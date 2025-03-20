@@ -4,7 +4,7 @@ Criei um script em python que gera esses datasets, de uma forma realista e prát
 
 # Pastas
 A pasta `csv/` contém os arquivos CSV desses meus datasets gerados pelo script python.
-Se quiser ver como eles foram construidos, veja os scripts: `gerar-dataset-agricultura-v1.py` e `gerar-dataset-agricultura-v2.py`
+Se quiser ver como eles foram construidos, veja os scripts: `gerar-dataset-agricultura-v1.py`, `gerar-dataset-agricultura-v2.py` e `gerar-dataset-agricultura-v3.py`
 
 # Versões
-A versão `v2` é mais completa. 
+A versão `v3` é a mais completa. 

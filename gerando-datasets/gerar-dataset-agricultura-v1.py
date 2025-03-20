@@ -1,3 +1,42 @@
+"""
+Código python parar gerar o dataset
+
+Author: William Alves Jardim
+
+Descrição da ideia que tive:
+
+Criar um script em python que crie um dataset CSV livre de direitos autorais, e bem realista, com features realistas que refletam a realidade.
+
+Tema: agricultura, crescimento de plantas. 
+
+Deve conter:
+
+  - pequenos ruídos aleatórios 
+  
+  - Umas 20 features ou mais se precisar, algumas categóricas(como tipo de planta, se é saudavel ou doente, tipo de solo, etc...) e outras numéricas(como tamanho, tempo de crescimento, custo de cultivo, preço de venda, espaço ocupado, litros de agua que consome, tempo de vida, chuva, humidade do ar, humidade do terreno, e outras situações do ambiente, que vai ter alguma relação com a saude e crescimento das plantas) 
+  
+  - Vai ter algumas features irrelevantes(para que eu possa tratar ou ignorar elas)
+
+  - Precisa ter a capacidade de ser usado tanto para classificação e também regressão
+
+  - Deve ter Amostras que são Outliers 
+
+  - algumas amostras devem ter valores nulos
+
+  - algumas features com escala em horas sendo que seria mais apropiado usar dias(para que eu precise conveter ao fazer tratamento)
+
+  - recorrência das amostras(série temporal)
+
+  - padrões sacionais 
+
+Um dataset que as features sejam realistas, 
+algumas features vão ser lineares, outras nem tanto, e outras não lineares, 
+... mais elas devem ser propias para treinar regressoes, classificadores, tanto simples, quanto Redes Neurais MLP para tarefas de regressão ou classificação. 
+E também, vão existir features como o preço_venda, Custo_Cultivo, Saude, Tempo_Vida_dias, e outras, que vão estar relacionadas com outras: ou seja, o valor dessas features vai ser gerado com base nos valores de outras features da mesma amostra. 
+Então não vai ser 100% aleatorio, mais também baseado em outros fatores que fazem sentido e tem relação; Crie essas relações que eu falei, para essas e inclusive outras features, para ficar realista. 
+ 
+"""
+
 import pandas as pd
 import numpy as np
 import random

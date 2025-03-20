@@ -1,3 +1,26 @@
+"""
+Código python parar gerar o dataset
+
+Author: William Alves Jardim
+
+Descrição da ideia que tive para melhorar a v1:
+Adicionar novas features numéricas, com relações baseadas em outras features, e que afetam a saude, o tempo de vida, e o tempo de crescimento, e consequentemente todas elas impactam de forma realista no custo de cultivo e no preço de venda. 
+Ou seja o custo de cultivo é influenciado pela saude da planta tambem. Features adicionar: as que voce achar relevante, e também as que eu disse a seguir: se tem presença de herva daninhas, se tem pragas que prejudicam a planta e quantas são. 
+Também, a presença de hervas daninhas pode ser algo sacional ou/e também relacionado ao tipo de solo, cuidados que o dono tem, etc.... 
+
+Adicionar características numéricas e categóricas, pelo menos umas 5, que identificam unicamente o tipo da planta. Pra dar pra fazer classificação Multiclasse. Mais com algumas variações aleatórias nesses características pra ficar realista, pra dar entender que as características podem virar um pouco como acontece na vida real 
+Adicionar que tempo de crescimento e o consumo de água varia de acordo com o tipo da planta, Mais com algumas variações aleatórias nesses características pra ficar realista, pra dar entender que as características podem virar um pouco como acontece na vida real 
+Adicionar um padrão sacional que indica que, favorece certos tipos de plantas em determinadas datas, e em outras não. Um padrão perceptível. E também, determinadas épocas influenciam na presença de pragas e hervas daninhas 
+
+OUTROS AJUSTES:
+
+Adicionamente o nível de pesticida vai impactar nas pregas e hervas daninhas(o que consequentemente vai impactar outras features, naturalmente)
+Os litros de água adicionamente também vai ser afetado pelo tipo da planta(como mencionei no começo desse prompt)
+O tempo de crescimento adicionamente também deve ser afetado pelas hervas daninhas, o tipo do solo, e humidade. Além disso, também vai ser afetado pelo tipo da planta(como mencionei no começo desse prompt)
+O custo de cultivo adicionamente também vai ser afetado pela humidade, e litros de água.
+
+"""
+
 import pandas as pd
 import numpy as np
 import random
