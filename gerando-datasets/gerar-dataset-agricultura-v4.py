@@ -98,29 +98,80 @@ def growth_adjustment(row):
 
 # Tempo de crescimento afetado por estação, tipo de planta, ervas daninhas, solo e umidade
 df['Tempo_Crescimento_horas'] = (
-    np.random.uniform(500, 3000, n_samples) + noise(50) -
-    df['Horas_Sol_Dia'] * 10 + df['Chuva_mm'] * 3 + df['Num_Praga'] * 5 +
-    df['Tipo_Planta'].factorize()[0] * 100 - df['Humidade_Solo'] * 5 - df['Ervas_Daninhas'] * 20 +
-    df.apply(growth_adjustment, axis=1)
+    #O valor é aleatorio
+    np.random.uniform(500, 3000, n_samples) 
+
+    # Existe um ruido aleatorio tambem
+    + noise(50)
+    
+    #O tempo de crescimento diminui com horas do sol e chuva
+    -(df['Horas_Sol_Dia'] * 10 + df['Chuva_mm'] * 3) 
+
+    # O tempo aumenta com pragas
+    + df['Num_Praga'] * 5 
+
+    # o tempo tambem depende do tipo da planta
+    + df['Tipo_Planta'].factorize()[0] * 100 
+
+    # o tempo diminui com um solo bem irrigado
+    - df['Humidade_Solo'] * 5 - df['Ervas_Daninhas'] * 20 
+    
+    # o tempo tambem depende do tipo da planta
+    + df.apply(growth_adjustment, axis=1)
 )
 
 # Consumo de água por semana baseado no tipo de planta
 df['Litros_Agua_Semana'] = (
-    np.random.uniform(5, 50, n_samples) + noise(3) + df['Humidade_Solo'] * 0.3 - df['Num_Praga'] * 0.2 +
-    df['Tipo_Planta'].factorize()[0] * 2
+    # um valor aleatorio
+    np.random.uniform(5, 50, n_samples) 
+
+    # tem um ruido aleatorio
+    + noise(3) 
+    
+    # a planta consome menos agua se o solo for bem irrigado
+    - df['Humidade_Solo'] * 0.3 
+    
+    # a planta perde agua com pragas(que consomem a agua dela)
+    + df['Num_Praga'] * 0.2 
+
+    # O tipo de planta pode consumir mais agua que outras
+    + df['Tipo_Planta'].factorize()[0] * 2
 )
 
 # Custo de cultivo afetado por umidade, ervas daninhas, pragas, tipo de solo e água
 df['Custo_Cultivo'] = (
-    np.random.uniform(50, 500, n_samples) + noise(20) +
-    df['Tipo_Solo'].map({'Arenoso': 30, 'Argiloso': 50, 'Siltoso': 40, 'Humoso': 60}) +
-    df['Num_Praga'] * 2 + df['Ervas_Daninhas'] * 15 + df['Humidade_Solo'] * 0.5 + df['Litros_Agua_Semana'] * 0.3
+    # um valor aleatorio
+    np.random.uniform(50, 500, n_samples) 
+
+    # com um ruido aleatorio
+    + noise(20) 
+
+    # A boa humidade do solo pode rezudir um pouco o custo do cultimo
+    - (df['Humidade_Solo'] * 0.4)
+    
+    # O tipo do solo pode fazer com que o custo de cultivo seja mais caro
+    + df['Tipo_Solo'].map({'Arenoso': 30, 'Argiloso': 50, 'Siltoso': 40, 'Humoso': 60}) 
+
+    # o numero de pragas, hervas daninhas tambem pode fazer com que o custo de cultivo seja mais caro
+    + (df['Num_Praga'] * 2 + df['Ervas_Daninhas'] * 15) 
+
+    # A quantidade de agua gasta também pode aumentar o custo do cultimo
+    + df['Litros_Agua_Semana'] * 0.3
 )
 
 # Preço de venda baseado no custo e qualidade
 df['Preco_Venda'] = (
-    df['Custo_Cultivo'] * np.random.uniform(1.5, 3.0, n_samples) +
-    df['Indice_Crescimento'] * 20 + noise(50) - df['Num_Praga'] * 1.5
+    # o custo do cultimo mais um lucro em cima
+    df['Custo_Cultivo'] * np.random.uniform(1.5, 3.0, n_samples) 
+
+    # mais a qualidade
+    + df['Indice_Crescimento'] * 20 
+    
+    # mais um ruido aleatorio
+    + noise(50) 
+    
+    # porém, o numero de pragas afeta o preço da venda
+    - df['Num_Praga'] * 1.5
 )
 
 # Saúde baseada na umidade, temperatura, poda, pragas e ervas daninhas
@@ -134,12 +185,24 @@ df['Tempo_Vida_dias'] = (
     np.where(df['Saude'] == 'Saudável', np.random.uniform(100, 365, n_samples), np.random.uniform(30, 150, n_samples))
     + noise(10)
     + df['Resistencia_Clima'] * 2
+
+    # o numero de pragas afeta o tempo de vida
     - df['Num_Praga'] * 0.8
+
+    # o numero de hervas daninhas afeta o tempo de vida
     - df['Ervas_Daninhas'] * 10
+
+    # usar pesticidade é bom, mais não em excesso
     + (df['Nivel_Pesticida'] * -5 + df['Nivel_Pesticida'] ** 2)  # Pouco pesticida ajuda, muito prejudica
-    + df['Frequencia_Podas'] * 3  # Podas moderadas aumentam a vida
-    - np.abs(df['Humidade_Solo'] - 40) * 0.3  # Umidade ideal = 40
-    - np.abs(df['Temperatura_C'] - 25) * 0.5  # Temperatura ideal = 25
+
+    # Podas moderadas aumentam a vida
+    + df['Frequencia_Podas'] * 3  
+
+    # Umidade ideal = 40
+    - np.abs(df['Humidade_Solo'] - 40) * 0.3  
+
+    # Temperatura ideal = 25
+    - np.abs(df['Temperatura_C'] - 25) * 0.5  
 )
 
 # Introduzir valores nulos
