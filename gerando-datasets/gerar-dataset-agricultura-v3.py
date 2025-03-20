@@ -15,6 +15,8 @@ import numpy as np
 import random
 from datetime import datetime, timedelta
 
+np.random.seed(22)
+
 # Definir parâmetros do dataset
 n_samples = 3000  # Número de amostras
 plant_types = ['Milho', 'Trigo', 'Soja', 'Tomate', 'Batata', 'Cenoura']
@@ -47,7 +49,7 @@ df = pd.DataFrame({
 })
 
 # Características únicas da planta para classificação multiclasse
-df['Cor_Folha'] = np.random.uniform(0, 100, n_samples) + df['Tipo_Planta'].factorize()[0] * 5 + noise(3)
+df['Cor_Folha'] = np.random.uniform(0, 25, n_samples) + df['Tipo_Planta'].factorize()[0] * 7 + noise(3)
 df['Densidade_Fibra'] = np.random.uniform(0.5, 3.5, n_samples) + df['Tipo_Planta'].factorize()[0] * 0.2 + noise(0.2)
 df['Tamanho_Raiz_cm'] = np.random.uniform(5, 50, n_samples) + df['Tipo_Planta'].factorize()[0] * 2 + noise(2)
 df['Indice_Crescimento'] = np.random.uniform(0.1, 1.5, n_samples) + df['Tipo_Planta'].factorize()[0] * 0.05 + noise(0.1)
