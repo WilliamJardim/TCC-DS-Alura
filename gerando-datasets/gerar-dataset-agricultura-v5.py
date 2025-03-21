@@ -172,8 +172,19 @@ df['Litros_Agua_Semana'] = (
     + df['Tipo_Planta'].map({'Milho': 45, 'Trigo': 35, 'Soja': 38, 'Tomate': 60, 'Batata': 50, 'Cenoura': 22}) * 6
 
     # a resistencia ao clima ajuda
-    + (df['Resistencia_Clima'] * 15)
+    - (df['Resistencia_Clima'] * 15)
 )
+
+# a alta temperatura pode aumentar o custo do cultivo
+def ajuste_custo_temperatura(row):
+    ajuste = 0
+    if row['Temperatura_C'] < 0:
+        ajuste + abs(row['Temperatura_C']) * 50
+
+    else:
+        ajuste + row['Temperatura_C'] * 10
+
+    return ajuste
 
 # Custo de cultivo afetado por umidade, ervas daninhas, pragas, tipo de solo e água
 df['Custo_Cultivo'] = (
@@ -203,8 +214,11 @@ df['Custo_Cultivo'] = (
     + (df['Num_Praga'] * 380)
     + (df['Ervas_Daninhas'] * 600) 
 
+    # a alta temperatura pode aumentar o custo do cultivo
+    + df.apply(ajuste_custo_temperatura, axis=1)
+
     # a resistencia ao clima ajuda
-    + (df['Resistencia_Clima'] * 15)
+    - (df['Resistencia_Clima'] * 15)
 )
 
 # Preço de venda baseado no custo e qualidade
