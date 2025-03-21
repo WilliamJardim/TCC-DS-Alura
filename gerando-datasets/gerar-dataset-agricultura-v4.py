@@ -83,6 +83,30 @@ df['Num_Praga'] = np.random.randint(0, 50, n_samples) * df['Ervas_Daninhas']
 df.loc[df['Nivel_Pesticida'] > 3, ['Ervas_Daninhas', 'Num_Praga']] *= 0.5
 df.loc[df['Estacao_Ano'] == 'Verão', ['Ervas_Daninhas', 'Num_Praga']] *= 1.5
 
+# Altura da planta depende do tipo, solo e ambiente
+df['Altura_cm'] = (
+    # valor aleatorio
+    np.random.uniform(10, 300, n_samples) 
+
+    # ruidos aleatorios
+    + noise(8) 
+
+    # a altura tambem depende do tipo da planta
+    + df['Tipo_Planta'].factorize()[0] * 100 
+
+    # a altura pode ser maior com boa humidade 
+    + df['Humidade_Solo'] * 0.5 
+    
+    # pode ser reduzida pela má temperatura
+    - df['Temperatura_C'] * 1.2 
+
+    # vai depender das horas do sol
+    + df['Horas_Sol_Dia'] * 2.5 
+    
+    # vai ser afetado pelo numero de pragas
+    - df['Num_Praga'] * 0.5
+)
+
 # Ajustes no tempo de crescimento baseado em fatores ambientais
 def growth_adjustment(row):
     ajuste = 0
@@ -208,6 +232,10 @@ df['Tempo_Vida_dias'] = (
 # Introduzir valores nulos
 df.loc[random.sample(range(n_samples), k=25), 'Humidade_Solo'] = np.nan
 df.loc[random.sample(range(n_samples), k=10), 'Custo_Cultivo'] = np.nan
+
+# Introduzir outliers
+df.loc[random.sample(range(n_samples), k=20), 'Preco_Venda'] *= 5  # Aumenta muito o preço
+df.loc[random.sample(range(n_samples), k=15), 'Altura_cm'] *= 0.1  # Plantas muito pequenas
 
 # Salvar CSV
 df.to_csv('csv/dataset-agricultura-v4.csv', index=False, sep=';')
