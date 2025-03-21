@@ -116,7 +116,7 @@ def growth_adjustment(row):
 df['Tempo_Crescimento_horas'] = (
     #O valor é aleatorio
     #np.random.uniform(6800, 10600, n_samples) 
-    8800
+    39600
 
     # Existe um ruido aleatorio tambem
     + noise(5)
@@ -145,7 +145,7 @@ df['Tempo_Crescimento_horas'] = (
 df['Litros_Agua_Semana'] = (
     # um valor aleatorio
     #np.random.uniform(3500, 7000, n_samples) 
-    5500
+    25500
 
     # tem um ruido aleatorio
     + noise(8) 
@@ -265,7 +265,7 @@ df['Saude'] = df.apply(calcular_saude, axis=1)
 df['Tempo_Vida_dias'] = (
     # o tempo de vida varia se a planta é saudavel ou não
     #(np.where(df['Saude'] == 'Saudável', np.random.uniform(585, 1065, n_samples), np.random.uniform(150, 300, n_samples)) + 300),
-    300 + 
+    9000 + 
     + (np.where(df['Saude'] == 'Saudável', np.random.uniform(100, 200, n_samples), np.random.uniform(15, 50, n_samples)))
 
     + noise(8)
