@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-dataset = pd.read_csv('./datasets/dataset-agricultura-v5-v4balanceado.csv', sep=';');
+dataset = pd.read_csv('./datasets/dataset-agricultura-v5-balanceado.csv', sep=';');
 
 # Converter a coluna de data para o formato datetime
 dataset['Data'] = pd.to_datetime(dataset['Data'])

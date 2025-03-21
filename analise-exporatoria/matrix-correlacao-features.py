@@ -3,7 +3,7 @@ import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-dataset = pd.read_csv('./datasets/dataset-agricultura-v5-v4balanceado.csv', sep=';');
+dataset = pd.read_csv('./datasets/dataset-agricultura-v5-balanceado.csv', sep=';');
 
 dataset = dataset.drop('Data', axis=1);
 dataset = dataset.drop('Estacao_Ano', axis=1);

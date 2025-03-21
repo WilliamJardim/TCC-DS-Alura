@@ -4,12 +4,12 @@ Criei um script em python que gera esses datasets, de uma forma realista e prát
 
 # Pastas
 A pasta `csv/` contém os arquivos CSV desses meus datasets gerados pelo script python.
-Se quiser ver como eles foram construidos, veja os scripts: `gerar-dataset-agricultura-v1.py`, `gerar-dataset-agricultura-v2.py`, `gerar-dataset-agricultura-v3.py` e `gerar-dataset-agricultura-v4.py`
+Se quiser ver como eles foram construidos, veja os scripts: `gerar-dataset-agricultura-v1.py`, `gerar-dataset-agricultura-v2.py`, `gerar-dataset-agricultura-v3.py`, `gerar-dataset-agricultura-v4.py` e `gerar-dataset-agricultura-v5.py`
 
 # Versões
-A versão `v4` é a mais completa. 
+A versão `v5` é a mais completa. 
 
 # Balancemaneto que fiz
-Fiz também um balancemento no arquivo `dataset-agricultura-v4.csv` gerado pelo `gerar-dataset-agricultura-v3.py`, para ele ter classes mais balanceadas de plantas saudaveis/doentes por estação.
+Fiz também um balancemento no arquivo `dataset-agricultura-v5.csv` gerado pelo `gerar-dataset-agricultura-v5.py`, para ele ter classes mais balanceadas de plantas saudaveis/doentes por estação.
 
-O arquivo `dataset-agricultura-v5-v4balanceado` está com esse balanceamento feito.
+O arquivo `dataset-agricultura-v5-balanceado` está com esse balanceamento feito.

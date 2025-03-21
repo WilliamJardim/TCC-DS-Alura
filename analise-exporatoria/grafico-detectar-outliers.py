@@ -2,7 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-dataset = pd.read_csv('./datasets/dataset-agricultura-v5-v4balanceado.csv', sep=';');
+dataset = pd.read_csv('./datasets/dataset-agricultura-v5-balanceado.csv', sep=';');
 
 """
 Para esse exemplo, eu sei que os outliers estão apenas na coluna PRECO VENDA,

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-dataset = pd.read_csv('./datasets/dataset-agricultura-v5-v4balanceado.csv', sep=';');
+dataset = pd.read_csv('./datasets/dataset-agricultura-v5-balanceado.csv', sep=';');
 
 dataset_selecionado = dataset[dataset['Litros_Agua_Semana'] < 0]
 

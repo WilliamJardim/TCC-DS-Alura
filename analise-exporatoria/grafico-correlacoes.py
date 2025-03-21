@@ -2,7 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-dataset = pd.read_csv('./datasets/dataset-agricultura-v5-v4balanceado.csv', sep=';');
+dataset = pd.read_csv('./datasets/dataset-agricultura-v5-balanceado.csv', sep=';');
 
 # Removendo features que não vão ser usadas
 dataset = dataset.drop('Data', axis=1);

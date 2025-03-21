@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-dataset = pd.read_csv('./datasets/dataset-agricultura-v5-v4balanceado.csv', sep=';');
+dataset = pd.read_csv('./datasets/dataset-agricultura-v5-balanceado.csv', sep=';');
 
 print('\nAmostras com tempo de crescimento negativo:')
 crescimentoNegativos = (dataset['Tempo_Crescimento_horas'] < 0).sum()

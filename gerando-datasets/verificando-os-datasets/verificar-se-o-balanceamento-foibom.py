@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Carregar o dataset balanceado
-df = pd.read_csv('../csv/dataset-agricultura-v5-v4balanceado.csv', sep=";")
+df = pd.read_csv('../csv/dataset-agricultura-v5-balanceado.csv', sep=";")
 
 # Verificar as primeiras linhas para garantir que o dataset está correto
 print("Primeiras linhas do dataset:")

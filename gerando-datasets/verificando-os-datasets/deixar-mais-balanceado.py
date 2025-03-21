@@ -1,13 +1,13 @@
 import pandas as pd
 
-df = pd.read_csv('../csv/dataset-agricultura-v4.csv', sep=";")
+df = pd.read_csv('../csv/dataset-agricultura-v5.csv', sep=";")
 
 doentes = df[df['Saude'] == 'Doente']
 saudaveis = df[df['Saude'] == 'Saudável']
 
-total_doentes = 826
+total_doentes = 1200
 
-# Deixar apenas 826 plantas doentes ao todo,.. mais distribuido uniformemente por estação, pra ficar balanceado
+# Deixar apenas 1200 plantas doentes ao todo,.. mais distribuido uniformemente por estação, pra ficar balanceado
 undersampled_doentes = []
 
 for estacao in doentes['Estacao_Ano'].unique():
@@ -54,4 +54,4 @@ plt.xticks(rotation=45)
 plt.legend(['Doente', 'Saudável'])
 plt.show()
 
-novo_dataset.to_csv('../csv/dataset-agricultura-v4-balanceado.csv', index=False, sep=';');
+novo_dataset.to_csv('../csv/dataset-agricultura-v5-balanceado.csv', index=False, sep=';');
