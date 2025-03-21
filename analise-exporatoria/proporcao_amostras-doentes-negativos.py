@@ -12,3 +12,7 @@ contagem_por_saude = dataset_selecionado.groupby(['Saude', 'Litros_Agua_Semana']
 print('\n\nConsumo de agua plantas Doentes vs Saudaveis')
 
 print(contagem_por_saude.sum(axis=1))
+
+"""
+Com as melhoras não tem mais nenhuma amostra que se encaixa nessa situação
+"""
