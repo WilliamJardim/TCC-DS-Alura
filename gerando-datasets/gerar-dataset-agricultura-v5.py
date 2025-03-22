@@ -151,7 +151,7 @@ def growth_adjustment(row):
 df['Tempo_Crescimento_horas'] = (
     #O valor é aleatorio
     #np.random.uniform(6800, 10600, n_samples) 
-    189600
+    889600
 
     # Existe um ruido aleatorio tambem
     + noise(5)
