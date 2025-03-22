@@ -333,8 +333,8 @@ df['Custo_Cultivo'] = (
     + df['Tipo_Solo'].map({'Arenoso': 30, 'Argiloso': 50, 'Siltoso': 40, 'Humoso': 60}) * 2.5 
 
     # o numero de pragas, hervas daninhas tambem pode fazer com que o custo de cultivo seja mais caro
-    + (df['Num_Praga'] * 585900)
-    + (df['Ervas_Daninhas'] * 2985900) 
+    + (df['Num_Praga'] * 2985900)
+    + (df['Ervas_Daninhas'] * 29885900) 
 
     # a alta temperatura pode aumentar o custo do cultivo
     + df.apply(ajuste_custo_temperatura, axis=1)
