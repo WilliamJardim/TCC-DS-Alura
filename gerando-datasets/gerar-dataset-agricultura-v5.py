@@ -157,20 +157,20 @@ df['Tempo_Crescimento_horas'] = (
     + noise(5)
     
     #O tempo de crescimento diminui com horas do sol e chuva
-    -(df['Horas_Sol_Dia'] * 1000) 
-    -(df['Chuva_mm'] * 490)
+    -(df['Horas_Sol_Dia'] * 2900) 
+    -(df['Chuva_mm'] * 1800)
 
     # O tempo aumenta com pragas
-    + (df['Num_Praga'] * 750)
+    + (df['Num_Praga'] * 7500)
 
     # o tempo tambem depende do tipo da planta
     + df['Tipo_Planta'].map({'Milho': 98, 'Trigo': 10, 'Soja': 35, 'Tomate': 12, 'Batata': 48, 'Cenoura': 22}) * 150 
 
     # o tempo diminui com um solo bem irrigado
-    - (df['Humidade_Solo'] * 900)
+    - (df['Humidade_Solo'] * 3000)
     
     # O tempo aumenta com ervas daninhas
-    + (df['Ervas_Daninhas'] * 750)
+    + (df['Ervas_Daninhas'] * 4000)
     
     # o tempo tambem depende do tipo da planta
     + df.apply(growth_adjustment, axis=1)
