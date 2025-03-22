@@ -278,7 +278,7 @@ def ajuste_custo_doentes(row):
 df['Custo_Cultivo'] = (
     # um valor aleatorio
     #np.random.uniform(50, 500, n_samples) 
-    9000
+    68829000
 
     # com um ruido aleatorio
     + noise(8) 
