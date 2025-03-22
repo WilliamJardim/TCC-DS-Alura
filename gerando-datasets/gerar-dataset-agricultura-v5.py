@@ -65,7 +65,16 @@ df['Resistencia_Clima'] = np.random.uniform(0, 10, n_samples) + df['Tipo_Planta'
 
 # Presença de ervas daninhas e pragas influenciadas pela estação e pesticida
 df['Ervas_Daninhas'] = np.random.choice([0, 1], n_samples, p=[0.7, 0.3])
+# Nao vai ter negativo
+df['Ervas_Daninhas'] = df['Ervas_Daninhas'].abs();
+
+
 df['Num_Praga'] = np.random.randint(0, 50, n_samples) * df['Ervas_Daninhas']
+# Nao vai ter negativo
+df['Num_Praga'] = df['Num_Praga'].abs();
+
+
+
 df.loc[df['Nivel_Pesticida'] > 3, ['Ervas_Daninhas', 'Num_Praga']] *= 0.5
 df.loc[df['Estacao_Ano'] == 'Verão', ['Ervas_Daninhas', 'Num_Praga']] *= 1.5
 
@@ -78,7 +87,7 @@ def condicao_crescimento_inverno(row):
         impacto = 160;
     
     if row['Estacao_Ano'] == 'Outono':
-        impacto = 17;
+        impacto = 9;
 
     return impacto;
 
@@ -101,6 +110,28 @@ df['Nivel_Pesticida'] = df['Nivel_Pesticida'] - (df.apply(condicao_crescimento_i
 # No inverno e outono tem menas pragas e hervas daninhas
 df['Num_Praga'] = df['Num_Praga'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.5)
 df['Ervas_Daninhas'] = df['Ervas_Daninhas'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.5)
+
+# Nao deixa ter pagas nem ervas daninhas menores do que zero
+def naoPodeTerPragasMenorQueZero(row):
+    if row['Num_Praga'] < 0:
+        return 0;
+
+    else:
+        return row['Num_Praga']
+
+df['Num_Praga'] = df.apply(naoPodeTerPragasMenorQueZero, axis=1)
+
+
+
+def naoPodeTerErvasDaninhasMenorQueZero(row):
+    if row['Ervas_Daninhas'] < 0:
+        return 0;
+
+    else:
+        return row['Ervas_Daninhas']
+
+df['Ervas_Daninhas'] = df.apply(naoPodeTerErvasDaninhasMenorQueZero, axis=1)
+
 
 
 
@@ -128,10 +159,10 @@ df['Altura_cm'] = (
     + (df['Chuva_mm'] * 2500)  
     
     # vai ser afetado pelo numero de pragas
-    - (df['Num_Praga'] * 2900)
+    - (df['Num_Praga'] * 9900)
 
     # vai ser afetado com ervas daninhas
-    - (df['Ervas_Daninhas'] * 2900)
+    - (df['Ervas_Daninhas'] * 9900)
 )
 
 # Ajustes no tempo de crescimento baseado em fatores ambientais
@@ -161,7 +192,7 @@ df['Tempo_Crescimento_horas'] = (
     -(df['Chuva_mm'] * 1800)
 
     # O tempo aumenta com pragas
-    + (df['Num_Praga'] * 7500)
+    + (df['Num_Praga'] * 30500)
 
     # o tempo tambem depende do tipo da planta
     + df['Tipo_Planta'].map({'Milho': 98, 'Trigo': 10, 'Soja': 35, 'Tomate': 12, 'Batata': 48, 'Cenoura': 22}) * 150 
@@ -170,7 +201,7 @@ df['Tempo_Crescimento_horas'] = (
     - (df['Humidade_Solo'] * 3000)
     
     # O tempo aumenta com ervas daninhas
-    + (df['Ervas_Daninhas'] * 4000)
+    + (df['Ervas_Daninhas'] * 38000)
     
     # o tempo tambem depende do tipo da planta
     + df.apply(growth_adjustment, axis=1)
@@ -198,10 +229,10 @@ df['Litros_Agua_Semana'] = (
     - (df['Tempo_Crescimento_horas'] * 0.05)
     
     # a planta perde agua com pragas(que consomem a agua dela)
-    + (df['Num_Praga'] * 2900)
+    + (df['Num_Praga'] * 10900)
 
     # A planta perde agua com ervas daninhas
-    + (df['Ervas_Daninhas'] * 2900)
+    + (df['Ervas_Daninhas'] * 10900)
 
     # O tipo de planta pode consumir mais agua que outras
     + df['Tipo_Planta'].map({'Milho': 45, 'Trigo': 35, 'Soja': 38, 'Tomate': 60, 'Batata': 50, 'Cenoura': 22}) * 6
@@ -302,8 +333,8 @@ df['Custo_Cultivo'] = (
     + df['Tipo_Solo'].map({'Arenoso': 30, 'Argiloso': 50, 'Siltoso': 40, 'Humoso': 60}) * 2.5 
 
     # o numero de pragas, hervas daninhas tambem pode fazer com que o custo de cultivo seja mais caro
-    + (df['Num_Praga'] * 385900)
-    + (df['Ervas_Daninhas'] * 1985900) 
+    + (df['Num_Praga'] * 585900)
+    + (df['Ervas_Daninhas'] * 2985900) 
 
     # a alta temperatura pode aumentar o custo do cultivo
     + df.apply(ajuste_custo_temperatura, axis=1)
@@ -339,7 +370,7 @@ df['Preco_Venda'] = (
 df['Tempo_Vida_dias'] = (
     # o tempo de vida varia se a planta é saudavel ou não
     #(np.where(df['Saude'] == 'Saudável', np.random.uniform(585, 1065, n_samples), np.random.uniform(150, 300, n_samples)) + 300),
-    155000 + 
+    2955000 + 
     + (np.where(df['Saude'] == 'Saudável', np.random.uniform(100, 200, n_samples), np.random.uniform(15, 50, n_samples)))
 
     + noise(8)
@@ -347,10 +378,10 @@ df['Tempo_Vida_dias'] = (
     + (df['Resistencia_Clima'] * 4000)
 
     # o numero de pragas afeta o tempo de vida
-    - (df['Num_Praga'] * 20900)
+    - (df['Num_Praga'] * 90900)
 
     # o numero de hervas daninhas afeta o tempo de vida
-    - (df['Ervas_Daninhas'] * 20900)
+    - (df['Ervas_Daninhas'] * 90900)
 
     # Quanto mais tempo a planta levou pra crescer, menor o tempo de vida dela, POIS DEMORARIA MUITO PARA SE DESENVOLVER
     - (df['Tempo_Crescimento_horas'] * 0.08)

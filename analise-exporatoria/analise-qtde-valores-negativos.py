@@ -22,6 +22,18 @@ custoCultivoNegativo = (dataset['Custo_Cultivo'] < 0).sum()
 print(custoCultivoNegativo)
 
 
+print('\nAmostras num pragas negativo:')
+numPragaNegativo = (dataset['Num_Praga'] < 0).sum()
+
+print(numPragaNegativo)
+
+
+print('\nAmostras Ervas Daninhas negativo:')
+DaninhasNegativo = (dataset['Ervas_Daninhas'] < 0).sum()
+
+print(DaninhasNegativo)
+
+
 
 print('\nAmostras com consumo de agua negativo:')
 litrosAguaNegativos = (dataset['Litros_Agua_Semana'] < 0).sum()
