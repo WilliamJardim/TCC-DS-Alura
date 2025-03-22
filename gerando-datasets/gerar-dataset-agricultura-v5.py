@@ -299,8 +299,8 @@ df['Custo_Cultivo'] = (
     + df['Tipo_Solo'].map({'Arenoso': 30, 'Argiloso': 50, 'Siltoso': 40, 'Humoso': 60}) * 2.5 
 
     # o numero de pragas, hervas daninhas tambem pode fazer com que o custo de cultivo seja mais caro
-    + (df['Num_Praga'] * 2900)
-    + (df['Ervas_Daninhas'] * 2900) 
+    + (df['Num_Praga'] * 285900)
+    + (df['Ervas_Daninhas'] * 1085900) 
 
     # a alta temperatura pode aumentar o custo do cultivo
     + df.apply(ajuste_custo_temperatura, axis=1)
@@ -378,6 +378,20 @@ df.loc[random.sample(range(n_samples), k=10), 'Custo_Cultivo'] = np.nan
 # Introduzir outliers
 df.loc[random.sample(range(n_samples), k=20), 'Preco_Venda'] *= 5  # Aumenta muito o preço
 df.loc[random.sample(range(n_samples), k=15), 'Altura_cm'] *= 0.1  # Plantas muito pequenas
+
+
+# Tratar outras coisas
+
+# CUSTO DE CULTIVO DAS PLANTAS DOENTES VAI SER MAIOR
+def custoMaiorPraPlantasDoentes(row):
+    if row['Saude'] == 'Doente':
+        return 99900000
+    else:
+        return -9950000
+
+df['Custo_Cultivo'] = df['Custo_Cultivo'] + df.apply(custoMaiorPraPlantasDoentes, axis=1)
+
+
 
 # Salvar CSV
 df.to_csv('csv/dataset-agricultura-v5.csv', index=False, sep=';')

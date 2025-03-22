@@ -16,6 +16,12 @@ tempoVidaNegativo = (dataset['Tempo_Vida_dias'] < 0).sum()
 print(tempoVidaNegativo)
 
 
+print('\nAmostras com custo de cultivo negativo:')
+custoCultivoNegativo = (dataset['Custo_Cultivo'] < 0).sum()
+
+print(custoCultivoNegativo)
+
+
 
 print('\nAmostras com consumo de agua negativo:')
 litrosAguaNegativos = (dataset['Litros_Agua_Semana'] < 0).sum()
