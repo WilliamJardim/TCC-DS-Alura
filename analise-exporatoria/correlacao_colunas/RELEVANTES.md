@@ -8,6 +8,7 @@ CustoCultivo_vs_Altura.py
 
 CustoCultivo_vs_PrecoVenda.py
 
+CustoCultivo_vs_Pragas.py
 
 TEMPO DE VIDA:
 
