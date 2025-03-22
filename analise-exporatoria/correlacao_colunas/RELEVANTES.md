@@ -10,6 +10,8 @@ CustoCultivo_vs_PrecoVenda.py
 
 CustoCultivo_vs_Pragas.py
 
+Pragas_vs_PrecoVenda.py
+
 TEMPO DE VIDA:
 
   TempoVida_vs_CustoCultivo.py
