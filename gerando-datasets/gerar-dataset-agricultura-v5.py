@@ -186,7 +186,7 @@ df['Litros_Agua_Semana'] = (
     + noise(8) 
     
     # a planta consome menos agua se o solo for bem irrigado
-    - (df['Humidade_Solo'] * 2500)
+    - (df['Humidade_Solo'] * 2900)
 
     # a planta consome menos agua se tiver bastante chuva
     - (df['Chuva_mm'] * 1800)
