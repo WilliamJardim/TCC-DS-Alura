@@ -286,6 +286,9 @@ df['Custo_Cultivo'] = (
     # A quantidade de agua gasta também pode aumentar o custo do cultimo
     + df['Litros_Agua_Semana'] * 200
 
+    # a chuva pode reduzir um pouco o custo do cultivo
+    - (df['Chuva_mm'] * 699800)
+
     # A boa humidade do solo pode rezudir um pouco o custo do cultivo
     - (df['Humidade_Solo'] * 1800)
 
@@ -299,8 +302,8 @@ df['Custo_Cultivo'] = (
     + df['Tipo_Solo'].map({'Arenoso': 30, 'Argiloso': 50, 'Siltoso': 40, 'Humoso': 60}) * 2.5 
 
     # o numero de pragas, hervas daninhas tambem pode fazer com que o custo de cultivo seja mais caro
-    + (df['Num_Praga'] * 285900)
-    + (df['Ervas_Daninhas'] * 1085900) 
+    + (df['Num_Praga'] * 385900)
+    + (df['Ervas_Daninhas'] * 1985900) 
 
     # a alta temperatura pode aumentar o custo do cultivo
     + df.apply(ajuste_custo_temperatura, axis=1)
