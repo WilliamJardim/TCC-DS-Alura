@@ -290,7 +290,7 @@ df['Tempo_Vida_dias'] = (
     - (df['Num_Praga'] * 80)
 
     # o numero de hervas daninhas afeta o tempo de vida
-    - (df['Ervas_Daninhas'] * 200)
+    - (df['Ervas_Daninhas'] * 1000)
 
     # Quanto mais tempo a planta levou pra crescer, menor o tempo de vida dela, POIS DEMORARIA MUITO PARA SE DESENVOLVER
     - (df['Tempo_Crescimento_horas'] * 0.08)
