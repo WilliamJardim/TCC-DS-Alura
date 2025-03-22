@@ -336,7 +336,7 @@ df['Preco_Venda'] = (
 df['Tempo_Vida_dias'] = (
     # o tempo de vida varia se a planta é saudavel ou não
     #(np.where(df['Saude'] == 'Saudável', np.random.uniform(585, 1065, n_samples), np.random.uniform(150, 300, n_samples)) + 300),
-    95000 + 
+    155000 + 
     + (np.where(df['Saude'] == 'Saudável', np.random.uniform(100, 200, n_samples), np.random.uniform(15, 50, n_samples)))
 
     + noise(8)
@@ -344,10 +344,10 @@ df['Tempo_Vida_dias'] = (
     + (df['Resistencia_Clima'] * 4000)
 
     # o numero de pragas afeta o tempo de vida
-    - (df['Num_Praga'] * 10900)
+    - (df['Num_Praga'] * 20900)
 
     # o numero de hervas daninhas afeta o tempo de vida
-    - (df['Ervas_Daninhas'] * 10900)
+    - (df['Ervas_Daninhas'] * 20900)
 
     # Quanto mais tempo a planta levou pra crescer, menor o tempo de vida dela, POIS DEMORARIA MUITO PARA SE DESENVOLVER
     - (df['Tempo_Crescimento_horas'] * 0.08)
@@ -362,10 +362,13 @@ df['Tempo_Vida_dias'] = (
     - (np.abs(df['Humidade_Solo'] - 40) * 1000)  
 
     # Temperatura ideal = 25
-    - (np.abs(df['Temperatura_C'] - 25) * 1000)  
+    - (np.abs(df['Temperatura_C'] - 25) * 300)  
 
     # A chuva melhora a vida tambem
-    + (df['Chuva_mm'] * 4900)  
+    + (df['Chuva_mm'] * 9900)  
+
+    # vai depender das horas do sol
+    + (df['Horas_Sol_Dia'] * 4000)
 )
 
 # Introduzir valores nulos
