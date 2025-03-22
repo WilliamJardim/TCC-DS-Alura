@@ -69,6 +69,41 @@ df['Num_Praga'] = np.random.randint(0, 50, n_samples) * df['Ervas_Daninhas']
 df.loc[df['Nivel_Pesticida'] > 3, ['Ervas_Daninhas', 'Num_Praga']] *= 0.5
 df.loc[df['Estacao_Ano'] == 'Verão', ['Ervas_Daninhas', 'Num_Praga']] *= 1.5
 
+# Aplicando padrões
+
+def condicao_crescimento_inverno(row):
+    impacto = 0;
+
+    if row['Estacao_Ano'] == 'Inverno':
+        impacto = 160;
+    
+    if row['Estacao_Ano'] == 'Outono':
+        impacto = 17;
+
+    return impacto;
+
+# No inverno e outono, tem menas horas sol
+df['Horas_Sol_Dia'] = df['Horas_Sol_Dia'] - (df.apply(condicao_crescimento_inverno, axis=1))
+
+# No inverno e outono, tem menas humidade
+df['Humidade_Solo'] = df['Humidade_Solo'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.2)
+
+# No interno e outono, tem menas chuvas
+df['Chuva_mm'] = df['Chuva_mm'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.5)
+# No inverno e outono a temperatura é muito menor
+df['Temperatura_C'] = df['Temperatura_C'] - df.apply(condicao_crescimento_inverno, axis=1)
+# No inverno e outono a ressistencia ao clima é menor
+df['Resistencia_Clima'] = df['Resistencia_Clima'] - df.apply(condicao_crescimento_inverno, axis=1)
+# No inverno e outono a frequencia de podas é menor
+df['Frequencia_Podas'] = df['Frequencia_Podas'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.5 )
+# No inverno e outono o nivel de pesticida é menor
+df['Nivel_Pesticida'] = df['Nivel_Pesticida'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.5)
+# No inverno e outono tem menas pragas e hervas daninhas
+df['Num_Praga'] = df['Num_Praga'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.5)
+df['Ervas_Daninhas'] = df['Ervas_Daninhas'] - (df.apply(condicao_crescimento_inverno, axis=1) * 0.5)
+
+
+
 # Altura da planta depende do tipo, solo e ambiente
 df['Altura_cm'] = (
     # valor aleatorio
@@ -78,25 +113,25 @@ df['Altura_cm'] = (
     + noise(2) 
 
     # a altura tambem depende do tipo da planta
-    + df['Tipo_Planta'].map({'Milho': 70, 'Trigo': 20, 'Soja': 39, 'Tomate': 15, 'Batata': 45, 'Cenoura': 30}) * 100 
+    + df['Tipo_Planta'].map({'Milho': 98, 'Trigo': 10, 'Soja': 35, 'Tomate': 12, 'Batata': 48, 'Cenoura': 22}) * 150 
 
     # a altura pode ser maior com boa humidade 
-    + (df['Humidade_Solo'] * 40)
+    + (df['Humidade_Solo'] * 2500)
     
     # pode ser reduzida pela má temperatura
     - (df['Temperatura_C'] * 40)
 
     # vai depender das horas do sol
-    + (df['Horas_Sol_Dia'] * 60)
+    + (df['Horas_Sol_Dia'] * 180)
 
     # A chuva melhora a altura tambem
-    + (df['Chuva_mm'] * 60)  
+    + (df['Chuva_mm'] * 2500)  
     
     # vai ser afetado pelo numero de pragas
-    - (df['Num_Praga'] * 205)
+    - (df['Num_Praga'] * 2900)
 
     # vai ser afetado com ervas daninhas
-    - (df['Ervas_Daninhas'] * 350)
+    - (df['Ervas_Daninhas'] * 2900)
 )
 
 # Ajustes no tempo de crescimento baseado em fatores ambientais
@@ -116,26 +151,26 @@ def growth_adjustment(row):
 df['Tempo_Crescimento_horas'] = (
     #O valor é aleatorio
     #np.random.uniform(6800, 10600, n_samples) 
-    39600
+    189600
 
     # Existe um ruido aleatorio tambem
     + noise(5)
     
     #O tempo de crescimento diminui com horas do sol e chuva
-    -(df['Horas_Sol_Dia'] * 600) 
-    -(df['Chuva_mm'] * 65)
+    -(df['Horas_Sol_Dia'] * 1000) 
+    -(df['Chuva_mm'] * 490)
 
     # O tempo aumenta com pragas
-    + (df['Num_Praga'] * 700)
+    + (df['Num_Praga'] * 750)
 
     # o tempo tambem depende do tipo da planta
-    + df['Tipo_Planta'].map({'Milho': 70, 'Trigo': 20, 'Soja': 39, 'Tomate': 15, 'Batata': 45, 'Cenoura': 30}) * 100 
+    + df['Tipo_Planta'].map({'Milho': 98, 'Trigo': 10, 'Soja': 35, 'Tomate': 12, 'Batata': 48, 'Cenoura': 22}) * 150 
 
     # o tempo diminui com um solo bem irrigado
-    - (df['Humidade_Solo'] * 290)
+    - (df['Humidade_Solo'] * 900)
     
     # O tempo aumenta com ervas daninhas
-    + (df['Ervas_Daninhas'] * 700)
+    + (df['Ervas_Daninhas'] * 750)
     
     # o tempo tambem depende do tipo da planta
     + df.apply(growth_adjustment, axis=1)
@@ -145,16 +180,16 @@ df['Tempo_Crescimento_horas'] = (
 df['Litros_Agua_Semana'] = (
     # um valor aleatorio
     #np.random.uniform(3500, 7000, n_samples) 
-    25500
+    985500
 
     # tem um ruido aleatorio
     + noise(8) 
     
     # a planta consome menos agua se o solo for bem irrigado
-    - (df['Humidade_Solo'] * 100)
+    - (df['Humidade_Solo'] * 2500)
 
     # a planta consome menos agua se tiver bastante chuva
-    - (df['Chuva_mm'] * 60)
+    - (df['Chuva_mm'] * 1800)
 
     # Podas moderadas aumentam a reduzir um pouco o uso da agua
     - (df['Frequencia_Podas'] * 5)  
@@ -163,10 +198,10 @@ df['Litros_Agua_Semana'] = (
     - (df['Tempo_Crescimento_horas'] * 0.05)
     
     # a planta perde agua com pragas(que consomem a agua dela)
-    + (df['Num_Praga'] * 380)
+    + (df['Num_Praga'] * 2900)
 
     # A planta perde agua com ervas daninhas
-    + (df['Ervas_Daninhas'] * 600)
+    + (df['Ervas_Daninhas'] * 2900)
 
     # O tipo de planta pode consumir mais agua que outras
     + df['Tipo_Planta'].map({'Milho': 45, 'Trigo': 35, 'Soja': 38, 'Tomate': 60, 'Batata': 50, 'Cenoura': 22}) * 6
@@ -174,6 +209,47 @@ df['Litros_Agua_Semana'] = (
     # a resistencia ao clima ajuda
     - (df['Resistencia_Clima'] * 15)
 )
+
+
+
+# Saúde baseada na umidade, temperatura, poda, pragas e ervas daninhas
+def calcular_saude(row):
+    score = 100  # Começamos com uma pontuação de saúde máxima
+    
+    # Impacto das condições ambientais
+    score -= abs(row['Temperatura_C'] - 25) * 2  # Temperaturas extremas reduzem a saúde
+    score -= abs(row['Humidade_Solo'] - 50) * 1.5  # Solo muito seco ou muito úmido prejudica
+    score += row['Horas_Sol_Dia'] * 2  # Mais sol, em geral, melhora a saúde
+    score -= row['Chuva_mm'] * 0.5  # Excesso de chuva pode ser prejudicial
+    
+    # Impacto de pragas e ervas daninhas
+    score -= row['Num_Praga'] * 10  # Muitas pragas reduzem a saúde
+    score -= row['Ervas_Daninhas'] * 10  # Presença de ervas daninhas reduz a saúde
+    
+    # Impacto do manejo agrícola
+    score += row['Nivel_Pesticida'] * 8  # Pesticidas ajudam a reduzir impacto de pragas
+    score += row['Frequencia_Podas'] * 10  # Podas melhoram a saúde
+    
+    # Ajuste baseado no tipo de planta (sensibilidade às condições)
+    if row['Tipo_Planta'] in ['Milho', 'Tomate']:
+        score += row['Horas_Sol_Dia'] * 2  # Essas plantas gostam de mais sol
+
+    if row['Tipo_Planta'] == 'Cenoura':
+        score -= row['Chuva_mm'] * 1.2  # Cenouras não lidam bem com excesso de chuva
+
+    if row['Tipo_Planta'] in ['Soja', 'Arroz']:
+        score += row['Humidade_Solo'] * 1.2  # Solo úmido beneficia essas plantas
+    
+    # Garantir que a pontuação de saúde fique dentro dos limites
+    score = max(0, min(100, score))
+    
+    return 'Saudável' if score >= 50 else 'Doente'
+
+# Aplicar a função ao dataset
+df['Saude'] = df.apply(calcular_saude, axis=1)
+
+
+
 
 # a alta temperatura pode aumentar o custo do cultivo
 def ajuste_custo_temperatura(row):
@@ -186,20 +262,32 @@ def ajuste_custo_temperatura(row):
 
     return ajuste
 
+# Se a planta for doente, o custo de cultivo vai ser bem maior
+def ajuste_custo_doentes(row):
+    ajuste = 0
+    if row['Saude'] == 'Doente':
+        ajuste + 6000;
+
+    else:
+        #planta saudavel é mais facil de cuidar
+        ajuste - 0;
+
+    return ajuste
+
 # Custo de cultivo afetado por umidade, ervas daninhas, pragas, tipo de solo e água
 df['Custo_Cultivo'] = (
     # um valor aleatorio
     #np.random.uniform(50, 500, n_samples) 
-    500
+    9000
 
     # com um ruido aleatorio
     + noise(8) 
 
     # A quantidade de agua gasta também pode aumentar o custo do cultimo
-    + df['Litros_Agua_Semana'] * 10
+    + df['Litros_Agua_Semana'] * 200
 
     # A boa humidade do solo pode rezudir um pouco o custo do cultivo
-    - (df['Humidade_Solo'] * 10)
+    - (df['Humidade_Solo'] * 1800)
 
     # Podas moderadas aumentam a reduzir um pouco o custo
     - (df['Frequencia_Podas'] * 8)  
@@ -211,11 +299,14 @@ df['Custo_Cultivo'] = (
     + df['Tipo_Solo'].map({'Arenoso': 30, 'Argiloso': 50, 'Siltoso': 40, 'Humoso': 60}) * 2.5 
 
     # o numero de pragas, hervas daninhas tambem pode fazer com que o custo de cultivo seja mais caro
-    + (df['Num_Praga'] * 380)
-    + (df['Ervas_Daninhas'] * 600) 
+    + (df['Num_Praga'] * 2900)
+    + (df['Ervas_Daninhas'] * 2900) 
 
     # a alta temperatura pode aumentar o custo do cultivo
     + df.apply(ajuste_custo_temperatura, axis=1)
+
+    # Se a planta for doente, o custo de cultivo vai ser bem maior
+    + df.apply(ajuste_custo_doentes, axis=1)
 
     # a resistencia ao clima ajuda
     - (df['Resistencia_Clima'] * 15)
@@ -239,58 +330,24 @@ df['Preco_Venda'] = (
     - (df['Num_Praga'] * 300)
 )
 
-# Saúde baseada na umidade, temperatura, poda, pragas e ervas daninhas
-def calcular_saude(row):
-    score = 100  # Começamos com uma pontuação de saúde máxima
-    
-    # Impacto das condições ambientais
-    score -= abs(row['Temperatura_C'] - 25) * 2  # Temperaturas extremas reduzem a saúde
-    score -= abs(row['Humidade_Solo'] - 50) * 1.5  # Solo muito seco ou muito úmido prejudica
-    score += row['Horas_Sol_Dia'] * 2  # Mais sol, em geral, melhora a saúde
-    score -= row['Chuva_mm'] * 0.5  # Excesso de chuva pode ser prejudicial
-    
-    # Impacto de pragas e ervas daninhas
-    score -= row['Num_Praga'] * 5  # Muitas pragas reduzem a saúde
-    score -= row['Ervas_Daninhas'] * 5  # Presença de ervas daninhas reduz a saúde
-    
-    # Impacto do manejo agrícola
-    score += row['Nivel_Pesticida'] * 8  # Pesticidas ajudam a reduzir impacto de pragas
-    score += row['Frequencia_Podas'] * 5  # Podas melhoram a saúde
-    
-    # Ajuste baseado no tipo de planta (sensibilidade às condições)
-    if row['Tipo_Planta'] in ['Milho', 'Tomate']:
-        score += row['Horas_Sol_Dia'] * 2  # Essas plantas gostam de mais sol
 
-    if row['Tipo_Planta'] == 'Cenoura':
-        score -= row['Chuva_mm'] * 1.2  # Cenouras não lidam bem com excesso de chuva
-
-    if row['Tipo_Planta'] in ['Soja', 'Arroz']:
-        score += row['Humidade_Solo'] * 1.2  # Solo úmido beneficia essas plantas
-    
-    # Garantir que a pontuação de saúde fique dentro dos limites
-    score = max(0, min(100, score))
-    
-    return 'Saudável' if score >= 50 else 'Doente'
-
-# Aplicar a função ao dataset
-df['Saude'] = df.apply(calcular_saude, axis=1)
 
 # Tempo de vida atualizado levando em conta mais fatores
 df['Tempo_Vida_dias'] = (
     # o tempo de vida varia se a planta é saudavel ou não
     #(np.where(df['Saude'] == 'Saudável', np.random.uniform(585, 1065, n_samples), np.random.uniform(150, 300, n_samples)) + 300),
-    9000 + 
+    95000 + 
     + (np.where(df['Saude'] == 'Saudável', np.random.uniform(100, 200, n_samples), np.random.uniform(15, 50, n_samples)))
 
     + noise(8)
     
-    + (df['Resistencia_Clima'] * 150)
+    + (df['Resistencia_Clima'] * 4000)
 
     # o numero de pragas afeta o tempo de vida
-    - (df['Num_Praga'] * 80)
+    - (df['Num_Praga'] * 10900)
 
     # o numero de hervas daninhas afeta o tempo de vida
-    - (df['Ervas_Daninhas'] * 1000)
+    - (df['Ervas_Daninhas'] * 10900)
 
     # Quanto mais tempo a planta levou pra crescer, menor o tempo de vida dela, POIS DEMORARIA MUITO PARA SE DESENVOLVER
     - (df['Tempo_Crescimento_horas'] * 0.08)
@@ -302,13 +359,13 @@ df['Tempo_Vida_dias'] = (
     + (df['Frequencia_Podas'] * 110)  
 
     # Umidade ideal = 40
-    - (np.abs(df['Humidade_Solo'] - 40) * 0.4)  
+    - (np.abs(df['Humidade_Solo'] - 40) * 1000)  
 
     # Temperatura ideal = 25
-    - (np.abs(df['Temperatura_C'] - 25) * 0.5)  
+    - (np.abs(df['Temperatura_C'] - 25) * 1000)  
 
     # A chuva melhora a vida tambem
-    + (df['Chuva_mm'] * 2)  
+    + (df['Chuva_mm'] * 4900)  
 )
 
 # Introduzir valores nulos

@@ -15,16 +15,6 @@ print('\n\nPlantas doentes vs Saudaveis')
 
 print( dataset_selecionado['Saude'].value_counts() )
 
-"""
-Tem um desbalanceamento de classes
-
-Plantas doentes vs Saudaveis
-Doente      2174
-Saudável     826
-
-Eu posso escolher só 826 doentes, de todas as estações, para tentar balancear melhor
-"""
-
 # CONTANDO POR ESTAÇÂO
 
 contagem_por_estacao = dataset_selecionado.groupby(['Estacao_Ano', 'Saude']).size().unstack(fill_value=0)

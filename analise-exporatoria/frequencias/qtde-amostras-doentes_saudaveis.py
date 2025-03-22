@@ -12,7 +12,7 @@ print('CONTAGEM Doentes vs Saudáveis', contagem);
 
 # Criar gráfico de barras
 plt.figure(figsize=(6, 4))
-ax = sns.barplot(x=contagem.index, y=contagem.values, palette=['green', 'red'])
+ax = sns.barplot(x=contagem.index, y=contagem.values, palette=['red', 'green'])
 
 # Adicionar os valores dentro das barras
 for i, v in enumerate(contagem.values):
