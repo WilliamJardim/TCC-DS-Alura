@@ -27,4 +27,25 @@ print('DATASET DEPOIS DE MUDAR A ESCALA DO TEMPO CRESCIMENTO')
 print(dataset.head()['Tempo_Crescimento_horas'])
 
 
+print('DATASET ANTES DE MUDAR A ESCALA:')
+print(dataset.head())
 
+# Reduzindo a escala das outras colunas
+dataset['Litros_Agua_Semana'] = dataset['Litros_Agua_Semana'] / 999
+dataset['Custo_Cultivo'] = dataset['Custo_Cultivo'] / 999
+dataset['Preco_Venda'] = dataset['Preco_Venda'] / 999999
+dataset['Tempo_Vida_dias'] = dataset['Tempo_Vida_dias'] / 999
+
+print('DATASET DEPOIS DE MUDAR A ESCALA')
+print(dataset.head())
+
+"""
+# ver a coluna Altura_cm
+print('DATASET ANTES DE MUDAR A ESCALA DA ALTURA CM:')
+print(dataset.head()['Altura_cm'])
+
+dataset['Altura_cm'] = dataset['Altura_cm'] / 100
+
+print('DATASET DEPOIS DE MUDAR A ESCALA DA ALTURA CM:')
+print(dataset.head()['Altura_cm'])"
+"""
