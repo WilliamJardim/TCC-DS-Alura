@@ -46,6 +46,7 @@ max        49.986731   249.160474      13.994681      81.486994          9.00000
 **Ou seja, 3000 AMOSTRAS, com 24 colunas cada.**
 
 ### QTDE VALORES NULOS POR COLUNA
+<pre>
 Data                        0
 Estacao_Ano                 0
 Tipo_Planta                 0
@@ -71,6 +72,7 @@ Custo_Cultivo              10
 Preco_Venda                 0
 Tempo_Vida_dias             0
 dtype: int64
+</pre>
 
 **NOTA: Isso vai precisar ser tratado.**
 
