@@ -231,6 +231,22 @@ Mais esse gráfico faz uma análise mais geral, sem considerar estações do ano
 ## Gráfico de calor das plantas mais vulneráveis a ficar doentes POR ESTAÇÂO DO ANO
 <img src="./images/plantas/GraficoCalor_Tipo_Plantas_Mais_Vulneraveis_Por_Estacao.png" width="100%" height="800px">
 
+**NOTA: Eu poderia ter feito também um gráfico de quais tipos de plantas tem um custo de cultivo maior. Esse tipo de análise é muito legal.**
+
+## Histogramas
+Também podemos usar histogramas para visualizar os dados. Histogramas são gráficos de frequências, ou seja, gráficos que mostram com que frequência os valores aparecem dentro de uma coluna específica do dataset. Isso é semelhante à contagem de frequência que fizemos no script `analise-basica.py` e também ao gráfico de barras que criamos, mas a diferença é que, no histograma, ele tem diversos intervalos de frequência, chamados de `bins`. Em vez de contar quantas vezes cada valor numérico apareceu na coluna, o histograma faz algo um pouco melhor: ele conta quantas vezes os valores daquela coluna aparecem dentro de cada intervalo (ou bin). Por exemplo, podemos criar um histograma para contar a frequência das idades: `[28, 20, 22, 25, 28, 22, 23]`, e o histograma vai determinar os `bins` e criar faixas como: de `20 a 22`, `de 23 a 25`, `de 26 a 28`, etc. Ele vai contar quantas vezes os valores caem nesses intervalos e, no final, teremos um gráfico que mostra, por exemplo, que no intervalo de `20 a 22` houve tantas pessoas, no intervalo de `23 a 25` houve tantas, e no intervalo de `26 a 28` houve tantas.
+
+Abaixo eu mostro exemplos de histogramas:
+
+## Histograma do Tempo de Vida das plantas
+<img src="./images/histogramas/Histograma_TempoVidaPlantas.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Nesse gráfico de histograma, vemos que no intervalo de 5 a 10 e de 10 a 15 é que se concentram a maior parte dos valores de tempo de vida.**
+
+## Histograma do Custo de Cultivo das plantas
+<img src="./images/histogramas/Histograma_CustoCultivoPlantas.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Nesse gráfico de histograma, vemos que no intervalo de 10 a 15 é que se concentram a maior parte dos valores de custo de cultivo.**
 
 
 # ENCONTRANDO CORRELAÇÂO ENTRE AS COLUNAS
@@ -322,6 +338,8 @@ Para ficar mais fácil de visualizarmos isso, podemos usar médias móveis, e vi
 **EXPLICAÇÂO: Igual no gráfico anterior, nesse segundo gráfico, observamos um padrão de crescimento das plastas que se repete: um some e desce no crescimento das plantas, por assim dizer. Porém, nesse segundo gráfico, usei médias móveis para calcular as tendencias de crescimento.**
 
 # Médias moveis
-As médias móveis são calculadas através de média, porém não é uma média de todo o conjunto de dados, mais sim, uma média de um período especifico, e essa média pode se "mover", ou seja, ela pode mudar, de acordo com as amostras usadas para calcular essa média. Esse "movimento" ocorre usando um conceito chamado de "janelas deslizantes", ou seja, é como se literalmente tivessemos uma "janela retangular" de um tamanho fixo, ou seja, que tem um `inicio` e um `fim`. E dentro dessa janela, nós pegamos todas as amostras que estão dentro dessa faixa de indices: ou seja deis do indice do `inicio` até o indice do `fim`, e tiramos a média disso. Depois disso, "movemos" essa "janela retangular" 1 passinho para a direita, agora no `inicio` e o `fim` foram somados 1, então as amostras que serão escolhidas vão ser as que estiverem no intervalo entre `inicio + 1` até `fim + 1`, e calcular a média delas, de modo que, as amostras mais antigas vão ficando para traz, e vão deixando de ser usadas no cálculo da média móvel. Existem diferentes tipos de médias móveis, mais não vou entrar em detalhes sobre isso.
+As médias móveis são calculadas a partir de uma média, mas não de todo o conjunto de dados. Em vez disso, é uma média de um período específico, e essa média pode "mover-se", ou seja, ela muda conforme as amostras usadas para o cálculo da média. Esse "movimento" acontece por meio de um conceito chamado de "janelas deslizantes". Imagine uma "janela retangular" de tamanho fixo, que tem um `início` e um `fim`. Dentro dessa janela, pegamos todas as amostras dentro desse intervalo de índices: do índice do `início` até o índice do `fim`, e calculamos a média. 
+
+Depois, "movemos" essa janela um passo para a direita, ou seja, o `início` e o `fim` são incrementados em 1. Assim, as amostras escolhidas vão ser as que estão no intervalo entre `início + 1` até `fim + 1`, e calculamos a nova média. Dessa forma, as amostras mais antigas vão ficando para trás e deixam de ser usadas no cálculo da média móvel. Existem diferentes tipos de médias móveis, mas não vou entrar em detalhes sobre isso.
 
 
