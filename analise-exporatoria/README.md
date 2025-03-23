@@ -305,8 +305,13 @@ Para se ter uma visão mais detalhada da correlação, uma boa prática é criar
 
 **IDEIA: Voce pode calcular a correlação com o dataset inteiro como eu fiz. Ou então, voce também pode fatiar o dataset em partes menores, ou seja, em grupos menores de amostras, e calcular a correlação de cada grupo. Isso pode dar uma visão melhor.**
 
+# Conceito de Médias moveis
+As médias móveis são calculadas a partir de uma média, mas não de todo o conjunto de dados. Em vez disso, é uma média de um período específico, e essa média pode "mover-se", ou seja, ela muda conforme as amostras usadas para o cálculo da média. Esse "movimento" acontece por meio de um conceito chamado de "janelas deslizantes". Imagine uma "janela retangular" de tamanho fixo, que tem um `início` e um `fim`. Dentro dessa janela, pegamos todas as amostras dentro desse intervalo de índices: do índice do `início` até o índice do `fim`, e calculamos a média. 
 
-# Padrões sacionais e temporais
+Depois, "movemos" essa janela um passo para a direita, ou seja, o `início` e o `fim` são incrementados em 1. Assim, as amostras escolhidas vão ser as que estão no intervalo entre `início + 1` até `fim + 1`, e calculamos a nova média. Dessa forma, as amostras mais antigas vão ficando para trás e deixam de ser usadas no cálculo da média móvel. Existem diferentes tipos de médias móveis, mas não vou entrar em detalhes sobre isso.
+
+
+# Padrões sacionais e temporais e uso de Médias moveis
 Padrões sacionais são aqueles que se repetem em épocas especificas, por exemplo, em meses especificos.
 E padrões temporais em geral são padrões que levam em conta o tempo.
 
@@ -322,13 +327,7 @@ Para ficar mais fácil de visualizarmos isso, podemos usar médias móveis, e vi
 
 **EXPLICAÇÂO: Igual no gráfico anterior, nesse segundo gráfico, observamos um padrão de crescimento das plastas que se repete: um some e desce no crescimento das plantas, por assim dizer. Porém, nesse segundo gráfico, usei médias móveis para calcular as tendencias de crescimento.**
 
-# Médias moveis
-As médias móveis são calculadas a partir de uma média, mas não de todo o conjunto de dados. Em vez disso, é uma média de um período específico, e essa média pode "mover-se", ou seja, ela muda conforme as amostras usadas para o cálculo da média. Esse "movimento" acontece por meio de um conceito chamado de "janelas deslizantes". Imagine uma "janela retangular" de tamanho fixo, que tem um `início` e um `fim`. Dentro dessa janela, pegamos todas as amostras dentro desse intervalo de índices: do índice do `início` até o índice do `fim`, e calculamos a média. 
-
-Depois, "movemos" essa janela um passo para a direita, ou seja, o `início` e o `fim` são incrementados em 1. Assim, as amostras escolhidas vão ser as que estão no intervalo entre `início + 1` até `fim + 1`, e calculamos a nova média. Dessa forma, as amostras mais antigas vão ficando para trás e deixam de ser usadas no cálculo da média móvel. Existem diferentes tipos de médias móveis, mas não vou entrar em detalhes sobre isso.
-
-
-## Histogramas
+## Gráficos de Histogramas
 Também podemos usar histogramas para visualizar os dados. Histogramas são gráficos de frequências, ou seja, gráficos que mostram com que frequência os valores aparecem dentro de uma coluna específica do dataset. Isso é semelhante à contagem de frequência que fizemos no script `analise-basica.py` e também ao gráfico de barras que criamos, mas a diferença é que, no histograma, ele tem diversos intervalos de frequência, chamados de `bins`. Em vez de contar quantas vezes cada valor numérico apareceu na coluna, o histograma faz algo um pouco melhor: ele conta quantas vezes os valores daquela coluna aparecem dentro de cada intervalo (ou bin). Por exemplo, podemos criar um histograma para contar a frequência das idades: `[28, 20, 22, 25, 28, 22, 23]`, e o histograma vai determinar os `bins` e criar faixas como: de `20 a 22`, `de 23 a 25`, `de 26 a 28`, etc. Ele vai contar quantas vezes os valores caem nesses intervalos e, no final, teremos um gráfico que mostra, por exemplo, que no intervalo de `20 a 22` houve tantas pessoas, no intervalo de `23 a 25` houve tantas, e no intervalo de `26 a 28` houve tantas.
 
 Abaixo eu mostro exemplos de histogramas:
