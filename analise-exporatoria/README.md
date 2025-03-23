@@ -186,7 +186,7 @@ Caso contrário, se uma determinada coluna tem correlação negativa forte com o
 
 **IMPORTANTE: A ordem das colunas não importa, o valor da correlação será o mesmo**
 
-**NOTA: Veja tambem os [GRAFICOS DAS CORRELAÇÔES](./images/Correlacoes/README.md)**
+**NOTA: Veja tambem os [GRAFICOS DAS CORRELAÇÔES](./images/correlacoes/README.md)**
 
 A correlação é muito útil para selecionar quais colunas são mais relevantes, e para poder saber quais colunas usar para treinar um modelo de Machine Learning. Com ela podemos descartar colunas irrelevantes, ou não tão relevantes.
 
@@ -199,7 +199,7 @@ Para calcular a correlação, existem duas formas principais:
 
  - (2) Usando cálculos: Por exemplo, podemos usar o método da correlação de Pearson, que faz a correlação entre dois vetores X e Y diretamente(ou seja, os valores das colunas X e Y), com isso, retorna um valor entre -1 e 1, que segue a mesma lógica da **Interpretação de correlação** que mostrei acima. 
 
-Eu calculei essa correlações entre algumas colunas, e vou apresentar abaixo:
+**Eu calculei essa correlações entre algumas colunas, e vou apresentar abaixo:**
 
 ## Correlação entre o Custo de Cultivo com o Preço de Venda da planta
 <img src="./images/correlacoes/Grafico_CustoCultivo_vs_Preco_Venda2.png" width="100%" height="800px">
