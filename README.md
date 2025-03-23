@@ -15,3 +15,12 @@ Um trabalho de conclusão de meu curso na Alura que eu fiz usando todos os conhe
  - Encontrar correlações entre as features
  - Procurar outliers(valores extremos)
  - Fazer anotações das analises
+
+[ 4. Normalização, Escala e Tratamento de dados](./tratamentos-dados/)
+ - Mudar a escala dos dados
+ - Tratar os dados nulos
+ - Remover Outliers identificados na etapa 3
+ - Fazer slicing das linhas
+ - Fazer reamostragem
+ - Escolher features mais relevantes
+ - Criar novas features
