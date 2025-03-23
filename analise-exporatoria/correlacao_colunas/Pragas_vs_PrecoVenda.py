@@ -25,7 +25,7 @@ plt.scatter(x, y, color='blue', alpha=0.5, label='Dados')
 # Adicionando rótulos e título
 plt.xlabel(xColuna)
 plt.ylabel(yColuna)
-plt.title('Gráfico de Dispersão')
+plt.title('Gráfico de Dispersão: ' + str(xColuna) + ' vs ' + str(yColuna) )
 plt.legend()
 
 # Exibindo o gráfico

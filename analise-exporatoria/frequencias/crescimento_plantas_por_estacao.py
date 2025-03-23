@@ -31,8 +31,8 @@ fig.tight_layout(pad=5.0)
 
 # Gráfico para a estação 'Primavera'
 bars = media_crescimento_por_estacao['Primavera'].plot(kind='bar', stacked=True, colormap='viridis', ax=axes[0, 0])
-axes[0, 0].set_title('Crescimento das Plantas na Estação Primavera')
-axes[0, 0].set_xlabel('Tipo de Planta')
+axes[0, 0].set_title('Primavera')
+#axes[0, 0].set_xlabel('Tipo de Planta')
 axes[0, 0].set_ylabel('Crescimento (Horas)')
 axes[0, 0].set_xticks(range(len(media_crescimento_por_estacao['Primavera'])))  # Definir posições no eixo X
 axes[0, 0].set_xticklabels(media_crescimento_por_estacao['Primavera'].index, rotation=45)  # Usar os nomes das plantas
@@ -42,8 +42,8 @@ for p in bars.patches:
 
 # Gráfico para a estação 'Verão'
 bars = media_crescimento_por_estacao['Verão'].plot(kind='bar', stacked=True, colormap='plasma', ax=axes[0, 1])
-axes[0, 1].set_title('Crescimento das Plantas na Estação Verão')
-axes[0, 1].set_xlabel('Tipo de Planta')
+axes[0, 1].set_title('Verão')
+#axes[0, 1].set_xlabel('Tipo de Planta')
 axes[0, 1].set_ylabel('Crescimento (Horas)')
 axes[0, 1].set_xticks(range(len(media_crescimento_por_estacao['Verão'])))  # Definir posições no eixo X
 axes[0, 1].set_xticklabels(media_crescimento_por_estacao['Verão'].index, rotation=45)  # Usar os nomes das plantas
@@ -53,8 +53,8 @@ for p in bars.patches:
 
 # Gráfico para a estação 'Outono'
 bars = media_crescimento_por_estacao['Outono'].plot(kind='bar', stacked=True, colormap='inferno', ax=axes[1, 0])
-axes[1, 0].set_title('Crescimento das Plantas na Estação Outono')
-axes[1, 0].set_xlabel('Tipo de Planta')
+axes[1, 0].set_title('Outono')
+#axes[1, 0].set_xlabel('Tipo de Planta')
 axes[1, 0].set_ylabel('Crescimento (Horas)')
 axes[1, 0].set_xticks(range(len(media_crescimento_por_estacao['Outono'])))  # Definir posições no eixo X
 axes[1, 0].set_xticklabels(media_crescimento_por_estacao['Outono'].index, rotation=45)  # Usar os nomes das plantas
@@ -64,8 +64,8 @@ for p in bars.patches:
 
 # Gráfico para a estação 'Inverno'
 bars = media_crescimento_por_estacao['Inverno'].plot(kind='bar', stacked=True, colormap='cividis', ax=axes[1, 1])
-axes[1, 1].set_title('Crescimento das Plantas na Estação Inverno')
-axes[1, 1].set_xlabel('Tipo de Planta')
+axes[1, 1].set_title('Inverno')
+#axes[1, 1].set_xlabel('Tipo de Planta')
 axes[1, 1].set_ylabel('Crescimento (Horas)')
 axes[1, 1].set_xticks(range(len(media_crescimento_por_estacao['Inverno'])))  # Definir posições no eixo X
 axes[1, 1].set_xticklabels(media_crescimento_por_estacao['Inverno'].index, rotation=45)  # Usar os nomes das plantas
