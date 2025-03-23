@@ -165,7 +165,73 @@ Outliers pelo Z-Score:
 [21 rows x 25 columns]
 </pre>
 
+Abaixo eu deixei um gráfico de Box Plot, que indica a presença de Outliers:
+
+## Gráfico que releva a presença de Outliers
+<img src="./images/Outliers/Grafico_BoxPlot_Outliers_PrecoVenda.png" width="100%" height="800px">
+
 **NOTA: Veja tambem os [GRAFICOS DOS OUTLIERS](./images/Outliers/README.md)**
+
+# USANDO GRÁFICOS PARA ENTENDER MELHOR OS DADOS
+Em Data Science, em visualização de dados, é muito comum criamos gráficos para nos ajudar a entender os dados, a distribuição, proporções, frequencias/contagens, etc. No Python, temos diversas bibliotecas Open Source para criar gráficos, como o Matplotlib, que foi a que eu utilizei para gerar esses gráficos.
+
+## Gráfico da quantidade de plantas doentes e saudáveis em geral
+<img src="./images/Plantas/Grafico_Plantas_Doentes_vs_Saudaveis_Por_Estacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação da quantidade de plantas doentes e saudáveis em geral**. Nesse gráfico vemos que no dataset, a quantidade de plantas doentes é muito maior do que a quantidade de plantas saudáveis.
+
+Isso pode indicar que existe um desbalanceamento, e talves seja necessário tratar isso, para deixar as classes mais balanceadas.
+
+
+## Gráfico de custo de cultivo das plantas saudáveis e doentes no geral
+<img src="./images/Plantas/Grafico_Custo_Cultivo_Saudaveis_vs_Doentes.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação entre o custo de cultivo das plantas doentes com o custo de cultivo das plantas saudáveis.**, e notavelmente, o custo de cultivo das plantas doentes é extremamente maior do que o custo de cultivo de plantas saudáveis, e isso faz total sentido, pois, nesse dataset, sempre quando as plantas estão doentes, isso tem vários fatores envolvidos, por exemplo: elas consumem mais agua(seja por pragas ou ervas daninhas), são prejudicadas por pragas ou ervas daninhas, ou, elas estão em situações inadequadas como clima ruim, pouca luz do dia, pouca chuva, pouca humidade, etc. E cada um desses fatores faz automaticamente com o que o custo de cultivo seja maior, pois dá muito mais trabalho para cuidar, elimiar as pragas, ervas daninhas, a planta demorou para se desenvolver, etc.
+
+Mais esse gráfico faz uma análise mais geral, sem considerar estações do ano, ou tipo de plantas.
+
+## Gráfico de custo de cultivo das plantas saudáveis e doentes POR ESTAÇÂO DO ANO
+<img src="./images/Plantas/Grafico_Custo_Cultivo_Plantas_DoentesSaudaveis_Por_Estacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação mais complexa, pois compara o custo de cultivo das plantas doentes com o custo de cultivo das plantas saudáveis em cada estação do ano.** Nesse segundo gráfico, fica muito claro que o custo de cultivo no Inverno é muito mais alto no que nas demais estações do ano. E isso tem explicações lógicas também, por exemplo, no inverno é um periodo muito mais frio, com temperaturas bem baixas, e também, com menas horas de sol no dia, tendo dias menos claros, mais escuros, tambem com menas chuvas, menas humidade do solo pois fica mais congelado. A maioria das plantas diminui seu crescimento ou para completamente. No Inverno são condições péssimais para as plantas. No Outuno nem tanto, mais já está indo para o ritmo do Inverno. (Também, as pragas e ervas daninhas também somem por completo no Inverno, e no Outuno reduz bastante tambem, mais esses detalhes irei falei em outro gráfico)
+
+## Gráfico de Número de Pragas por POR ESTAÇÂO DO ANO
+<img src="./images/Plantas/Grafico_Num_Pragas_Por_Estacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação da quantidade de pragas em cada estação do ano.** E fica claro que, no Inverno, não existe nenhuma praga(O mesmo ocorre com as ervas daninhas, porém não é mostrado aqui), e no Outono, existe uma quantidade bem menor de pragas, pois já está se aproximando do ritmo do Inverno, o que é ruim para as pragas. 
+
+**RELAÇÂO ENTRE OS DOIS ULTIMOS GRAFICOS: Veja que o gráfico de `custo de cultivo das plantas saudáveis e doentes POR ESTAÇÂO DO ANO` ele está diretamente relacionado com o gráfico de `Número de Pragas por POR ESTAÇÂO DO ANO`**, e isso faz sentido. E tem um detalhe curioso, pois, o custo de cultivo das plantas no Inverno é extremamente maior do que nas demais estações do ano. Embora no Inverno não tenha nenhum praga que possa atrapalhar a planta, outros fatores estão impactando o custo de cultivo, como o a humidade do solo, a falta de chuvas, o frio extremo, etc.
+
+
+## Gráfico da quantidade de plantas doentes e saudáveis por estação
+<img src="./images/Plantas/Grafico_Plantas_Doentes_vs_Saudaveis_Por_Estacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação da quantidade de plantas doentes e saudáveis por estação**. Nesse gráfico também vemos que no Inverno e Outono tem sido as piores estações, com maior número de plantas doentes.
+
+
+## Gráfico do tempo de vida das plantas por estação
+<img src="./images/Plantas/Grafico_Vida_Plantas_Por_Estacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação do tempo de vida das plantas por estação**. Nesse gráfico fica claro que no Inverno, é o período que as plantas vivem menos, e isso faz sentido, pois, como vimos em outros gráficos anteriores, a situação do Inverno tem um ambiente péssimo para as plantas. Embora não tenha pragas nem ervas daninhas, ainda assim o Inverno por si só, por causa das implicações dele, atrapalha muito.
+
+
+## Gráfico do tempo de crescimento das plantas por estação
+<img src="./images/Plantas/Grafico_Tempo_Crescimento_Por_Estacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação do tempo de crescimento das plantas por estação, em geral, considerando os tipos das plantas**. 
+
+
+## Gráfico das plantas mais vulneráveis a ficar doentes POR ESTAÇÂO DO ANO
+<img src="./images/Plantas/GraficoBarras_Tipo_Plantas_Mais_Vulneraveis_Por_Estacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico mostra uma comparação das plantas mais vulneráveis a ficar doentes POR ESTAÇÂO DO ANO, considerando os tipos das plantas, e suas fragilidades(tendencia a ficar doente).** 
+
+**Também podemos ver esse gráfico de outra forma, usando um mapa de calor:**
+
+## Gráfico de calor das plantas mais vulneráveis a ficar doentes POR ESTAÇÂO DO ANO
+<img src="./images/Plantas/GraficoCalor_Tipo_Plantas_Mais_Vulneraveis_Por_Estacao.png" width="100%" height="800px">
+
+
 
 # ENCONTRANDO CORRELAÇÂO ENTRE AS COLUNAS
 Correlação é o quanto os valores de uma determinada coluna estão relacionados com os valores de uma outra coluna.
@@ -226,6 +292,8 @@ Para calcular a correlação, existem duas formas principais:
 Para esse exmplo fictício que criei, pode parecer algo muito óbvio, mais esses gráficos são muito importantes para ajudar a entender o dataset.
 Esses são apenas alguns dos tipos de análise que podemos fazer com gráficos de correlação.
 
+**NOTA: Esses não foram os unicos gráficos que gerei. Para ver todos, veja m os [GRAFICOS DAS CORRELAÇÔES](./images/correlacoes/README.md)**
+
 
 ## Gráfico de calor para ver correlações
 Para se ter uma visão mais detalhada da correlação, uma boa prática é criar um gráfico de calor, mostrando as correlações, como o abaixo:
@@ -235,3 +303,25 @@ Para se ter uma visão mais detalhada da correlação, uma boa prática é criar
 **EXPLICAÇÂO: Esse gráfico cria uma tabela com as correlações de cada coluna com cada coluna.**, ou seja ele cruza todas as colunas com todas as colunas, trazendo uma tabela colorida. As cores indicam a força e sentido da correlação, e os valores também. A interpretação dos valores segue a mesma lógica da **Interpretação de correlação** que mostrei acima. 
 
 **IDEIA: Voce pode calcular a correlação com o dataset inteiro como eu fiz. Ou então, voce também pode fatiar o dataset em partes menores, ou seja, em grupos menores de amostras, e calcular a correlação de cada grupo. Isso pode dar uma visão melhor.**
+
+
+# Padrões sacionais e temporais
+Padrões sacionais são aqueles que se repetem em épocas especificas, por exemplo, em meses especificos.
+E padrões temporais em geral são padrões que levam em conta o tempo.
+
+Podemos identificar possíveis tendencias sacionais e temporais, analisando o crescimento das plantas pela data. Por exemplo, veja o gráfico abaixo:
+
+<img src="./images/Gerais/Grafico_Evolucao_Crescimento_Ao_Longo_das_Datas_1.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse primeiro gráfico, observamos um padrão de crescimento das plastas que se repete: um some e desce no crescimento das plantas, por assim dizer**
+
+Para ficar mais fácil de visualizarmos isso, podemos usar médias móveis, e visalizar a tendencia de crescimento dos valores ao longo do tempo. Veja isso no segundo gráfico abaixo:
+
+<img src="./images/Gerais/Grafico_Evolucao_Crescimento_Ao_Longo_das_Datas_2.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Igual no gráfico anterior, nesse segundo gráfico, observamos um padrão de crescimento das plastas que se repete: um some e desce no crescimento das plantas, por assim dizer. Porém, nesse segundo gráfico, usei médias móveis para calcular as tendencias de crescimento.**
+
+# Médias moveis
+As médias móveis são calculadas através de média, porém não é uma média de todo o conjunto de dados, mais sim, uma média de um período especifico, e essa média pode se "mover", ou seja, ela pode mudar, de acordo com as amostras usadas para calcular essa média. Esse "movimento" ocorre usando um conceito chamado de "janelas deslizantes", ou seja, é como se literalmente tivessemos uma "janela retangular" de um tamanho fixo, ou seja, que tem um `inicio` e um `fim`. E dentro dessa janela, nós pegamos todas as amostras que estão dentro dessa faixa de indices: ou seja deis do indice do `inicio` até o indice do `fim`, e tiramos a média disso. Depois disso, "movemos" essa "janela retangular" 1 passinho para a direita, agora no `inicio` e o `fim` foram somados 1, então as amostras que serão escolhidas vão ser as que estiverem no intervalo entre `inicio + 1` até `fim + 1`, e calcular a média delas, de modo que, as amostras mais antigas vão ficando para traz, e vão deixando de ser usadas no cálculo da média móvel. Existem diferentes tipos de médias móveis, mais não vou entrar em detalhes sobre isso.
+
+
