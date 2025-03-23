@@ -5,3 +5,5 @@ Então, tive que remover algumas plantas, para igualar as duas classes.
 
 Isso vai ser muito importante quando eu for treinar um modelo
 
+**NOTA: Eu melhorei o dataset, e o atual agora é o v5, mais o conceito explicado aqui funciona para qualquer dataset**
+
