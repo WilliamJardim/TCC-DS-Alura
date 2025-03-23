@@ -233,21 +233,6 @@ Mais esse gráfico faz uma análise mais geral, sem considerar estações do ano
 
 **NOTA: Eu poderia ter feito também um gráfico de quais tipos de plantas tem um custo de cultivo maior. Esse tipo de análise é muito legal.**
 
-## Histogramas
-Também podemos usar histogramas para visualizar os dados. Histogramas são gráficos de frequências, ou seja, gráficos que mostram com que frequência os valores aparecem dentro de uma coluna específica do dataset. Isso é semelhante à contagem de frequência que fizemos no script `analise-basica.py` e também ao gráfico de barras que criamos, mas a diferença é que, no histograma, ele tem diversos intervalos de frequência, chamados de `bins`. Em vez de contar quantas vezes cada valor numérico apareceu na coluna, o histograma faz algo um pouco melhor: ele conta quantas vezes os valores daquela coluna aparecem dentro de cada intervalo (ou bin). Por exemplo, podemos criar um histograma para contar a frequência das idades: `[28, 20, 22, 25, 28, 22, 23]`, e o histograma vai determinar os `bins` e criar faixas como: de `20 a 22`, `de 23 a 25`, `de 26 a 28`, etc. Ele vai contar quantas vezes os valores caem nesses intervalos e, no final, teremos um gráfico que mostra, por exemplo, que no intervalo de `20 a 22` houve tantas pessoas, no intervalo de `23 a 25` houve tantas, e no intervalo de `26 a 28` houve tantas.
-
-Abaixo eu mostro exemplos de histogramas:
-
-## Histograma do Tempo de Vida das plantas
-<img src="./images/histogramas/Histograma_TempoVidaPlantas.png" width="100%" height="800px">
-
-**EXPLICAÇÂO: Nesse gráfico de histograma, vemos que no intervalo de 5 a 10 e de 10 a 15 é que se concentram a maior parte dos valores de tempo de vida.**
-
-## Histograma do Custo de Cultivo das plantas
-<img src="./images/histogramas/Histograma_CustoCultivoPlantas.png" width="100%" height="800px">
-
-**EXPLICAÇÂO: Nesse gráfico de histograma, vemos que no intervalo de 10 a 15 é que se concentram a maior parte dos valores de custo de cultivo.**
-
 
 # ENCONTRANDO CORRELAÇÂO ENTRE AS COLUNAS
 Correlação é o quanto os valores de uma determinada coluna estão relacionados com os valores de uma outra coluna.
@@ -343,3 +328,17 @@ As médias móveis são calculadas a partir de uma média, mas não de todo o co
 Depois, "movemos" essa janela um passo para a direita, ou seja, o `início` e o `fim` são incrementados em 1. Assim, as amostras escolhidas vão ser as que estão no intervalo entre `início + 1` até `fim + 1`, e calculamos a nova média. Dessa forma, as amostras mais antigas vão ficando para trás e deixam de ser usadas no cálculo da média móvel. Existem diferentes tipos de médias móveis, mas não vou entrar em detalhes sobre isso.
 
 
+## Histogramas
+Também podemos usar histogramas para visualizar os dados. Histogramas são gráficos de frequências, ou seja, gráficos que mostram com que frequência os valores aparecem dentro de uma coluna específica do dataset. Isso é semelhante à contagem de frequência que fizemos no script `analise-basica.py` e também ao gráfico de barras que criamos, mas a diferença é que, no histograma, ele tem diversos intervalos de frequência, chamados de `bins`. Em vez de contar quantas vezes cada valor numérico apareceu na coluna, o histograma faz algo um pouco melhor: ele conta quantas vezes os valores daquela coluna aparecem dentro de cada intervalo (ou bin). Por exemplo, podemos criar um histograma para contar a frequência das idades: `[28, 20, 22, 25, 28, 22, 23]`, e o histograma vai determinar os `bins` e criar faixas como: de `20 a 22`, `de 23 a 25`, `de 26 a 28`, etc. Ele vai contar quantas vezes os valores caem nesses intervalos e, no final, teremos um gráfico que mostra, por exemplo, que no intervalo de `20 a 22` houve tantas pessoas, no intervalo de `23 a 25` houve tantas, e no intervalo de `26 a 28` houve tantas.
+
+Abaixo eu mostro exemplos de histogramas:
+
+## Histograma do Tempo de Vida das plantas
+<img src="./images/histogramas/Histograma_TempoVidaPlantas.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Nesse gráfico de histograma, vemos que no intervalo de 5 a 10 e de 10 a 15 é que se concentram a maior parte dos valores de tempo de vida.**
+
+## Histograma do Custo de Cultivo das plantas
+<img src="./images/histogramas/Histograma_CustoCultivoPlantas.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Nesse gráfico de histograma, vemos que no intervalo de 10 a 15 é que se concentram a maior parte dos valores de custo de cultivo.**
