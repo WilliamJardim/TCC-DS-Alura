@@ -10,7 +10,7 @@ Muitas vezes, se pode observar valores extremos, e possivelmente outliers, olhan
 <code>python .\analise-basica.py</code>
 </pre>
 
-## PRIMEIRAS LINHAS DO DATASET (PRIMEIRAS AMOSTRAS):
+### PRIMEIRAS LINHAS DO DATASET (PRIMEIRAS AMOSTRAS):
 <pre>
          Data Estacao_Ano Tipo_Planta Tipo_Solo  Temperatura_C    Chuva_mm  ...  Tempo_Crescimento_horas  Litros_Agua_Semana   Saude  Custo_Cultivo   Preco_Venda  Tempo_Vida_dias
 0  2020-01-01     Inverno      Tomate   Arenoso    -142.821783  -33.501388  ...             1.283856e+06        8.708987e+05  Doente   3.662212e+08  3.405255e+10     1.208945e+06
@@ -81,7 +81,7 @@ dtype: int64
 0
 </pre>
 
-# QTDE VALORES NEGATIVOS NAS AMOSTRAS
+## QTDE VALORES NEGATIVOS NAS AMOSTRAS
 <pre>
 <code>python .\analise-qtde-valores-negativos.py</code>
 </pre>
@@ -167,8 +167,81 @@ Outliers pelo Z-Score:
 
 **NOTA: Veja tambem os [GRAFICOS DOS OUTLIERS](./images/Outliers/README.md)**
 
+# ENCONTRANDO CORRELAÇÂO ENTRE AS COLUNAS
+Correlação é o quanto os valores de uma determinada coluna estão relacionados com os valores de uma outra coluna.
+Existem correlações positivas, neutras e negativas, e em diferentes niveis. Isso claro, com respeito a aumento ou diminuição de valores.
+**A correlação é calculada sempre comparando duas colunas.**
+
+## Faixa de valores possiveis da correlação
+ - 0: Nenhuma correlação, nada acontece
+ - 1: Correlação forte positiva, a medida que uma coluna aumenta, a outra tambem aumenta
+ - -1: Correlação negativa forte, a medidaa que uma coluna aumenta, a outra diminui.
+
+**Os valores podem variar entre -1 a 1. O valor da correlação vai ser sempre dentro dessa faixa de valores.**
+
+## Interpretação de correlação
+Por exemplo, se uma determinada coluna tem correlação positiva forte com outra coluna, isso significa que, a medida que essa coluna aumenta, a outra tambem aumenta junto. 
+
+Caso contrário, se uma determinada coluna tem correlação negativa forte com outra coluna, isso significa que, a medida que essa coluna aumenta, a outra tambem diminui, e vice-versa.
+
+**IMPORTANTE: A ordem das colunas não importa, o valor da correlação será o mesmo**
+
+**NOTA: Veja tambem os [GRAFICOS DAS CORRELAÇÔES](./images/Correlacoes/README.md)**
+
+A correlação é muito útil para selecionar quais colunas são mais relevantes, e para poder saber quais colunas usar para treinar um modelo de Machine Learning. Com ela podemos descartar colunas irrelevantes, ou não tão relevantes.
+
+**IDEIA: Voce pode calcular a correlação com o dataset inteiro como eu fiz. Ou então, voce também pode fatiar o dataset em partes menores, ou seja, em grupos menores de amostras, e calcular a correlação de cada grupo. Isso pode dar uma visão melhor.**
+
+## Como calcular
+Para calcular a correlação, existem duas formas principais:
+
+ - (1) Usando Gráficos de Dispersão: Nesse método, nós fazer um Gráfico de Dispersão entre as colunas X e Y, e olhamos se existe uma relação de crescimento vísivel no gráfico, por exemplo, se houver alguma correlação, os eixos X e Y vão estar formando algum tipo de reta linear, para alguma direção, e mesmo com algumas variações, vai existir um padrão claramente visivel. Porém, se não houver nenhuma correlação entre as colunas X e Y escolhidas, os pontos no gráfico vão estar distantes, ou distribuidos de forma bem aleatoria, sem um padrão claro.
+
+ - (2) Usando cálculos: Por exemplo, podemos usar o método da correlação de Pearson, que faz a correlação entre dois vetores X e Y diretamente(ou seja, os valores das colunas X e Y), com isso, retorna um valor entre -1 e 1, que segue a mesma lógica da **Interpretação de correlação** que mostrei acima. 
+
+Eu calculei essa correlações entre algumas colunas, e vou apresentar abaixo:
+
+## Correlação entre o Custo de Cultivo com o Preço de Venda da planta
+<p align="center">
+  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_Preco_Venda1.png" width="45%">
+  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_Preco_Venda2.png" width="45%">
+</p>
+
+**EXPLICAÇÂO: A medida que o Custo de Cultivo aumenta, o Preço de Venda também aumenta.** Pois, o Preço da Venda está sendo calculado com base no Custo de Cultivo, mais uma margem de lucro em cima, e outros fatores, como qualidade. Mais existe uma relação. Se pra cultivar uma planta foi muito caro, é esperado que para vender ela, também seja caro, por que isso foi custoso.
 
 
+## Correlação entre o Custo de Cultivo com os litros de água por semana que a planta consome
+<p align="center">
+  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_LitrosAguaSemana1.png" width="45%">
+  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_LitrosAguaSemana2.png" width="45%">
+</p>
+
+**EXPLICAÇÂO: A medida que o Custo de Cultivo aumenta, o Consumo da agua por semana das plantas também aumenta.** Pois nas amostras desse dataset, sempre que o Custo de Cultivo aumenta, isso ocorre por causa de alguns fatores, como número de pragas, ervas daninhas, etc, que por consequencia, aumentam o consumo de agua, e além disos, nesse dataset, o própio custo de cultivo é influenciado pelos litros de agua gastos, e cada planta pode ser um nivel de consumo diferente. A frequencia de chuvas e humidade do solo também podem reduzir o custo de cultivo e o consumo de agua. Então, está diretamente relacionado sim!
 
 
+## Correlação entre o Tempo de crescimento da planta com o Tempo de vida dela
+<p align="center">
+  <img src="./images/Correlacoes/Grafico_TempoVida_vs_TempoCrescimentoHoras_1.png" width="45%">
+  <img src="./images/Correlacoes/Grafico_TempoVida_vs_TempoCrescimentoHoras_2.png" width="45%">
+</p>
 
+**EXPLICAÇÂO: A medida que o Tempo de Crescimento aumenta, O Tempo de vida das plantas diminui.** Isso acontece por que, quando uma planta demora muito para crescer, isso significa que ela demorou para se desenvolver, e isso ocorre por alguns motivos, como por exemplo grande quantidade de pragas, ervas daninhas, ou condições climáticas ou estação do ano desfavoráveis para a planta. Então, está diretamente relacionado sim! 
+
+## Correlação entre o Tempo de Vida da planta com o Número de Pragas
+<p align="center">
+  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_1.png" width="45%">
+  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_2.png" width="45%">
+</p>
+
+**EXPLICAÇÂO: A medida que o número de pragas aumenta, O Tempo de vida das plantas diminui.** Pois, as pragas e ervas daninhas matam as plantas, sugando nutrientes delas, retardando o crescimento, e reduzindo o tempo de vida.
+
+Para esse exmplo fictício que criei, pode parecer algo muito óbvio, mais esses gráficos são muito importantes para ajudar a entender o dataset.
+Esses são apenas alguns dos tipos de análise que podemos fazer com gráficos de correlação.
+
+Para se ter uma visão mais detalhada da correlação, uma boa prática é criar um gráfico de calor, mostrando as correlações, como o abaixo:
+
+<img src="./images/Gerais/Grafico_Correlacoes_Entre_Colunas.png" width="45%">
+
+**EXPLICAÇÂO: Esse gráfico cria uma tabela com as correlações de cada coluna com cada coluna.**, ou seja ele cruza todas as colunas com todas as colunas, trazendo uma tabela colorida. As cores indicam a força e sentido da correlação, e os valores também. A interpretação dos valores segue a mesma lógica da **Interpretação de correlação** que mostrei acima. 
+
+**IDEIA: Voce pode calcular a correlação com o dataset inteiro como eu fiz. Ou então, voce também pode fatiar o dataset em partes menores, ou seja, em grupos menores de amostras, e calcular a correlação de cada grupo. Isso pode dar uma visão melhor.**
