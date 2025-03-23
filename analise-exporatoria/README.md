@@ -105,12 +105,14 @@ Amostras com chuva negativo: 615
 **Isso vai precisar ser tratado.**
 
 ## Encontrando Outliers
-Outliers são amostras que tem valores absurdos ou extremos, mesmo que estejam corretos.
+Outliers são amostras que tem colunas com valores absurdos ou extremos, mesmo que estejam corretos.
 Outliers em geral são valores que forem do padrão, e devem ser tratados ou removidos de alguma forma, para evitar problemas e confusões em analises futuras, ou ao treinar modelos de Machine Learning.
 
 Para detectar Outliers podemos usar Gráficos do tipo Box Plot, ou então, usar alguns testes especificos como o Z-Score.
 
 Nos scripts em python, usei três métodos: O Box Plot, e dois tipos de teste.
+
+**IMPORTANTE: Nesse exemplo, eu propositalmente procurei Outliers na coluna `Preco_Venda`, por que eu criei esse dataset para ter Outliers nessa coluna, para ilustrar o conceito. Por isso, para não delongar muito a explicação, não irei procurar Outliers em outras colunas, pra poupar tempo. Porém para procurar Outliers, sempre precisamos definir em qual coluna queremos procurar, nesse exemplo, eu procuro Outliers na coluna `Preco_Venda`, como mencionado.**
 
 <pre>
 <code>python .\grafico-detectar-outliers.py</code>
