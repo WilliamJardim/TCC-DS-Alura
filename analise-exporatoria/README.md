@@ -176,7 +176,7 @@ Abaixo eu deixei um gráfico de Box Plot, que indica a presença de Outliers:
 Em Data Science, em visualização de dados, é muito comum criamos gráficos para nos ajudar a entender os dados, a distribuição, proporções, frequencias/contagens, etc. No Python, temos diversas bibliotecas Open Source para criar gráficos, como o Matplotlib, que foi a que eu utilizei para gerar esses gráficos.
 
 ## Gráfico da quantidade de plantas doentes e saudáveis em geral
-<img src="./images/Plantas/Grafico_Plantas_Doentes_vs_Saudaveis_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/Grafico_Plantas_Doentes_vs_Saudaveis_Por_Estacao.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação da quantidade de plantas doentes e saudáveis em geral**. Nesse gráfico vemos que no dataset, a quantidade de plantas doentes é muito maior do que a quantidade de plantas saudáveis.
 
@@ -184,19 +184,19 @@ Isso pode indicar que existe um desbalanceamento, e talves seja necessário trat
 
 
 ## Gráfico de custo de cultivo das plantas saudáveis e doentes no geral
-<img src="./images/Plantas/Grafico_Custo_Cultivo_Saudaveis_vs_Doentes.png" width="100%" height="800px">
+<img src="./images/plantas/Grafico_Custo_Cultivo_Saudaveis_vs_Doentes.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação entre o custo de cultivo das plantas doentes com o custo de cultivo das plantas saudáveis.**, e notavelmente, o custo de cultivo das plantas doentes é extremamente maior do que o custo de cultivo de plantas saudáveis, e isso faz total sentido, pois, nesse dataset, sempre quando as plantas estão doentes, isso tem vários fatores envolvidos, por exemplo: elas consumem mais agua(seja por pragas ou ervas daninhas), são prejudicadas por pragas ou ervas daninhas, ou, elas estão em situações inadequadas como clima ruim, pouca luz do dia, pouca chuva, pouca humidade, etc. E cada um desses fatores faz automaticamente com o que o custo de cultivo seja maior, pois dá muito mais trabalho para cuidar, elimiar as pragas, ervas daninhas, a planta demorou para se desenvolver, etc.
 
 Mais esse gráfico faz uma análise mais geral, sem considerar estações do ano, ou tipo de plantas.
 
 ## Gráfico de custo de cultivo das plantas saudáveis e doentes POR ESTAÇÂO DO ANO
-<img src="./images/Plantas/Grafico_Custo_Cultivo_Plantas_DoentesSaudaveis_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/Grafico_Custo_Cultivo_Plantas_DoentesSaudaveis_Por_Estacao.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação mais complexa, pois compara o custo de cultivo das plantas doentes com o custo de cultivo das plantas saudáveis em cada estação do ano.** Nesse segundo gráfico, fica muito claro que o custo de cultivo no Inverno é muito mais alto no que nas demais estações do ano. E isso tem explicações lógicas também, por exemplo, no inverno é um periodo muito mais frio, com temperaturas bem baixas, e também, com menas horas de sol no dia, tendo dias menos claros, mais escuros, tambem com menas chuvas, menas humidade do solo pois fica mais congelado. A maioria das plantas diminui seu crescimento ou para completamente. No Inverno são condições péssimais para as plantas. No Outuno nem tanto, mais já está indo para o ritmo do Inverno. (Também, as pragas e ervas daninhas também somem por completo no Inverno, e no Outuno reduz bastante tambem, mais esses detalhes irei falei em outro gráfico)
 
 ## Gráfico de Número de Pragas por POR ESTAÇÂO DO ANO
-<img src="./images/Plantas/Grafico_Num_Pragas_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/Grafico_Num_Pragas_Por_Estacao.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação da quantidade de pragas em cada estação do ano.** E fica claro que, no Inverno, não existe nenhuma praga(O mesmo ocorre com as ervas daninhas, porém não é mostrado aqui), e no Outono, existe uma quantidade bem menor de pragas, pois já está se aproximando do ritmo do Inverno, o que é ruim para as pragas. 
 
@@ -204,32 +204,32 @@ Mais esse gráfico faz uma análise mais geral, sem considerar estações do ano
 
 
 ## Gráfico da quantidade de plantas doentes e saudáveis por estação
-<img src="./images/Plantas/Grafico_Plantas_Doentes_vs_Saudaveis_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/Grafico_Plantas_Doentes_vs_Saudaveis_Por_Estacao.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação da quantidade de plantas doentes e saudáveis por estação**. Nesse gráfico também vemos que no Inverno e Outono tem sido as piores estações, com maior número de plantas doentes.
 
 
 ## Gráfico do tempo de vida das plantas por estação
-<img src="./images/Plantas/Grafico_Vida_Plantas_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/Grafico_Vida_Plantas_Por_Estacao.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação do tempo de vida das plantas por estação**. Nesse gráfico fica claro que no Inverno, é o período que as plantas vivem menos, e isso faz sentido, pois, como vimos em outros gráficos anteriores, a situação do Inverno tem um ambiente péssimo para as plantas. Embora não tenha pragas nem ervas daninhas, ainda assim o Inverno por si só, por causa das implicações dele, atrapalha muito.
 
 
 ## Gráfico do tempo de crescimento das plantas por estação
-<img src="./images/Plantas/Grafico_Tempo_Crescimento_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/Grafico_Tempo_Crescimento_Por_Estacao.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação do tempo de crescimento das plantas por estação, em geral, considerando os tipos das plantas**. 
 
 
 ## Gráfico das plantas mais vulneráveis a ficar doentes POR ESTAÇÂO DO ANO
-<img src="./images/Plantas/GraficoBarras_Tipo_Plantas_Mais_Vulneraveis_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/GraficoBarras_Tipo_Plantas_Mais_Vulneraveis_Por_Estacao.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico mostra uma comparação das plantas mais vulneráveis a ficar doentes POR ESTAÇÂO DO ANO, considerando os tipos das plantas, e suas fragilidades(tendencia a ficar doente).** 
 
 **Também podemos ver esse gráfico de outra forma, usando um mapa de calor:**
 
 ## Gráfico de calor das plantas mais vulneráveis a ficar doentes POR ESTAÇÂO DO ANO
-<img src="./images/Plantas/GraficoCalor_Tipo_Plantas_Mais_Vulneraveis_Por_Estacao.png" width="100%" height="800px">
+<img src="./images/plantas/GraficoCalor_Tipo_Plantas_Mais_Vulneraveis_Por_Estacao.png" width="100%" height="800px">
 
 
 
