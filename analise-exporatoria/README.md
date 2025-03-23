@@ -202,42 +202,32 @@ Para calcular a correlação, existem duas formas principais:
 Eu calculei essa correlações entre algumas colunas, e vou apresentar abaixo:
 
 ## Correlação entre o Custo de Cultivo com o Preço de Venda da planta
-<p align="center">
-  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_Preco_Venda1.png" width="45%">
-  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_Preco_Venda2.png" width="45%">
-</p>
+<img src="./images/Correlacoes/Grafico_CustoCultivo_vs_Preco_Venda2.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: A medida que o Custo de Cultivo aumenta, o Preço de Venda também aumenta.** Pois, o Preço da Venda está sendo calculado com base no Custo de Cultivo, mais uma margem de lucro em cima, e outros fatores, como qualidade. Mais existe uma relação. Se pra cultivar uma planta foi muito caro, é esperado que para vender ela, também seja caro, por que isso foi custoso.
 
 
 ## Correlação entre o Custo de Cultivo com os litros de água por semana que a planta consome
-<p align="center">
-  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_LitrosAguaSemana1.png" width="45%">
-  <img src="./images/Correlacoes/Grafico_CustoCultivo_vs_LitrosAguaSemana2.png" width="45%">
-</p>
+<img src="./images/Correlacoes/Grafico_CustoCultivo_vs_LitrosAguaSemana2.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: A medida que o Custo de Cultivo aumenta, o Consumo da agua por semana das plantas também aumenta.** Pois nas amostras desse dataset, sempre que o Custo de Cultivo aumenta, isso ocorre por causa de alguns fatores, como número de pragas, ervas daninhas, etc, que por consequencia, aumentam o consumo de agua, e além disos, nesse dataset, o própio custo de cultivo é influenciado pelos litros de agua gastos, e cada planta pode ser um nivel de consumo diferente. A frequencia de chuvas e humidade do solo também podem reduzir o custo de cultivo e o consumo de agua. Então, está diretamente relacionado sim!
 
 
 ## Correlação entre o Tempo de crescimento da planta com o Tempo de vida dela
-<p align="center">
-  <img src="./images/Correlacoes/Grafico_TempoVida_vs_TempoCrescimentoHoras_1.png" width="45%">
-  <img src="./images/Correlacoes/Grafico_TempoVida_vs_TempoCrescimentoHoras_2.png" width="45%">
-</p>
+<img src="./images/Correlacoes/Grafico_TempoVida_vs_TempoCrescimentoHoras_2.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: A medida que o Tempo de Crescimento aumenta, O Tempo de vida das plantas diminui.** Isso acontece por que, quando uma planta demora muito para crescer, isso significa que ela demorou para se desenvolver, e isso ocorre por alguns motivos, como por exemplo grande quantidade de pragas, ervas daninhas, ou condições climáticas ou estação do ano desfavoráveis para a planta. Então, está diretamente relacionado sim! 
 
 ## Correlação entre o Tempo de Vida da planta com o Número de Pragas
-<p align="center">
-  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_1.png" width="45%" height="800px">
-  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_2.png" width="45%" height="800px">
-</p>
+<img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_2.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: A medida que o número de pragas aumenta, O Tempo de vida das plantas diminui.** Pois, as pragas e ervas daninhas matam as plantas, sugando nutrientes delas, retardando o crescimento, e reduzindo o tempo de vida.
 
 Para esse exmplo fictício que criei, pode parecer algo muito óbvio, mais esses gráficos são muito importantes para ajudar a entender o dataset.
 Esses são apenas alguns dos tipos de análise que podemos fazer com gráficos de correlação.
 
+
+## Gráfico de calor para ver correlações
 Para se ter uma visão mais detalhada da correlação, uma boa prática é criar um gráfico de calor, mostrando as correlações, como o abaixo:
 
 <img src="./images/Gerais/Grafico_Correlacoes_Entre_Colunas.png" width="100%" height="800px">
