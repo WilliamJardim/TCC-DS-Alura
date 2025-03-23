@@ -229,8 +229,8 @@ Eu calculei essa correlações entre algumas colunas, e vou apresentar abaixo:
 
 ## Correlação entre o Tempo de Vida da planta com o Número de Pragas
 <p align="center">
-  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_1.png" width="45%">
-  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_2.png" width="45%">
+  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_1.png" width="45%" height="800px">
+  <img src="./images/Correlacoes/Grafico_TempoVida_vs_Num_Pragas_2.png" width="45%" height="800px">
 </p>
 
 **EXPLICAÇÂO: A medida que o número de pragas aumenta, O Tempo de vida das plantas diminui.** Pois, as pragas e ervas daninhas matam as plantas, sugando nutrientes delas, retardando o crescimento, e reduzindo o tempo de vida.
@@ -240,7 +240,7 @@ Esses são apenas alguns dos tipos de análise que podemos fazer com gráficos d
 
 Para se ter uma visão mais detalhada da correlação, uma boa prática é criar um gráfico de calor, mostrando as correlações, como o abaixo:
 
-<img src="./images/Gerais/Grafico_Correlacoes_Entre_Colunas.png" width="45%">
+<img src="./images/Gerais/Grafico_Correlacoes_Entre_Colunas.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Esse gráfico cria uma tabela com as correlações de cada coluna com cada coluna.**, ou seja ele cruza todas as colunas com todas as colunas, trazendo uma tabela colorida. As cores indicam a força e sentido da correlação, e os valores também. A interpretação dos valores segue a mesma lógica da **Interpretação de correlação** que mostrei acima. 
 
