@@ -11,6 +11,7 @@ Muitas vezes, se pode observar valores extremos, e possivelmente outliers, olhan
 </pre>
 
 ## PRIMEIRAS LINHAS DO DATASET (PRIMEIRAS AMOSTRAS):
+<pre>
          Data Estacao_Ano Tipo_Planta Tipo_Solo  Temperatura_C    Chuva_mm  ...  Tempo_Crescimento_horas  Litros_Agua_Semana   Saude  Custo_Cultivo   Preco_Venda  Tempo_Vida_dias
 0  2020-01-01     Inverno      Tomate   Arenoso    -142.821783  -33.501388  ...             1.283856e+06        8.708987e+05  Doente   3.662212e+08  3.405255e+10     1.208945e+06
 1  2020-01-02     Inverno      Batata   Arenoso    -151.689624   -5.484920  ...             1.365897e+06        9.447499e+05  Doente   3.614611e+08  5.991073e+10     1.481377e+06
@@ -20,9 +21,10 @@ Muitas vezes, se pode observar valores extremos, e possivelmente outliers, olhan
 
 [5 rows x 24 columns]
 ``
+</pre>
 
 ### Calculando métricas: média, valor minimo, valor máximo, etc...
-``` 
+<pre>
        Temperatura_C     Chuva_mm  Horas_Sol_Dia  Humidade_Solo  Frequencia_Podas  ...  Tempo_Crescimento_horas  Litros_Agua_Semana  Custo_Cultivo   Preco_Venda  Tempo_Vida_dias
 count    3000.000000  3000.000000    3000.000000    2975.000000       3000.000000  ...             3.000000e+03        3.000000e+03   2.990000e+03  3.000000e+03     3.000000e+03
 mean      -19.259555    74.953493     -35.918143      37.629188        -17.451000  ...             9.082197e+05        7.526629e+05   2.547188e+08  5.762628e+10     2.831568e+06
@@ -34,7 +36,7 @@ min      -159.971698  -129.919691    -157.965008     -20.390887        -80.00000
 max        49.986731   249.160474      13.994681      81.486994          9.000000  ...             2.952793e+06        1.451219e+06   6.847427e+08  7.266834e+11     5.470994e+06
 
 [8 rows x 19 columns]
-```
+</pre>
 
 ### Shape do dataset
 <pre>
@@ -128,6 +130,10 @@ Nos scripts em python, usei três métodos: O Box Plot, e dois tipos de teste.
 2956  2028-02-04     Inverno     Cenoura   Arenoso    -156.557741  -84.034792  ...             1.548906e+06        1.114452e+06  Doente   4.503850e+08  1.669106e+11    635346.228349
 
 [70 rows x 24 columns]
+</pre>
+
+## Outliers pelo Z-Score:
+<pre>
 Outliers pelo Z-Score:
              Data Estacao_Ano Tipo_Planta Tipo_Solo  Temperatura_C    Chuva_mm  ...  Litros_Agua_Semana     Saude  Custo_Cultivo   Preco_Venda  Tempo_Vida_dias    Z_Score
 411   2021-02-15     Inverno      Tomate   Arenoso    -139.676858   56.001076  ...        8.504519e+05    Doente   2.995859e+08  3.344221e+11     2.071579e+06   5.555040
