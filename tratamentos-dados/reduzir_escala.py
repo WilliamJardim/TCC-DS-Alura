@@ -645,6 +645,96 @@ MAX Temperatura_C INVERNO 4.006060728518891
 Agora fez muito mais sentido
 """
 
+"""
+Porém, eu notei isso:
+
+APÒS AJUSTAR A TEMPERATURA MINIMA NA PRIMAVERA
+MIN Temperatura_C PRIMAVERA 8.006811146547665
+MEDIA Temperatura_C PRIMAVERA 21.309430574536954
+MAX Temperatura_C PRIMAVERA 34.98382043179019
+
+MIN Temperatura_C VERAO 20.01793816504386
+MEDIA Temperatura_C VERAO 34.547941191212715
+MAX Temperatura_C VERAO 49.98673109751316
+
+MIN Temperatura_C OUTONO 6.000921565361473
+MEDIA Temperatura_C OUTONO 20.680503386573164
+MAX Temperatura_C OUTONO 35.930167897939775
+
+MIN Temperatura_C INVERNO 2.0072182893117967
+MEDIA Temperatura_C INVERNO 2.96505561731765
+MAX Temperatura_C INVERNO 4.006060728518891
+
+Note que, o minino do outono é 6.000921565361473, e o minimo do verão é 20.01793816504386, são valores muito distantes, uma mudança muita brusca repetina
+eu preciso suavilizar um pouco mais essa transição,
+
+e manter o padrão do inverno muito abaixo
+
+"""
+
+# Tratei o outono
+media_temperatura_outono = dataset.loc[dataset['Estacao_Ano'] == 'Outono', 'Temperatura_C'].mean()
+dataset.loc[(dataset['Estacao_Ano'] == 'Outono') & (dataset['Temperatura_C'] <= media_temperatura_outono), 'Temperatura_C'] += 2.6
+
+# Aumentei só um pouquino mais o outono em geral tambem
+dataset.loc[dataset['Estacao_Ano'] == 'Outono', 'Temperatura_C'] += 1.2
+
+# Aumentei só um pouquino mais o inverno tambem
+dataset.loc[dataset['Estacao_Ano'] == 'Inverno', 'Temperatura_C'] += 1.8
+
+print('\nAPÒS AJUSTAR A TEMPERATURA MINIMA NA PRIMAVERA')
+# qual a média da Temperatura_C na primavera
+print( 'MIN Temperatura_C PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Temperatura_C'].min() ) 
+print( 'MEDIA Temperatura_C PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Temperatura_C'].mean() ) 
+print( 'MAX Temperatura_C PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Temperatura_C'].max() ) 
+
+print('')
+
+# qual a média de Temperatura_C no verao
+print( 'MIN Temperatura_C VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Temperatura_C'].min() ) 
+print( 'MEDIA Temperatura_C VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Temperatura_C'].mean() ) 
+print( 'MAX Temperatura_C VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Temperatura_C'].max() ) 
+
+print('')
+
+# qual a média de Temperatura_C no outono
+print( 'MIN Temperatura_C OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Temperatura_C'].min() ) 
+print( 'MEDIA Temperatura_C OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Temperatura_C'].mean() ) 
+print( 'MAX Temperatura_C OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Temperatura_C'].max() ) 
+
+print('')
+
+# qual a média de Temperatura_C no inverno
+print( 'MIN Temperatura_C INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Temperatura_C'].min() ) 
+print( 'MEDIA Temperatura_C INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Temperatura_C'].mean() ) 
+print( 'MAX Temperatura_C INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Temperatura_C'].max() ) 
+
+print('\n')
+
+"""
+Ficou um pouco melhor agora:
+
+APÒS AJUSTAR A TEMPERATURA MINIMA NA PRIMAVERA
+MIN Temperatura_C PRIMAVERA 8.006811146547665
+MEDIA Temperatura_C PRIMAVERA 21.309430574536954
+MAX Temperatura_C PRIMAVERA 34.98382043179019
+
+MIN Temperatura_C VERAO 20.01793816504386
+MEDIA Temperatura_C VERAO 34.547941191212715
+MAX Temperatura_C VERAO 49.98673109751316
+
+MIN Temperatura_C OUTONO 9.800921565361472
+MEDIA Temperatura_C OUTONO 23.19836052943031
+MAX Temperatura_C OUTONO 37.13016789793978
+
+MIN Temperatura_C INVERNO 3.8072182893117965
+MEDIA Temperatura_C INVERNO 4.76505561731765
+MAX Temperatura_C INVERNO 5.806060728518891
+
+Faz muito mais sentido
+"""
+
+
 
 """
 São 3000 amostras, 
