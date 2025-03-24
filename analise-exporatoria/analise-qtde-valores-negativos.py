@@ -46,3 +46,27 @@ print('\nAmostras com chuva negativo:')
 chuvaNegativo = (dataset['Chuva_mm'] < 0).sum()
 
 print(chuvaNegativo)
+
+
+
+print('\nAltura:')
+alturaNegativo = (dataset['Altura_cm'] < 0).sum()
+
+print(alturaNegativo)
+      
+
+print('\Frequencia_Podas:')
+freqPodasNegativo = (dataset['Frequencia_Podas'] < 0).sum()
+
+print(freqPodasNegativo)
+
+
+print('\Horas_Sol_Dia:')
+solNegativo = (dataset['Horas_Sol_Dia'] < 0).sum()
+
+print(solNegativo)
+
+print('\Temperatura_C:')
+tempNegativo = (dataset['Temperatura_C'] < 0).sum()
+
+print(tempNegativo)
