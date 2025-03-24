@@ -205,4 +205,28 @@ IDEIA FAZER TAMBEM: Tratar o numero de pragas, pra ao invez de ser zero no inver
 
 """
 
+"""
+Vou ver a coluna Chuva_mm
+"""
+
+print( 'ESTACOES COM VALORES DE Chuva_mm NEGATIVOS', dataset[ dataset['Chuva_mm'] <= 0 ]['Estacao_Ano'].unique() )
+
+"""
+o código acima não dá pra tratar dessa forma por que a primavera tem valores negativos tambem
+eu posso tentar fazer o teste do +1, ou tentar aquela outra ideia minha: aumentar a escala pra todos os valores ficarem maior que zero, ai eu idenficar o valor que posso usar pra separar, e reduzir a escala denovo
+"""
+
+dataset['Chuva_mm'] = dataset['Chuva_mm'] + 25;
+
+print( 'ESTACOES COM VALORES DE FREQUENCIA PODAS NEGATIVOS', dataset[ dataset['Chuva_mm'] <= 0 ]['Estacao_Ano'].unique() )
+
+"""
+Eu fiz varios testes somando valores, somei 22, 24, e todos davam primavera tambem
+agora eu somei por ultimo +25,.. e ai a primavera sumiu
+
+isso significa que ao somar 25, o valor negativo ficou zero, provavelmente por que poderia ser -25,....., ai deixou de existir valores menores do que zero na primavera, isolando totalmente o inverno com os valores negativos ficando apenas no inverno
+não existe nenhum valor em outras estações nessa faixa
+
+Então somar 25 é um bom limiar pra eu me basear para tratar o Chuva_mm
+"""
 
