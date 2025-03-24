@@ -434,6 +434,64 @@ Na minha opinião não preciso mexer mais nisso, já está bom
 Não tem muito a ver com o tempo, mais mesmo assim, o padrão de no outono e inverno ficar menor foi aplicado
 """
 
+"""
+Porém veja:
+
+MIN Frequencia_Podas PRIMAVERA 1.0
+MEDIA Frequencia_Podas PRIMAVERA 5.559681697612732
+MAX Frequencia_Podas PRIMAVERA 10.0
+
+MIN Frequencia_Podas VERAO 1.0
+MEDIA Frequencia_Podas VERAO 5.430706521739131
+MAX Frequencia_Podas VERAO 10.0
+
+MIN Frequencia_Podas OUTONO 0.5
+MEDIA Frequencia_Podas OUTONO 2.1416925178976043
+MAX Frequencia_Podas OUTONO 5.5
+
+MIN Frequencia_Podas INVERNO 0.5002815696779608
+MEDIA Frequencia_Podas INVERNO 0.7523202206862205
+MAX Frequencia_Podas INVERNO 0.9979648323438057
+
+Eu acho que não deveriam existir valores como 0.5, 0.7, deveria ser no minimo 1
+"""
+
+# Tratei isso
+dataset['Frequencia_Podas'] = dataset['Frequencia_Podas'] + 1;
+
+print('\nAPOS TRATAR O FREQUENCIA PODAS')
+# qual a média da Frequencia_Podas na primavera
+print( 'MIN Frequencia_Podas PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Frequencia_Podas'].min() ) 
+print( 'MEDIA Frequencia_Podas PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Frequencia_Podas'].mean() ) 
+print( 'MAX Frequencia_Podas PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Frequencia_Podas'].max() ) 
+
+print('')
+
+# qual a média de Frequencia_Podas no verao
+print( 'MIN Frequencia_Podas VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Frequencia_Podas'].min() ) 
+print( 'MEDIA Frequencia_Podas VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Frequencia_Podas'].mean() ) 
+print( 'MAX Frequencia_Podas VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Frequencia_Podas'].max() ) 
+
+print('')
+
+# qual a média de Frequencia_Podas no outono
+print( 'MIN Frequencia_Podas OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Frequencia_Podas'].min() ) 
+print( 'MEDIA Frequencia_Podas OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Frequencia_Podas'].mean() ) 
+print( 'MAX Frequencia_Podas OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Frequencia_Podas'].max() ) 
+
+print('')
+
+# qual a média de Frequencia_Podas no inverno
+print( 'MIN Frequencia_Podas INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Frequencia_Podas'].min() ) 
+print( 'MEDIA Frequencia_Podas INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Frequencia_Podas'].mean() ) 
+print( 'MAX Frequencia_Podas INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Frequencia_Podas'].max() ) 
+
+print('')
+
+"""
+Na minha opinião ficou muito melhor 
+"""
+
 
 """
 São 3000 amostras, 
