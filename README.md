@@ -21,6 +21,10 @@ Um trabalho de conclusão de meu curso na Alura que eu fiz usando todos os conhe
  - Tratar os dados nulos
  - Remover Outliers identificados na etapa 3
  - Fazer slicing das linhas
- - Fazer reamostragem
  - Escolher features mais relevantes
  - Criar novas features
+
+[ 5. Treinando um modelo de Machine Learning para fazer classificação e regressão das plantas do dataset](./treinando-modelo-MachineLearning/)
+ - Escolher features mais relevantes
+ - Classificação de plantas
+ - Regressão do Custo_Cultivo das plantas

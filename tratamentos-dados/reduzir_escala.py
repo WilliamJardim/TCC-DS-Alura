@@ -1856,3 +1856,406 @@ Deu certo tambem
 Pronto!, agora meu dataset não tem mais valores NaN
 """
 
+"""
+Agora eu posso descrever o dataset denovo
+"""
+print('\nDATASET AGORA DEPOIS DE TODOS ESSES TRATAMENTOS FEITOS:')
+print( dataset_balanceado.describe() );
+
+
+"""
+Ainda falta eu tratar uma outra coluna: Tempo_Vida_dias
+
+Como eu vejo em no método describe:
+
+  DATASET AGORA DEPOIS DE TODOS ESSES TRATAMENTOS FEITOS:
+
+        Temperatura_C    Chuva_mm  Horas_Sol_Dia  Humidade_Solo  ...  Litros_Agua_Semana  Custo_Cultivo    Preco_Venda  Tempo_Vida_dias
+  count     875.000000  875.000000     875.000000     875.000000  ...          875.000000     875.000000     875.000000       875.000000
+  mean       20.037217  100.380397      17.197617      36.660594  ...          883.180572  358621.090376   83843.228167      1559.276327
+  std        12.909478   79.870014       6.816875      25.571283  ...          171.685316   99329.390785   59318.221709      1418.514971
+  min         3.808148    2.086400       8.004251     -20.161422  ...          377.627814   90531.419479      96.088607     -3498.109989
+  25%         5.434947    5.000000       8.415673      18.748046  ...          761.585837  292444.464499   47634.402696       658.908617
+  50%        20.983145  101.502666      16.752415      37.830503  ...          880.894554  358387.859829   74233.257085      1573.795971
+  75%        29.522825  161.610187      22.613890      56.272721  ...         1001.878139  429019.135168  106916.471842      2524.605947
+  max        49.665216  274.120840      29.750185      81.486994  ...         1452.671623  685428.162668  726684.139340      5069.175504
+
+Note que na coluna 'Tempo_Vida_dias', existem valores negativos, o que não faz nenhum sentido.
+Então, eu vou precisar tratar eles tambem, a escala deles tambem
+
+Note que a coluna 'Humidade_Solo' existem valores negativos tambem, , o que não faz nenhum sentido.
+Então, eu vou precisar tratar eles tambem, e a escala deles tambem
+"""
+
+"""
+Primeiro vou tratar a Tempo_Vida_Dias
+vou eliminar os numeros negativos, depois voltar a escala ao normal
+"""
+# Tratei isso: primeiro eu somo um valor bem grande para elimiar os negativos
+dataset_balanceado['Tempo_Vida_dias'] = dataset_balanceado['Tempo_Vida_dias'] + 10000
+
+# conferindo se isso resolveu
+print( 'Tempo_Vida_dias após remover negativos: ', dataset_balanceado['Tempo_Vida_dias'].describe() );
+
+"""
+Ficou assim:
+Tempo_Vida_dias após remover negativos:  count      875.000000
+mean     11559.276327
+std       1418.514971
+min       6501.890011
+25%      10658.908617
+50%      11573.795971
+75%      12524.605947
+max      15069.175504
+Name: Tempo_Vida_dias, dtype: float64
+
+Funcionou!
+Agora o Tempo_Vida_dias não tem mais valores negativos
+Porém, a escala dele ficou absurda devido a grande soma
+
+VOU TRATAR A ESCALA DELE
+"""
+dataset_balanceado['Tempo_Vida_dias'] = dataset_balanceado['Tempo_Vida_dias'] / 100
+
+# conferindo se isso resolveu a escala
+print( 'Tempo_Vida_dias após tratar escala: ', dataset_balanceado['Tempo_Vida_dias'].describe() );
+
+"""
+Após tratar a escala do Tempo_Vida_Dias, ficou assim:
+
+Tempo_Vida_dias após tratar escala:  count    875.000000
+mean     115.592763
+std       14.185150
+min       65.018900
+25%      106.589086
+50%      115.737960
+75%      125.246059
+max      150.691755
+Name: Tempo_Vida_dias, dtype: float64
+"""
+
+"""
+Pronto!, agora o Tempo_Vida_dias não tem mais valores negativos, e está em uma escala que faz muito mais sentido
+"""
+
+"""
+Agora quero tratar o 'Humidade_Solo' que tem valores negativos
+Pra isso eu posso descrever o dataset denovo pra ver as colunas
+"""
+print('\nDATASET AGORA DEPOIS DE TODOS ESSES TRATAMENTOS FEITOS:')
+print( dataset_balanceado.describe() );
+
+# Vendo especificamente a coluna Humidade_Solo 
+print( 'Humidade_Solo atual das amostras: ',dataset_balanceado['Humidade_Solo'].describe() );
+
+"""
+HUMIDADE DO SOLO ATUAL DAS AMOSTRAS
+
+Humidade_Solo atual das amostras:  count    875.000000
+mean      36.660594
+std       25.571283
+min      -20.161422
+25%       18.748046
+50%       37.830503
+75%       56.272721
+max       81.486994
+Name: Humidade_Solo, dtype: float64
+
+Note que, existem valores negativos
+
+Eu vou tratar exatamente da mesma forma que eu fiz com todos os outros
+Porém não vou tratar a escala, por que eu testei e não ficou muito bom
+então pra presentar a escala, eu tive ideia de usar outra estrategia simples
+"""
+
+"""
+Vou eliminar os numeros negativos
+"""
+# Tratei isso: primeiro eu somo um valor qualquer que seja capaz de elimiar os negativos
+dataset_balanceado['Humidade_Solo'] = dataset_balanceado['Humidade_Solo'] + 25
+
+# conferindo se isso resolveu
+print( 'Humidade_Solo após remover negativos: ', dataset_balanceado['Humidade_Solo'].describe() );
+
+"""
+Humidade_Solo após remover negativos: 
+
+count     875.000000
+mean     1036.660594
+std        25.571283
+min       979.838578
+25%      1018.748046
+50%      1037.830503
+75%      1056.272721
+max      1081.486994
+Name: Humidade_Solo, dtype: float64
+
+Ele removeu os negativos porém, a escala ficou absurda, por causa da grande soma
+Agora vou tratar a escala divindo por um valor
+"""
+
+"""
+Agora eu posso conferir se esses valores fazem sentido pra acda estação do ano
+"""
+print('\nAPÒS TRATAR ESCALA Humidade_Solo:')
+
+# qual a média da Humidade_Solo na primavera
+print( 'MIN Humidade_Solo PRIMAVERA', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Primavera' ]['Humidade_Solo'].min() ) 
+print( 'MEDIA Humidade_Solo PRIMAVERA', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Primavera' ]['Humidade_Solo'].mean() ) 
+print( 'MAX Humidade_Solo PRIMAVERA', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Primavera' ]['Humidade_Solo'].max() ) 
+
+print('')
+
+# qual a média de Humidade_Solo no verao
+print( 'MIN Humidade_Solo VERAO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Verão' ]['Humidade_Solo'].min() ) 
+print( 'MEDIA Humidade_Solo VERAO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Verão' ]['Humidade_Solo'].mean() ) 
+print( 'MAX Humidade_Solo VERAO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Verão' ]['Humidade_Solo'].max() ) 
+
+print('')
+
+# qual a média de Humidade_Solo no outono
+print( 'MIN Humidade_Solo OUTONO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Outono' ]['Humidade_Solo'].min() ) 
+print( 'MEDIA Humidade_Solo OUTONO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Outono' ]['Humidade_Solo'].mean() ) 
+print( 'MAX Humidade_Solo OUTONO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Outono' ]['Humidade_Solo'].max() ) 
+
+print('')
+
+# qual a Humidade_Solo de chuvas no inverno
+print( 'MIN Humidade_Solo INVERNO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Inverno' ]['Humidade_Solo'].min() ) 
+print( 'MEDIA Humidade_Solo INVERNO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Inverno' ]['Humidade_Solo'].mean() ) 
+print( 'MAX Humidade_Solo INVERNO', dataset_balanceado[ dataset_balanceado['Estacao_Ano'] == 'Inverno' ]['Humidade_Solo'].max() ) 
+
+print('')
+
+"""
+Faz sentido!
+e não só isso, o padrão se manteve exatamente o mesmo, porém com valores negativos
+por exemplo a subtração do percentil 25% subtraido com o percentil 50%, deu 19, igual era antes, então a proporção dos valores não mudou
+"""
+
+
+"""
+Agora eu preciso ver se existem Outliers(amostras que valores extremos ou fora do padrão), e se tiver, remover eles
+"""
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+"""
+Para esse exemplo, eu sei que os outliers estão apenas na coluna PRECO VENDA,
+pois eu propositalmente criei esse dataset para ter Outliers nessa coluna para ensinar como identificar eles
+"""
+
+
+print('\n')
+
+# OUTLIERS PARA O PRECO VENDA
+# Criar um boxplot para uma variável específica
+sns.boxplot(x=dataset_balanceado['Preco_Venda'])
+plt.title('Boxplot de Preco_Venda')
+plt.show()
+
+print('\n')
+print('PROCURANDO OUTLIERS USANDO QUARTIS')
+print('\n')
+
+# Calcular o IQR (Intervalo Interquartil)
+Q1 = dataset_balanceado['Preco_Venda'].quantile(0.25)
+Q3 = dataset_balanceado['Preco_Venda'].quantile(0.75)
+IQR = Q3 - Q1
+
+# Definir limites para outliers
+limite_inferior = Q1 - 1.5 * IQR
+limite_superior = Q3 + 1.5 * IQR
+
+# Filtrar os outliers
+outliers = dataset_balanceado[(dataset_balanceado['Preco_Venda'] < limite_inferior) | 
+                              (dataset_balanceado['Preco_Venda'] > limite_superior)]
+
+print("Outliers encontrados:\n", outliers)
+
+
+print('\n')
+print('PROCURANDO OUTLIERS USANDO ZSCORE')
+print('\n')
+from scipy.stats import zscore
+
+# Calcular Z-score para a coluna
+dataset_balanceado['Z_Score'] = zscore(dataset_balanceado['Preco_Venda'])
+
+# Identificar os indices dos Outliers
+outliers_testeZ = dataset_balanceado[(dataset_balanceado['Z_Score'] > 3) | (dataset_balanceado['Z_Score'] < -3)]
+print("Outliers pelo Z-Score:\n", outliers_testeZ)
+
+"""
+Como voce pode ver no gráfico do matplotlib, existem amostras que tem o Preco_Venda muito alto!, valores extremos que fogem do padrão. 
+E isso é um exemplo de outlier que precisa ser tratado.
+
+Esses não são os unicos tipos que podem existir.
+Podem haver outros tipos de Outliers também, mais todos eles vão ter algo em comum: Vão ser valores extremos.
+
+Nos outros dois testes feitos com quartis e com o Z-Score, vemos que existem no mínimo de 7 a 18 outliers, na coluna Preco_Venda.
+Ou seja, existem de 7 a 18 amostras que tem valores extremos na coluna Preco_Venda. E precisam ser tratados ou removidos.
+"""
+
+"""
+Eu fiz dois tipos de testes: teste dos quartis e no teste do ZTEST
+Cada teste tem resultados diferentes.
+
+Eu na minha opinião, acho que remover 18 outliers(apontados pelo teste dos quartis) poderia ser algo não muito bom, pois, tem muitas amostras do verão, e pouca das outras,
+isso poderia desbalancear meu dataset
+
+Então vou optar por remover os 7 Outliers apontados pelo ZTEST, que são mais especificos, e vai afetar menos meu dataset
+
+VOU REMOVER
+"""
+
+# Removendo os 7 Outliers apontados pelo ZTEST,  pelos índices deles
+outliers_indices = outliers_testeZ.index
+dataset_sem_outliers = dataset_balanceado.drop(outliers_indices, axis=0)
+
+"""
+Agora eu posso visualizar o dataset pra ver como ficou
+"""
+print( dataset_sem_outliers.describe() )
+
+print( dataset_sem_outliers.head(10) )
+
+"""
+Pronto, os Outliers foram removidos!
+"""
+
+"""
+Agora vou reduzir um pouco a escala do preço de venda e custo cultivo, pra ficar menor
+"""
+dataset_sem_outliers['Custo_Cultivo'] = dataset_sem_outliers['Custo_Cultivo'] / 10
+dataset_sem_outliers['Preco_Venda'] = dataset_sem_outliers['Preco_Venda'] / 10
+
+"""
+Isso não ajuda muito, mais não cria valores muito grandes demais
+"""
+
+"""
+Agora eu posso visualizar o dataset pra ver como ficou
+"""
+print( dataset_sem_outliers.describe() )
+
+print( dataset_sem_outliers.head(10) )
+
+
+"""
+No pandas, tambem podemos criar novas colunas, usando colunas já existentes, ou cálculos matemáticos sobre os valores das colunas já existentes
+Abaixo eu criei um exemplo bem simples para criar algumas novas colunas:
+"""
+
+"""
+Tambem quero criar uma nova coluna chamada Altura_mm, para ser a altura em metros
+"""
+dataset_sem_outliers['Altura_mm'] = dataset_sem_outliers['Altura_cm'] / 100
+
+"""
+Tambem quero fazer uma nova coluna pra representar a chuva em metros
+"""
+dataset_sem_outliers['Chuva_mm'] = dataset_sem_outliers['Chuva_mm'] / 100
+
+"""
+Tambem quero criar uma nova coluna para representar a diferença entre o Preço de Venda e o Custo de Cultivo
+"""
+dataset_sem_outliers['dif_preco_venda_custo_cultivo'] = dataset_sem_outliers['Preco_Venda'] - dataset_sem_outliers['Custo_Cultivo']
+
+"""
+Tambem quero remover a coluna ZScore, que é desnecessária
+"""
+dataset_sem_outliers = dataset_sem_outliers.drop('Z_Score', axis=1);
+
+"""
+Essa ideia de criar novas colunas é chamada de Feature Engineering, que significa Engenharia de Features, pois permite criar/inventar novas features, ou caracteristicas
+"""
+
+"""
+Agora eu posso visualizar o dataset pra ver como ficou
+"""
+print( dataset_sem_outliers.describe() )
+
+print( dataset_sem_outliers.head(10) )
+
+"""
+Porém, ao criar novas features, notei que na maioria das vezes o Custo_Cultivo é muito maior do que o Preco_Venda
+Sendo que o preço de venda deveria ser um pouco maior que o Custo_Cultivo
+Essa simulação não fez sentido
+"""
+
+# Analisando esse problema, em cada versão do meu dataset, ao longo dos tratamentos que eu fiz
+dataset['custo_maior_que_venda'] = dataset['Custo_Cultivo'] > dataset['Preco_Venda']
+print(dataset['custo_maior_que_venda'].sum(), dataset.shape)
+
+dataset_balanceado['custo_maior_que_venda'] = dataset_balanceado['Custo_Cultivo'] > dataset_balanceado['Preco_Venda']
+print(dataset_balanceado['custo_maior_que_venda'].sum(), dataset_balanceado.shape)
+
+dataset_sem_outliers['custo_maior_que_venda'] = dataset_sem_outliers['Custo_Cultivo'] > dataset_sem_outliers['Preco_Venda']
+print(dataset_sem_outliers['custo_maior_que_venda'].sum(), dataset_sem_outliers.shape)
+
+"""
+Ao analisar:
+
+2944 (3000, 24)
+869 (875, 25)
+868 (868, 26)
+
+vi que esse padrão se manteve em cada versão do meu dataset, ao longo dos tratamentos que eu fiz~
+Eu preciso tratar isso!
+"""
+
+"""
+Vou aumentar o Preco_Venda somando com o Custo_Cultivo, acredito que isso faça sentido
+"""
+# Tratei isso
+dataset_sem_outliers['Preco_Venda'] = dataset_sem_outliers['Preco_Venda'] + dataset_sem_outliers['Custo_Cultivo']
+
+# Analisando se esse problema foi resolvido
+dataset_sem_outliers['custo_maior_que_venda'] = dataset_sem_outliers['Custo_Cultivo'] > dataset_sem_outliers['Preco_Venda']
+print(dataset_sem_outliers['custo_maior_que_venda'].sum(), dataset_sem_outliers.shape)
+
+"""
+E agora foi:
+
+0 (868, 26)
+
+O que significa que eu consegui tratar isso!
+"""
+
+"""
+Agora eu preciso calcular denovo a diferença entre o Custo_Cultivo e Preço_Venda
+"""
+dataset_sem_outliers['dif_preco_venda_custo_cultivo'] = dataset_sem_outliers['Preco_Venda'] - dataset_sem_outliers['Custo_Cultivo']
+
+"""
+Tambem vou remover a coluna custo_maior_que_venda que é desnecessária
+"""
+dataset_sem_outliers = dataset_sem_outliers.drop('custo_maior_que_venda', axis=1);
+
+"""
+Agora eu posso visualizar o dataset pra ver como ficou
+"""
+print( dataset_sem_outliers.describe() )
+
+print( dataset_sem_outliers.head(10) )
+
+"""
+Agora ficou certo,
+O Preco_Venda sempre vai ser maior que o Custo_Cultivo
+"""
+
+# Salvar CSV
+dataset_sem_outliers.to_csv('datasets/dataset-tratado-normalizado-sem-outliers.csv', index=False, sep=';')
+print("Dataset atualizado com sucesso!")
+
+
+
+tentando_abrir = pd.read_csv('datasets/dataset-tratado-normalizado-sem-outliers.csv', sep=';');
+
+"""
+Agora eu posso visualizar o dataset pra ver como ficou
+"""
+print( tentando_abrir.describe() )
+
+print( tentando_abrir.head(10) )
