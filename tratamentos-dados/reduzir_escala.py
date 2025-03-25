@@ -1185,5 +1185,115 @@ print( dataset['Altura_cm'].describe() );
 Na minha opinião está bem tratado a Altura_cm!
 """
 
+"""
+AGORA EU AINDA PRECISO TRATAR O NUM_PRAGAS
+
+IDEIA FAZER TAMBEM: Tratar o numero de pragas, pra ao invez de ser zero no inverno, ser a metade do valor minimo positivo, pra ficar na mesma proporção
+"""
+
+# Vou analisar as pragas
+print('\nANALISANDO MINIMO, MAXIMO E MEDIA DA COLUNA Num_Praga, APÒS TRARAR OS NEGATIVOS:')
+print( dataset['Num_Praga'].describe() );
+
+"""
+ANALISANDO MINIMO, MAXIMO E MEDIA DA COLUNA Num_Praga, APÒS TRARAR OS NEGATIVOS:
+count    3000.000000
+mean        4.945500
+std        12.359721
+min         0.000000
+25%         0.000000
+50%         0.000000
+75%         0.000000
+max        73.500000
+Name: Num_Praga, dtype: float64
+
+No caso, eu ja tratei na hora de gerar o dataset, criando uma restrição pra ele não ter Num_Praga negativas
+
+MAIS EXISTE UM POSSIVEL PROBLEMA: os quartis 25%, 50% e 75% do Num_Praga é 0, o que indica que a grande maioria das amostras tem praga igual a zero(que antes era negativo pois eu tratei pra ser zero se fosse negativo)
+isso com certeza vai impactar na hora que eu for criar meu modelo 
+
+porém, eu ainda posso melhor o padrão com aquela ideia que eu tive: 
+
+IDEIA FAZER TAMBEM: Tratar o numero de pragas, pra ao invez de ser zero no inverno, ser a metade do valor minimo positivo, pra ficar na mesma proporção
+"""
+
+"""
+Pra tentar corrigir o problema, eu posso fazer o seguinte:
+"""
+
+# Identificar quantas amostras tem Num_Praga igual a 0
+print( 'QTDE AMOSTRAS COM Num_Praga igual a zero: ', dataset[dataset['Num_Praga'] == 0]['Num_Praga'].count() );
+
+"""
+O meu dataset de tem 3000 amostras:
+
+Porém nesse meu dataset, dessas 3000 amostras, as 2386 amostras estão com Num_Praga igual a zero, o que é péssimo,
+de fato, o a grande maioria das amostras tem Num_Praga igual a zero
+
+Eu poderia recalcular esses valores, substituindo a coluna, levando em conta alguns fatores, simplificando um pouco meu dataset, mais eu não quero fazer isso.
+
+MAIS ALGUMAS PERGUNTAS SÂO IMPORTANTES EU SABER:
+
+  (1) Quantas amostras tem Num_Praga diferente de zero
+  
+  (2) Qual a quantidade de Num_Praga por estação do ano
+
+  Com isso vou conseguir saber se tem alguma desproporção ou desbalanceamento, o que tudo indica ser o caso
+
+"""
+# Identificar quantas amostras tem Num_Praga diferente de 0
+print( 'QTDE AMOSTRAS COM Num_Praga diferente de zero: ', dataset[dataset['Num_Praga'] != 0]['Num_Praga'].count() );
+
+"""
+Das 3000 amostras, apenas 614 tem Num_Praga diferente de zero,
+o resto é tudo zero!
+
+Eu preciso tratar isso
+
+MAIS ALGUMAS PERGUNTAS SÂO IMPORTANTES EU SABER:
+
+  (2) Qual a quantidade de Num_Praga por estação do ano
+
+"""
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Primavera: ', dataset[dataset['Estacao_Ano'] == 'Primavera']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Verão: ', dataset[dataset['Estacao_Ano'] == 'Verão']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Outono: ', dataset[dataset['Estacao_Ano'] == 'Outono']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Inverno: ', dataset[dataset['Estacao_Ano'] == 'Inverno']['Num_Praga'].describe() );
+
+"""
+Antes eu não tinha percebido isso por que o gráfico que eu tinha feito na analise exploratória mostrava a média do Num_Pragas por estação, mais não os valores mesmo
+E embora a média e valor minimo e maximo façam sentido, as pragas são meio que "raras" pois, em cada estação, bem poucas amostras tem Num_Pragas maior que zero
+"""
+
+"""
+Pra confirmar e entender mais isso eu tambem posso calcular a proporção "Num_Pragas maior que zero" e "Num_Pragas igual a zero", de cada estação
+"""
+
+"""
+A unica solução mais viavel que vejo no momento é remover algumas dessas amostras, mantendo uma certa proporção por estação
+
+Depois na hora de treinar o modelo eu posso até gerar novas amostras de treino em cima dessas 614 que não tem o valor zerado
+
+Eu sei que as Ervas_Daninhas vai ter esse mesmo problema, pois eu gerei e tratei da mesma forma!
+Então, eu vou optar por remover a coluna Ervas_Daninhas do dataset, não vou usar ela
+"""
+
+
+
+
+
+
 
 
