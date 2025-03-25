@@ -1287,13 +1287,231 @@ A unica solução mais viavel que vejo no momento é remover algumas dessas amos
 Depois na hora de treinar o modelo eu posso até gerar novas amostras de treino em cima dessas 614 que não tem o valor zerado
 
 Eu sei que as Ervas_Daninhas vai ter esse mesmo problema, pois eu gerei e tratei da mesma forma!
-Então, eu vou optar por remover a coluna Ervas_Daninhas do dataset, não vou usar ela
+Então, eu posso optar por remover a coluna Ervas_Daninhas do dataset e não usar ela
 """
 
+"""
+Vou começar a aplicar isso então:
+"""
+
+# Vou apagar a coluna Ervas_Daninhas que só vai dificultar
+dataset = dataset.drop('Ervas_Daninhas', axis=1);
+
+"""
+Agora vou fazer com que o inverno tenha pelo menos 1 a 2 pragas, em vez de ser apenas tudo zero, pra não ser um Outlier em potencial e não atrapalhar em outros processos
+"""
+pragas_inverno = dataset['Estacao_Ano'] == 'Inverno';
+dataset.loc[pragas_inverno, 'Num_Praga'] += np.random.uniform(1,3, pragas_inverno.sum() )
+
+"""
+Agora isso já vai impedir alguns problemas que eu pensei: Como por exemplo, não trazer nenhuma amostra para o inverno
+"""
+
+# Vou pegar só as amostras que tem Num_Pragas maior que zero
+dataset_com_pragas_maiores_que_zero = dataset[dataset['Num_Praga'] > 0];
+
+# Vendo se eu peguei o que eu queria
+print(dataset_com_pragas_maiores_que_zero.head())
+
+"""
+Agora eu preciso ver por estação, quais são os valores minimo, maximo e média, 
+E tambem conferir quantas amostras ficaram em cada, pra ver se existe um balanceamento justo de amostras
+"""
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Primavera: ', dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] == 'Primavera']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Verão: ', dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] == 'Verão']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Outono: ', dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] == 'Outono']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Inverno: ', dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] == 'Inverno']['Num_Praga'].describe() );
+
+"""
+Os resultados são:
+
+QTDE Num_Praga Primavera:  count    226.000000
+mean      21.030973
+std       13.794892
+min        0.500000
+25%        9.500000
+50%       18.000000
+75%       33.000000
+max       49.000000
+Name: Num_Praga, dtype: float64
 
 
 
+QTDE Num_Praga Verão:  count    211.000000
+mean      32.146919
+std       19.760283
+min        1.500000
+25%       15.000000
+50%       31.500000
+75%       45.000000
+max       73.500000
+Name: Num_Praga, dtype: float64
 
 
 
+QTDE Num_Praga Outono:  count    177.000000
+mean      18.646893
+std       12.417153
+min        0.500000
+25%        8.500000
+50%       16.500000
+75%       28.500000
+max       44.500000
+Name: Num_Praga, dtype: float64
+
+
+
+QTDE Num_Praga Inverno:  count    782.000000
+mean       2.002368
+std        0.592919
+min        1.000470
+25%        1.483718
+50%        1.976778
+75%        2.542618
+max        2.999172
+Name: Num_Praga, dtype: float64
+
+
+Note que o Inverno tem 782 amostras
+
+E as demais tem bem menos amostras. Então existe um desbalanceamento muito grande
+
+Eu tenho duas saidas:
+
+  (1) - Remover várias amostras do inverno e tratar algumas coisas
+
+  (2) - Ou compensar colocando mais amostras usando técnicas para gerar novas amostrar a partir das existentes
+
+Pra eu tentar seguir o primeiro caminho, eu preciso entender como estão organizadas as amostras do inverno
+
+"""
+
+# Quero ver todas as 782 uma por uma
+pd.set_option('display.max_rows', None)  # Remove o limite de linhas a ser exibido
+print( dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] == 'Inverno'] )
+
+"""
+Eu posso fazer um slicing para reduzir a quantidade de amostras
+Fazer um slicing significa recortar um trecho do dataset.
+Por exemplo se das 782 amostras eu quero pegar somente 300, eu posso fazer um slicing de 0 a 300
+
+Pelos dados dessas amostras, isso não vai prejudicar a qualidade 
+"""
+
+# eu preciso filtrar somente as amostras do inverno, para poder aplicar o slicing
+dataset_somente_amostras_inverno = dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] == 'Inverno'];
+
+quantas_em_quantas = 3 # Eu escolhi fazer um slicing só que selecionando as amostras de 3 em 3
+
+# Aqui eu faço o slicing
+dataset_somente_amostras_inverno_recortado = dataset_somente_amostras_inverno.iloc[0:782:quantas_em_quantas];
+
+# aqui eu limito que só quero no máximo 300 amostras do inverno
+dataset_somente_amostras_inverno_recortado_somente_300 = dataset_somente_amostras_inverno_recortado.head(300);
+
+"""
+Eu já tenho a minha seleção feita
+PORÈM AGORA EU PRECISO COLOCAR ISSO NO DATASET
+
+eu posso fazer isso pegando todas as amostras QUE NÂO SEJAM DO INVERNO, e depois concatenar(ou seja, juntar) com AS AMOSTRAS DO INVERNO
+"""
+
+# agora eu preciso pegar as amostras QUE NÂO SEJAM DO INVERNO
+dataset_amostras_exceto_inverno = dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] != 'Inverno'];
+
+# agora que eu tenho as duas coisas, eu posso juntar devolta
+dataset_balanceado = pd.concat([dataset_amostras_exceto_inverno, dataset_somente_amostras_inverno_recortado_somente_300], ignore_index=True)
+
+"""
+Agora eu posso verificar denovo
+"""
+print('\nVERIFICANDO DENOVO AS PRAGAS POR ESTAÇÂO APÒS O BALANCEAMENTO:\n\n')
+
+print( 'QTDE Num_Praga Primavera: ', dataset_balanceado[dataset_balanceado['Estacao_Ano'] == 'Primavera']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Verão: ', dataset_balanceado[dataset_balanceado['Estacao_Ano'] == 'Verão']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Outono: ', dataset_balanceado[dataset_balanceado['Estacao_Ano'] == 'Outono']['Num_Praga'].describe() );
+
+print('\n\n')
+
+print( 'QTDE Num_Praga Inverno: ', dataset_balanceado[dataset_balanceado['Estacao_Ano'] == 'Inverno']['Num_Praga'].describe() );
+
+"""
+Agora ficou assim a proporção:
+
+
+VERIFICANDO DENOVO AS PRAGAS POR ESTAÇÂO APÒS O BALANCEAMENTO:
+
+
+QTDE Num_Praga Primavera:  count    226.000000
+mean      21.030973
+std       13.794892
+min        0.500000
+25%        9.500000
+50%       18.000000
+75%       33.000000
+max       49.000000
+Name: Num_Praga, dtype: float64
+
+
+
+QTDE Num_Praga Verão:  count    211.000000
+mean      32.146919
+std       19.760283
+min        1.500000
+25%       15.000000
+50%       31.500000
+75%       45.000000
+max       73.500000
+Name: Num_Praga, dtype: float64
+
+
+
+QTDE Num_Praga Outono:  count    177.000000
+mean      18.646893
+std       12.417153
+min        0.500000
+25%        8.500000
+50%       16.500000
+75%       28.500000
+max       44.500000
+Name: Num_Praga, dtype: float64
+
+
+
+QTDE Num_Praga Inverno:  count    261.000000
+mean       1.992619
+std        0.612959
+min        1.034715
+25%        1.391882
+50%        1.989335
+75%        2.584597
+max        2.989941
+Name: Num_Praga, dtype: float64
+
+Ainda não está 100% balanceado
+PORÈM, JÁ ESTA MUITO MELHOR
+
+"""
+
+"""
+EU AINDA POSSO SEGUIR MINHA IDEIA: Compensar colocando mais amostras usando técnicas para gerar novas amostrar a partir das existentes
+"""
 
