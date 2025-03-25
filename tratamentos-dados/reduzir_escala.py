@@ -1515,3 +1515,14 @@ PORÈM, JÁ ESTA MUITO MELHOR
 EU AINDA POSSO SEGUIR MINHA IDEIA: Compensar colocando mais amostras usando técnicas para gerar novas amostrar a partir das existentes
 """
 
+"""
+
+Eu quero tratar alguns valores NaN que eu reparei durante a analise
+
+Pra isso eu preciso:
+  (1) - Descobrir quais colunas tem valores NaN
+
+  (2) - Escolher um método para tratar: usar média da coluna, regressão, ou preencher com zero ou um 1, ou outra técnica
+
+"""
+
