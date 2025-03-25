@@ -53,7 +53,7 @@ print(dataset.head()['Altura_cm'])"
 
 """
 São 3000 amostras, 
-DESSAS:
+DESSAS FALTA TRATAR:
 
 Amostras com chuva negativo:
 615
@@ -990,3 +990,200 @@ print('')
 """
 Agora faz mais sentido
 """
+
+"""
+Agora falta tratar a Altura_cm, pois ainda tem valores negativos na altura da planta, o que não faz nenhum sentido
+"""
+
+print('\nANALISANDO MINIMO, MAXIMO E MEDIA DA COLUNA ALTURA_CM:')
+print( dataset['Altura_cm'].describe() );
+
+"""
+
+ANALISANDO MINIMO, MAXIMO E MEDIA DA COLUNA ALTURA_CM:
+count      3000.000000
+mean     230260.402328
+std      265665.460498
+min     -509007.871632
+25%       28959.940530
+50%      252557.922538
+75%      430439.496518
+max      822584.493505
+Name: Altura_cm, dtype: float64
+
+Dá pra notar que os valores são aburdos, alguns mediriam KM de tamanho se fossem convertidos para kilometros!
+"""
+
+# Reduzi essa escala para não ultrapassar METROS
+dataset['Altura_cm'] = dataset['Altura_cm'] / 100;
+
+print('\nANALISANDO DENOVO: MINIMO, MAXIMO E MEDIA DA COLUNA ALTURA_CM, APÒS REDUZIR ESCALA:')
+print( dataset['Altura_cm'].describe() );
+
+"""
+Agora faz muito mais sentido:
+
+ANALISANDO DENOVO: MINIMO, MAXIMO E MEDIA DA COLUNA ALTURA_CM, APÒS REDUZIR ESCALA:
+count    3000.000000
+mean     2302.604023
+std      2656.654605
+min     -5090.078716
+25%       289.599405
+50%      2525.579225
+75%      4304.394965
+max      8225.844935
+Name: Altura_cm, dtype: float64
+
+Agora falta eu calcular a média, valor minimo e máximo de cada estação do ano, pra entender melhor se preciso ajustar algo
+
+"""
+print('\nAPÒS TRATAR ESCALA Altura_cm:')
+
+# qual a média da Altura_cm na primavera
+print( 'MIN Altura_cm PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Altura_cm'].min() ) 
+print( 'MEDIA Altura_cm PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Altura_cm'].mean() ) 
+print( 'MAX Altura_cm PRIMAVERA', dataset[ dataset['Estacao_Ano'] == 'Primavera' ]['Altura_cm'].max() ) 
+
+print('')
+
+# qual a média de Altura_cm no verao
+print( 'MIN Altura_cm VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Altura_cm'].min() ) 
+print( 'MEDIA Altura_cm VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Altura_cm'].mean() ) 
+print( 'MAX Altura_cm VERAO', dataset[ dataset['Estacao_Ano'] == 'Verão' ]['Altura_cm'].max() ) 
+
+print('')
+
+# qual a média de Altura_cm no outono
+print( 'MIN Altura_cm OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Altura_cm'].min() ) 
+print( 'MEDIA Altura_cm OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Altura_cm'].mean() ) 
+print( 'MAX Altura_cm OUTONO', dataset[ dataset['Estacao_Ano'] == 'Outono' ]['Altura_cm'].max() ) 
+
+print('')
+
+# qual a Altura_cm de chuvas no inverno
+print( 'MIN Altura_cm INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Altura_cm'].min() ) 
+print( 'MEDIA Altura_cm INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Altura_cm'].mean() ) 
+print( 'MAX Altura_cm INVERNO', dataset[ dataset['Estacao_Ano'] == 'Inverno' ]['Altura_cm'].max() ) 
+
+print('')
+
+"""
+O resultado foi esse:
+
+
+APÒS TRATAR ESCALA Altura_cm:
+MIN Altura_cm PRIMAVERA -4298.470527155631
+MEDIA Altura_cm PRIMAVERA 2417.146688033889
+MAX Altura_cm PRIMAVERA 6377.503598282309
+
+MIN Altura_cm VERAO -5090.078716321775
+MEDIA Altura_cm VERAO 3939.071890038556
+MAX Altura_cm VERAO 8225.844935045006
+
+MIN Altura_cm OUTONO -2138.238076239102
+MEDIA Altura_cm OUTONO 3707.298202983684
+MAX Altura_cm OUTONO 7346.103161482534
+
+MIN Altura_cm INVERNO -3765.205911099949
+MEDIA Altura_cm INVERNO -655.7372580196429
+MAX Altura_cm INVERNO 2651.3676537895644
+
+Eu acredito que a média, minimo e maixmo POR ESTAÇÂO da Altura_cm não é uma informação muito relevante para eu tratar isso, 
+Pois, Altura_cm não depende exclusivamente da estação do ano
+
+Por exemplo, Chuva, Temperatura, Horas Sol, Frequencia podas(nem tanto mais eu coloquei um pouco), podem até terem uma relação mais forte com a estação do ano,
+mais Altura_cm já não depende tanto da estação do ano em si, mais pode estar correlacionado devido a outros fatores correlatos
+"""
+
+"""
+Eu quero descobrir quantos valores negativos existem
+"""
+
+print( 'QTDE ALTURA NEGATIVAS', dataset[ dataset['Altura_cm'] < 0 ]['Altura_cm'].count() );
+
+"""
+Tem 668 amostras com valores negativos na coluna Altura_cm
+
+Eu preciso saber em quais estações do ano estão esses valores negativos.
+Preciso descobrir se estão mais em determinadas estações, ou em todas
+"""
+
+print( 'ESTAÇÔES QUE TEM ALTURA NEGATIVAS', dataset[ dataset['Altura_cm'] < 0 ]['Estacao_Ano'].unique() );
+
+"""
+Todas elas tem!
+Isso é um problema maior
+
+isso significa que, temos 668 amostras com valores negativos na coluna Altura_cm, 
+E tambem que essas amostras não estão concetradas em estações especificas, mais espalhadas, o que torna um pouco mais complexo de tratar sem afetar o dataset
+"""
+
+"""
+Tive uma idea para tratar isso sem muito esforço
+
+Primeiro eu somo um valor bem grande para elimiar os negativos, tornando eles positivos, porem isso aumentaria a escala de forma indesejada
+e depois eu reduzo a escala divivindo por 1000 pra corrigir a escala novamente
+"""
+
+# Tratei isso: primeiro eu somo um valor bem grande para elimiar os negativos
+dataset['Altura_cm'] = dataset['Altura_cm'] + 10000
+
+# Vou conferir se o número que eu somei em todos já eliminou os negativos
+print( 'QTDE ALTURA NEGATIVAS', dataset[ dataset['Altura_cm'] < 0 ]['Altura_cm'].count() );
+
+"""
+Fiz varios testes com diferentes valores para dividir
+e 100 diminui um pouco os negativos, 1000 diminui mais ainda,
+porém 10000 foi o valor que eliminou por completo
+
+Agora eu preciso conferir a média, o valor minimo e maximo denovo
+"""
+
+print('\nANALISANDO DENOVO: MINIMO, MAXIMO E MEDIA DA COLUNA ALTURA_CM, APÒS TRARAR OS NEGATIVOS:')
+print( dataset['Altura_cm'].describe() );
+
+"""
+E Ótimo: Os valores negativos foram transformados em positivos, sem afetar o padrão:
+
+ANALISANDO DENOVO: MINIMO, MAXIMO E MEDIA DA COLUNA ALTURA_CM, APÒS TRARAR OS NEGATIVOS:
+count     3000.000000
+mean     12302.604023
+std       2656.654605
+min       4909.921284
+25%      10289.599405
+50%      12525.579225
+75%      14304.394965
+max      18225.844935
+Name: Altura_cm, dtype: float64
+
+Aparentemente, os valores minimos e máximos e média, estão adequados, pois eu sei que o padrão não mudou, só a escala mesmo
+O que era grande continuou sendo grande, o que era pequeno continuou sendo pequeno, em relação a escala atual.
+
+A escala mudou, porém o mesmo padrão se manteve, e era exatamente isso que eu queria.
+
+Porém, eu preciso tratar a escala para que ela volte ao normal, sem afetar o padrão, e sem voltar a ter valores negativos.
+"""
+
+"""
+VOLTANDO A ESCALA AO NORMAL, OU PARA UMA ESCALA QUE FAÇA MAIS SENTIDO
+
+Pra isso, eu posso fazer uma divisão por 10
+"""
+
+dataset['Altura_cm'] = dataset['Altura_cm'] / 10
+
+# após tratar isso vou conferir denovo:
+
+# Vou conferir ainda continua sem os negativos
+print( 'QTDE ALTURA NEGATIVAS', dataset[ dataset['Altura_cm'] < 0 ]['Altura_cm'].count() );
+
+# Vou analisar denovo a média, valor minimo e maximo
+print('\nANALISANDO DENOVO: MINIMO, MAXIMO E MEDIA DA COLUNA ALTURA_CM, APÒS TRARAR OS NEGATIVOS:')
+print( dataset['Altura_cm'].describe() );
+
+"""
+Na minha opinião está bem tratado a Altura_cm!
+"""
+
+
+
