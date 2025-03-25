@@ -1526,3 +1526,333 @@ Pra isso eu preciso:
 
 """
 
+"""
+Vou tratar as colunas que estão com NaN usando a média delas
+
+Pra isso, primeiro preciso descobrir quais colunas tem valores NaN
+"""
+
+# Descobrir quais colunas tem valores NaN
+colunasQueTemNaN = dataset_balanceado.columns[dataset_balanceado.isna().any()].tolist()
+
+print('Quais colunas tem valores NaN', colunasQueTemNaN)
+
+"""
+Quais colunas tem valores NaN: ['Humidade_Solo', 'Custo_Cultivo']
+Apenas essas que eu preciso tratar
+
+Seria interessante eu saber quantos valores NaN existem em cada coluna
+"""
+
+# Contar os valores NaN nessas colunas: ['Humidade_Solo', 'Custo_Cultivo']
+contagem_nan = dataset_balanceado[colunasQueTemNaN].isna().sum()
+
+print('Quantidade NaN por coluna: \n');
+print(contagem_nan)
+
+"""
+Quantidade NaN por coluna:
+
+Humidade_Solo    8
+Custo_Cultivo    2
+dtype: int64
+
+Agora eu sei quantos valores NaN existem em cada coluna
+E posso calcular a média dessa scolunas
+"""
+
+mediaHumidadeSolo = dataset_balanceado['Humidade_Solo'].mean()
+print('MEDIA HUMIDADE SOLO: ', mediaHumidadeSolo);
+
+mediaCusto_Cultivo = dataset_balanceado['Custo_Cultivo'].mean()
+print('MEDIA Custo_Cultivo: ', mediaCusto_Cultivo);
+
+"""
+Eu disse que eu quero usar a média de cada uma dessas colunas pra tratar os valores NaN
+Então eu preciso calcular essa media geral da coluna
+
+Porém isso pode ter limitações, e pode distorcer os dados
+"""
+
+"""
+Uma abordagem melhor que eu pensei seria eu tratar com a média da coluna para cada estação do ano
+
+Pra isso, coisa que vale a pena eu olher é se os valores NaN estão em todas as estações
+se estiverem, eu posso aplicar um tratamente diferente para cada estação, o que pode melhorar
+"""
+
+# Vendo os valores NaN da coluna Humidade_Solo em cada estação do ano
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NA PRIMAVERA: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NO Verão: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NO Outono: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NO Inverno: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+"""
+Esses são eles:
+
+VALORES NAN DA COLUNA Humidade_Solo NA PRIMAVERA:
+           Data Estacao_Ano Tipo_Planta Tipo_Solo  Temperatura_C    Chuva_mm  ...  Tempo_Crescimento_horas  Litros_Agua_Semana   Saude  Custo_Cultivo    Preco_Venda  Tempo_Vida_dias
+150  2022-03-02   Primavera      Batata  Argiloso      12.542969  128.315936  ...               811.429365          762.305321  Doente  281794.199130   43309.802851      3388.847294
+245  2023-04-22   Primavera      Tomate    Humoso      21.327720   91.247849  ...              1169.506839          934.074498  Doente  401965.555291  360162.681780      1895.789925
+
+[2 rows x 23 columns]
+
+
+VALORES NAN DA COLUNA Humidade_Solo NO Verão:
+           Data Estacao_Ano Tipo_Planta Tipo_Solo  Temperatura_C    Chuva_mm  ...  Tempo_Crescimento_horas  Litros_Agua_Semana   Saude  Custo_Cultivo    Preco_Venda  Tempo_Vida_dias
+280  2023-08-09       Verão       Trigo   Siltoso      43.494843  107.905074  ...              1550.393435          959.961284  Doente  419230.342351  143782.199162       765.143755
+346  2024-06-24       Verão       Trigo    Humoso      34.460520  123.436689  ...              2617.414131         1335.694480  Doente  600095.890807  144757.262752     -2086.337256
+570  2027-06-26       Verão       Trigo    Humoso      43.185203   79.691804  ...              1863.621981         1096.269272  Doente  511100.157458   89201.456700      -269.066517
+
+[3 rows x 23 columns]
+
+
+VALORES NAN DA COLUNA Humidade_Solo NO Outono:
+           Data Estacao_Ano Tipo_Planta Tipo_Solo  Temperatura_C    Chuva_mm  ...  Tempo_Crescimento_horas  Litros_Agua_Semana   Saude  Custo_Cultivo   Preco_Venda  Tempo_Vida_dias
+213  2022-10-24      Outono     Cenoura    Humoso      24.744834  160.837865  ...              1342.921697          857.265372  Doente  320072.610993  38534.342262      1829.257145
+519  2026-09-17      Outono     Cenoura    Humoso      17.248624   73.764909  ...               779.748236          750.380789  Doente  292439.675495  59332.073832      3022.859520
+
+[2 rows x 23 columns]
+
+
+VALORES NAN DA COLUNA Humidade_Solo NO Inverno:
+           Data Estacao_Ano Tipo_Planta Tipo_Solo  Temperatura_C  Chuva_mm  ...  Tempo_Crescimento_horas  Litros_Agua_Semana   Saude  Custo_Cultivo  Preco_Venda  Tempo_Vida_dias
+739  2024-01-15     Inverno        Soja   Siltoso       4.493585       4.0  ...              1382.780409          956.525993  Doente  357453.124516  108994.7673      1540.857683
+
+[1 rows x 23 columns]
+
+"""
+
+"""
+Eu vi que, são bem poucas amostras que tem valores NaN na coluna Humidade_Solo
+E tambem sei que em todas as estações tem
+"""
+
+"""
+Agora eu posso tambem ver a do custo cultivo
+"""
+# Vendo os valores NaN da coluna Custo_Cultivo em cada estação do ano
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NA PRIMAVERA: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NO Verão: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NO Outono: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NO Inverno: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+"""
+Eu posso aplicar um tratamento para cada uma, assim esse tratamente não vai refletir um padrão genérico demais, e estará refletindo um padrão especifico pra cada estação
+Assim, eu posso calcular a média da coluna de Humidade_Solo para cada estação
+"""
+
+"""
+Eu disse que eu quero usar a média de cada uma dessas colunas pra tratar os valores NaN
+E eu tambem disse que vou usar a média da coluna PARA CADA ESTAÇÂO DO ANO PRA MELHORAR O TRATAMENTO
+
+Mais eu posso melhorar esse tratamento ainda mais
+Pois eu reparei que todas as amostras que tem valores NaN são amostras de plantas Doentes
+Então, para manter a coerencia, não faria nenhum sentido eu incluir no calculo da média amostras Saudaveis, e preencher esses valores NaN
+
+Já que eu vi que são todas amostras doentes que tem a coluna Humidade_Solo com valor NaN, eu posso substituir esses NaN pela média da coluna Humidade_Solo DAS PLANTES DOENTES, E EM CADA ESTAÇÂO
+assim eu estaria levando em conta a tendencia o dataset, e os padrões de cada região do dataset.
+"""
+
+#Calculando a média da coluna Humidade_Solo apenas das amostras doentes de cada estação:
+print('\n')
+print('MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NA PRIMAVERA: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean() )
+
+print('\n')
+print('MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NO Verão: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean() )
+
+print('\n')
+print('MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NO Outono: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean() )
+
+print('\n')
+print('MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NO Inverno: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean() )
+
+"""
+
+As médias da coluna Humidade_Solo das amostras doentes de cada estação são:
+
+  MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NA PRIMAVERA:
+  48.32694807289242
+
+
+  MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NO Verão:
+  47.5049442231675
+
+
+  MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NO Outono:
+  44.284092329230525
+
+
+  MEDIA DA COLUNA Humidade_Solo DAS AMOSTRAS DOENTES NO Inverno:
+  12.363740297806112
+
+Agora preciso calcular as médias do custo cultivo
+"""
+print('\n')
+print('AGORA VOU CALCULAR AS MÈDIAS DO CUSTO DE CULTIVO DE CADA ESTAÇÂO:')
+
+
+#Calculando a média do Custo_Cultivo apenas das amostras doentes de cada estação:
+print('\n')
+print('MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NA PRIMAVERA: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean() )
+
+print('\n')
+print('MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NO Verão: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean() )
+
+print('\n')
+print('MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NO Outono: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean() )
+
+print('\n')
+print('MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NO Inverno: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean() )
+print('\n')
+
+"""
+As médias da coluna Custo_Cultivo das amostras doentes de cada estação são:
+
+  MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NA PRIMAVERA:
+  391153.43613509164
+
+
+  MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NO Verão:
+  372687.8472476986
+
+
+  MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NO Outono:
+  302001.37153015024
+
+
+  MEDIA DA COLUNA Custo_Cultivo DAS AMOSTRAS DOENTES NO Inverno:
+384403.88122289494
+"""
+
+"""
+Agora eu tenho as médias da Humidade_Solo e Custo_Cultivo das plantas doentes em cada estação
+
+Agora posso tratar essas colunas de uma forma muito legal
+"""
+
+# Preenchendo os NaNs de cada estação do ano
+
+# NAN DA PRIMAVERA
+mediaHumidadeSolo_primavera = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Primavera') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Humidade_Solo'].isna()), 'Humidade_Solo'] = mediaHumidadeSolo_primavera;
+
+# NAN DO VERÂO
+mediaHumidadeSolo_verao = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Verão') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Humidade_Solo'].isna()), 'Humidade_Solo'] = mediaHumidadeSolo_verao;
+
+# NAN DO OUTONO
+mediaHumidadeSolo_outono = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Outono') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Humidade_Solo'].isna()), 'Humidade_Solo'] = mediaHumidadeSolo_outono;
+
+# NAN DO INVERNO
+mediaHumidadeSolo_inverno = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Humidade_Solo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Inverno') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Humidade_Solo'].isna()), 'Humidade_Solo'] = mediaHumidadeSolo_inverno;
+
+"""
+Posso ver se realmente ele substituiu os NaN na coluna Humidade_Solo
+"""
+print('\n')
+print('VALORES NAN NA COLUNA Humidade_Solo EM CADA ESTAÇÂO DO ANO, APÒS TRATAR OS NAN:')
+# Vendo os valores NaN da coluna Humidade_Solo em cada estação do ano
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NA PRIMAVERA: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NO Verão: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NO Outono: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Humidade_Solo NO Inverno: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno') & (dataset_balanceado['Humidade_Solo'].isna() ) ] )
+
+"""
+Deu certo
+"""
+
+"""
+Agora preciso fazer a mesma coisa para a coluna Custo_Cultivo
+"""
+# Preenchendo os NaNs de cada estação do ano
+
+# NAN DA PRIMAVERA
+mediaCustoCultivo_primavera = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Primavera') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Custo_Cultivo'].isna()), 'Custo_Cultivo'] = mediaCustoCultivo_primavera;
+
+# NAN DO VERÂO
+mediaCustoCultivo_verao = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Verão') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Custo_Cultivo'].isna()), 'Custo_Cultivo'] = mediaCustoCultivo_verao;
+
+# NAN DO OUTONO
+mediaCustoCultivo_outono = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Outono') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Custo_Cultivo'].isna()), 'Custo_Cultivo'] = mediaCustoCultivo_outono;
+
+# NAN DO INVERNO
+mediaCustoCultivo_inverno = dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno' ) & (dataset_balanceado['Saude'] == 'Doente') ]['Custo_Cultivo'].mean();
+dataset_balanceado.loc[(dataset_balanceado['Estacao_Ano'] == 'Inverno') & (dataset_balanceado['Saude'] == 'Doente') & (dataset_balanceado['Custo_Cultivo'].isna()), 'Custo_Cultivo'] = mediaCustoCultivo_inverno;
+
+"""
+Posso ver se realmente ele substituiu os NaN na coluna Custo_Cultivo
+"""
+print('\n')
+print('VALORES NAN NA COLUNA Custo_Cultivo EM CADA ESTAÇÂO DO ANO, APÒS TRATAR OS NAN:')
+# Vendo os valores NaN da coluna Humidade_Solo em cada estação do ano
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NA PRIMAVERA: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Primavera') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NO Verão: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Verão') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NO Outono: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Outono') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+print('\n')
+print('VALORES NAN DA COLUNA Custo_Cultivo NO Inverno: ')
+print( dataset_balanceado.loc[ (dataset_balanceado['Estacao_Ano'] == 'Inverno') & (dataset_balanceado['Custo_Cultivo'].isna() ) ] )
+
+"""
+Deu certo tambem
+"""
+
+"""
+Pronto!, agora meu dataset não tem mais valores NaN
+"""
+
