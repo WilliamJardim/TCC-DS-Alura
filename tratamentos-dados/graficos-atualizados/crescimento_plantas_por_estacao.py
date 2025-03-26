@@ -10,7 +10,6 @@ dataset = dataset.drop('Data', axis=1);
 dataset = dataset.drop('Tipo_Solo', axis=1);
 dataset = dataset.drop('Saude', axis=1);
 
-# Identificar os tipos de plantas mais frágeis (maior número de doentes) por estação
 media_crescimento_por_estacao = dataset.groupby(['Estacao_Ano', 'Tipo_Planta']).mean()['Tempo_Crescimento_horas']
 
 print(media_crescimento_por_estacao)
