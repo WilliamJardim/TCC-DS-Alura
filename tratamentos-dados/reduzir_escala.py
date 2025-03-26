@@ -2245,6 +2245,64 @@ Agora ficou certo,
 O Preco_Venda sempre vai ser maior que o Custo_Cultivo
 """
 
+"""
+Montei gráficos para analisar melhor
+
+Notei mudanças para fazer no tempo de crescimento das plantas:
+ 
+  Primavera: Tempo mais curto (crescimento rápido devido ao clima ameno e boas condições).  
+
+  Verão: Tempo ainda um pouco menor que a primavera (mais luz solar acelera o crescimento, mas pode haver estresse térmico).  
+
+  Outono: Tempo um pouco maior que no verão (temperaturas mais baixas desaceleram o crescimento).  
+
+  Inverno: Tempo mais longo (crescimento mais lento devido à baixa temperatura e menos luz solar).  
+
+"""
+
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Primavera', 'Tempo_Crescimento_horas'] -= 850;
+# A soja precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 30;
+# O trigo precisa demorar um pouco mias nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] += 25;
+# O tomate precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 35;
+
+
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Tempo_Crescimento_horas'] -= 1200;
+# A soja precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 160;
+# O trigo precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] -= 4;
+# O tomate precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 60;
+
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Tempo_Crescimento_horas'] -= 370;
+# A batata precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] -= 25;
+# A cenoura precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 15;
+# A soja precisa demorar um pouco menos nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 20;
+# A tomate precisa demorar um pouco mais nessa estação
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] += 10;
+
+
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Tempo_Crescimento_horas'] -= 215;
+
+
+"""
+Percebi que eu tambem preciso tratar o tempo de vida dias por cada estação do ano pra fazer mais sentido
+"""
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Primavera', 'Tempo_Vida_dias'] -= 3;
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Tempo_Vida_dias'] += 38;
+
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Tempo_Vida_dias'] -= 40;
+dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Tempo_Vida_dias'] -= 90;
+
+
+
+
 # Salvar CSV
 dataset_sem_outliers.to_csv('datasets/dataset-tratado-normalizado-sem-outliers.csv', index=False, sep=';')
 print("Dataset atualizado com sucesso!")
