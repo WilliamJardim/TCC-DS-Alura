@@ -2,7 +2,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-dataset = pd.read_csv('./datasets/dataset-tratado-normalizado-sem-outliers.csv', sep=';');
+dataset = pd.read_csv('../datasets/dataset-tratado-normalizado-sem-outliers.csv', sep=';');
 
 # Converter a coluna de data para o formato datetime
 dataset['Data'] = pd.to_datetime(dataset['Data'])
