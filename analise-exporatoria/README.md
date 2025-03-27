@@ -341,3 +341,9 @@ Abaixo eu mostro exemplos de histogramas:
 <img src="./images/histogramas/Histograma_CustoCultivoPlantas.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Nesse gráfico de histograma, vemos que no intervalo de 10 a 15 é que se concentram a maior parte dos valores de custo de cultivo.**
+
+# Balançeamento
+As vezes, nosso dataset pode ter muito mais amostras de uma determinada categoria do que de outras classes. Por exemplo, no dataset `dataset-agricultura-v4.csv` a quantidade de plantas doentes e muito maior do que a de plantas saudáveis. Então pra resolver isso, tive que remover algumas plantas, para igualar as duas classes. Isso vai ser muito importante quando eu for treinar um modelo.
+
+**NOTA: Eu melhorei o dataset, e o atual agora é o v5, mais o conceito explicado aqui funciona para qualquer dataset**
+
