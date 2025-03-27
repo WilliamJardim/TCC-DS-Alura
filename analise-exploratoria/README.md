@@ -4,19 +4,20 @@ O processo de Análise Explorátoria envolve analisar os dados do dataset, para 
 Muitas vezes, se pode observar valores extremos, e possivelmente outliers, olhando os valores minimos, máximos, onde poderiamos perceber informações que não fariam sentido, por exemplo, valores negativos em certas colunas que deveriam ser apenas positivas.
 
 ## Lendo o dataset com o pandas
-<code>
-  import pandas as pd
+```python
+import pandas as pd
 
-  dataset = pd.read_csv('../criando-dataset/datasets/crescimento-soja.csv', sep=';')
+dataset = pd.read_csv('../criando-dataset/datasets/crescimento-soja.csv', sep=';')
+```
 <code>
 
 ## Descrevendo o dataset
-<code>
-  dataset.describe();
-<code>
+```python
+dataset.describe();
+```
 
 ### Descrição do dataset dada pelo pandas:
-<code>
+```text
         Ano          Mes         Crescimento
 count  1805.000000  1805.000000  1802.000000
 mean   2022.496399     6.398892    69.758602
@@ -26,55 +27,54 @@ min    2020.000000     1.000000    30.000000
 50%    2022.000000     6.000000    49.000000
 75%    2024.000000     9.000000    95.000000
 max    2025.000000    12.000000  1024.000000
-<code>
+```
 
 Isso permite visualizar os minimos, máximos e média de cada Coluna, o que é muito util!
 
 ## Ver o tamanho do dataset
-<code>
-  dataset.shape;
-<code>
+```python
+dataset.shape;
+```
 
 ### Descrição do tamanho do dataset dada pelo pandas:
-<code>
+```python
 (1805, 4)
-<code>
+```
 
 Ou seja, esse meu dataset tem 1805 linhas e 4 colunas.
 
 ## Vendo se tem valores negativos na coluna Crescimento
 O método describe já mostrou isso. Mais quero garantir que não haja valores negativos.
 
-<code>
-  print( dataset[ dataset['Crescimento'] < 0 ].count()['Crescimento'].sum() )
-<code>
+```python
+print( dataset[ dataset['Crescimento'] < 0 ].count()['Crescimento'].sum() )
+```
 
 ### Resultado
-<code>
-  0
-<code>
+```text
+0
+```
 
 Ou seja, na coluna Crescimento não existe nenhum valor negativo. E não deveria ter mesmo!
 
 ## Vendo se tem valores NaN(valores faltando) em alguma das colunas
 As vezes, as colunas podem ter valores faltando. E isso precisa ser tratado de alguma forma para não causar problemas na hora de treinar modelos de Machine Learning, ou de fazer análises.
 
-<code>
+```python
 
 # Ver se tem valores NaN e contar quantos são, por coluna
 quantidade_nan_por_coluna = dataset.isna().sum()
 print(quantidade_nan_por_coluna)
 
-</code>
+```
 
-### Resultado
-<code>
+```text
 Ano            0
 Mes            0
 Estacao        0
 Crescimento    3
 dtype: int64
-</code>
+```
 
 **Isso significa que na coluna Crescimento tem 3 valores NaN.**
 Para tratar isso podemos usar a média da coluna, ou usar regressão linear na coluna, ou colocar tudo zero, ou mesmo remover as amostras que tem NaN.
