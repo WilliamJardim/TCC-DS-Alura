@@ -2,11 +2,10 @@
 Um trabalho de conclusão de meu curso na Alura que eu fiz usando todos os conhecimentos que aprendi nos meus cursos, imersões, e formações da Alura, que fiz no ano de 2024, como forma de agradecimento aos meus instrutores .
 
 # Temas e seus tópicos, em sequencia:
-[ 1. Como criei os datasets que usei ](./gerando-datasets/)
- - Scripts que inventei para gerar o dataset
- - Deixar o dataset balançeado. 
+[ 1. Análise Explorátoria Básica ](./criando-dataset/)
+ - Meu dataset
 
-[ 2. Análise Explorátoria Básica ](./analise-exporatoria/)
+[ 2. Análise Explorátoria Básica ](./analise-exploratoria/)
  - Conhecer os dados
  - Visualizar os dados
  - Verificar proporção das amostras
