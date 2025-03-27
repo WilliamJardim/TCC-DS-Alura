@@ -2,7 +2,7 @@
 Esse dataset que eu criei ele acabou ficando muito complexo, com escalas bem grandes, e foi muito trabalhoso de tratar.
 Fiquei a semana toda, todo dia, tratando tudo isso.
 
-Eu iria documentar todo processo de tratamento e normalização que eu segui, mais devido a alta complexidade do dataset, e de tantas coisas que eu precisei fazer, isso poderia confundir. Então, eu optei por apenas falar sobre o que eu fiz, mostrar alguns graficos, quais foram as dificuldades, a solução, e qual foi o resultado.
+Eu iria documentar todo processo de tratamento e normalização que eu segui, mais devido a alta complexidade do dataset, e de tantas coisas que eu precisei fazer, isso poderia confundir. Então, eu optei por apenas falar brevemente sobre o que eu fiz, mostrar alguns graficos, e quais foram as dificuldades e as soluções.
 
 # Gráficos
 **Os gráficos abaixo mostram como ficou o dataset depois dos tratamentos e simplificação que eu fiz.**

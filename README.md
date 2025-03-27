@@ -23,6 +23,7 @@ Um trabalho de conclusão de meu curso na Alura que eu fiz usando todos os conhe
  - Fazer slicing das linhas
  - Escolher features mais relevantes
  - Criar novas features
+ - Simplificação do dataset
 
 [ 5. Treinando um modelo de Machine Learning para fazer classificação e regressão das plantas do dataset](./treinando-modelo-MachineLearning/)
  - Escolher features mais relevantes
