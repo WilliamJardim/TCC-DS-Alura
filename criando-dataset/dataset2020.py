@@ -120,6 +120,9 @@ outono2020 = pd.DataFrame([
     [2020, 4, 'Outono',      49],
     [2020, 4, 'Outono',      49],
     [2020, 4, 'Outono',      49],
+    [2020, 4, 'Outono',      pd.NA], # VALOR NAN DE PROPOSITO
+    [2020, 4, 'Outono',      pd.NA], # VALOR NAN DE PROPOSITO
+    [2020, 4, 'Outono',      pd.NA], # VALOR NAN DE PROPOSITO
     # Maio 2020
     [2020, 5, 'Outono',      49],
     [2020, 5, 'Outono',      49],

@@ -343,7 +343,10 @@ primavera2023 = pd.DataFrame([
     [2023, 12, 'Primavera',    43],
     [2023, 12, 'Primavera',    43],
     [2023, 12, 'Primavera',    43],
-    [2023, 12, 'Primavera',    43]
+    [2023, 12, 'Primavera',    43],
+    #OUTLIERS DE PROPOSITO
+    [2023, 12, 'Primavera',    300],
+    [2023, 12, 'Primavera',    999]
 
 ], columns=['Ano', 'Mes', 'Estacao', 'Crescimento']);
 

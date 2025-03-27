@@ -1,16 +1,3 @@
-Pragas vai ser uma variavel numérica, independente do Crescimento, que vai indicar quantas pragas atacaram aquela planta
-
-As pragas vão ser maiores na Primavera e Verão, e vão cair no Outono e Inverno
-PORÈM NEM TODO MES VAI TER PRAGAS
-
-NEM TODO MES VAI TER PRAGAS
-CERTOS MESES na Primavera e Verão vão ter valores ZERO, ou um a dois, o que vai ser uma anomalia, um padrão não muito linear
-
-O CustoCultivo vai ser uma variavel numérica, independente do Crescimento, que indica o quanto custou para cultivar aquela planta
-Ele vai depender do Crescimento e das Pragas, sem subtrações, apenas com somas pra evitar dar valores negativos.
-
-
-
 OUTLIERS
 Adicionar outliers contextualizados,
 por exemplo, alguns Outliers em 2020 no Inverno, com um valor absurdo proposital e facil de ver e remover
