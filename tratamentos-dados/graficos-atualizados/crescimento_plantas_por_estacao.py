@@ -7,8 +7,6 @@ dataset = pd.read_csv('../datasets/dataset-tratado-normalizado-sem-outliers.csv'
 
 # Removendo features que não vão ser usadas
 dataset = dataset.drop('Data', axis=1);
-dataset = dataset.drop('Tipo_Solo', axis=1);
-dataset = dataset.drop('Saude', axis=1);
 
 media_crescimento_por_estacao = dataset.groupby(['Estacao_Ano', 'Tipo_Planta']).mean()['Tempo_Crescimento_horas']
 

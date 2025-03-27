@@ -1121,18 +1121,20 @@ E tambem que essas amostras não estão concetradas em estações especificas, m
 """
 Tive uma idea para tratar isso sem muito esforço
 
-Eu somo um valor bem grande para elimiar os negativos, tornando eles positivos, porem isso poderia aumentar a escala de forma indesejada
-Se aumentasse a escala depois eu reduzo a escala divivindo por um valor pra corrigir a escala novamente
+Primeiro eu somo um valor bem grande para elimiar os negativos, tornando eles positivos, porem isso aumentaria a escala de forma indesejada
+e depois eu reduzo a escala divivindo por 1000 pra corrigir a escala novamente
 """
 
-# Tratei isso: primeiro eu somo um valor suficiente para elimiar os negativos
-dataset['Altura_cm'] = dataset['Altura_cm'] + 5099.078716 + 35
+# Tratei isso: primeiro eu somo um valor bem grande para elimiar os negativos
+dataset['Altura_cm'] = dataset['Altura_cm'] + 10000
 
 # Vou conferir se o número que eu somei em todos já eliminou os negativos
 print( 'QTDE ALTURA NEGATIVAS', dataset[ dataset['Altura_cm'] < 0 ]['Altura_cm'].count() );
 
 """
 Fiz varios testes com diferentes valores para dividir
+e 100 diminui um pouco os negativos, 1000 diminui mais ainda,
+porém 10000 foi o valor que eliminou por completo
 
 Agora eu preciso conferir a média, o valor minimo e maximo denovo
 """
@@ -1397,7 +1399,7 @@ Pra eu tentar seguir o primeiro caminho, eu preciso entender como estão organiz
 """
 
 # Quero ver todas as 782 uma por uma
-#pd.set_option('display.max_rows', None)  # Remove o limite de linhas a ser exibido
+pd.set_option('display.max_rows', None)  # Remove o limite de linhas a ser exibido
 print( dataset_com_pragas_maiores_que_zero[dataset_com_pragas_maiores_que_zero['Estacao_Ano'] == 'Inverno'] )
 
 """
@@ -2243,522 +2245,50 @@ Agora ficou certo,
 O Preco_Venda sempre vai ser maior que o Custo_Cultivo
 """
 
-"""
-Montei gráficos para analisar melhor
+dataset_sem_outliers.loc[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera', 'Tempo_Crescimento_horas' ] -= 1400
+dataset_sem_outliers.loc[ dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Tempo_Crescimento_horas' ] -= 2500
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas' ] -= 1100
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas' ] -= 800
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas' ] -= 600
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas' ] -= 400
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Tempo_Crescimento_horas' ] -= 200
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas' ] -= 600
+dataset_sem_outliers.loc[ dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Tempo_Crescimento_horas' ] += 100
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas' ] -= 500
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas' ] -= 800
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas' ] -= 400
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Tempo_Crescimento_horas' ] -= 600
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas' ] -= 600
+dataset_sem_outliers.loc[ (dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas' ] -= 400
+dataset_sem_outliers.loc[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Tempo_Crescimento_horas' ] += 4000
 
-Notei mudanças para fazer no tempo de crescimento das plantas:
- 
-  Primavera: Tempo mais curto (crescimento rápido devido ao clima ameno e boas condições).  
+dataset_sem_outliers['Tempo_Crescimento_horas'] = dataset_sem_outliers['Tempo_Crescimento_horas'] + 2698.015070 + 50
+dataset_sem_outliers.loc[ dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Tempo_Crescimento_horas' ] -= 50
 
-  Verão: Tempo ainda um pouco menor que a primavera (mais luz solar acelera o crescimento, mas pode haver estresse térmico).  
-
-  Outono: Tempo um pouco maior que no verão (temperaturas mais baixas desaceleram o crescimento).  
-
-  Inverno: Tempo mais longo (crescimento mais lento devido à baixa temperatura e menos luz solar).  
-
-"""
-
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Primavera', 'Tempo_Crescimento_horas'] -= 850;
-# A soja precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 30;
-# O trigo precisa demorar um pouco mias nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] += 25;
-# O tomate precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 35;
-
-
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Tempo_Crescimento_horas'] -= 1200;
-# A soja precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 160;
-# O trigo precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] -= 4;
-# O tomate precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 60;
-
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Tempo_Crescimento_horas'] -= 370;
-# A batata precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] -= 25;
-# A cenoura precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 15;
-# A soja precisa demorar um pouco menos nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 20;
-# A tomate precisa demorar um pouco mais nessa estação
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] += 10;
-
-
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Tempo_Crescimento_horas'] -= 215;
-
+print( 'ESTACOES TEM VALORES NEGATIVOS TEMPO_VIDA_DIAS: ', dataset_sem_outliers[ dataset_sem_outliers['Tempo_Vida_dias'] < 0 ]['Estacao_Ano'].unique() );
+print( 'ESTACOES TEM VALORES NEGATIVOS Tempo_Crescimento_horas: ', dataset_sem_outliers[ dataset_sem_outliers['Tempo_Crescimento_horas'] < 0 ]['Estacao_Ano'].unique() );
+print( 'ESTACOES TEM VALORES NEGATIVOS Altura_cm: ', dataset_sem_outliers[ dataset_sem_outliers['Altura_cm'] < 0 ]['Estacao_Ano'].unique() );
 
 """
-Percebi que eu tambem preciso tratar o tempo de vida dias por cada estação do ano pra fazer mais sentido
+Percebi que algunas colunas vão atrapalhar, pois vai ficar dificil de criar um dataset 100% alinhado com tudo sem afetar nada
+Vou simplificar removendo algumas features
 """
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Primavera', 'Tempo_Vida_dias'] -= 3;
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Tempo_Vida_dias'] += 38;
-
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Tempo_Vida_dias'] -= 40;
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Tempo_Vida_dias'] -= 90;
-
-
-"""
-Percebi que a coluna Nivel_Pesticida tem valores negativos
-Quero tratar tambem
-
-Vou elimitar os negativos, e vou fazer da forma que fiz no outro, pra não precisar mexer na escala
-
-Como eu sei que o minimo do Nivel_Pesticida foi -80, eu somo com esse valor positivo e mais um pouco
-"""
-dataset_sem_outliers['Nivel_Pesticida'] = dataset_sem_outliers['Nivel_Pesticida'] + 89;
-
-"""
-Pronto!
-Agora ficou bom
-"""
-
-"""
-Eu quero verificar tambem o Frequencia_Podas e o Nivel_Pesticida, por estação, pra ver se o padrão está refletindo o que eu quero
-"""
-
-"""
-Vou começar vendo o Nivel_Pesticida por estação
-"""
-print('\nMEDIAS Nivel_Pesticida POR ESTAÇÂO:')
-
-# qual a média da Nivel_Pesticida na primavera
-print( 'MIN Nivel_Pesticida PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-# qual a média de Nivel_Pesticida no verao
-print( 'MIN Nivel_Pesticida VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-# qual a média de Nivel_Pesticida no outono
-print( 'MIN Nivel_Pesticida OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-# qual a Nivel_Pesticida de chuvas no inverno
-print( 'MIN Nivel_Pesticida INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-"""
-MEDIAS Nivel_Pesticida POR ESTAÇÂO:
-MIN Nivel_Pesticida PRIMAVERA 88.75335863851059
-MEDIA Nivel_Pesticida PRIMAVERA 91.25124714909755
-MAX Nivel_Pesticida PRIMAVERA 93.71821420900419
-
-MIN Nivel_Pesticida VERAO 88.74795040396387
-MEDIA Nivel_Pesticida VERAO 91.24298626905178
-MAX Nivel_Pesticida VERAO 93.7370857402004
-
-MIN Nivel_Pesticida OUTONO 84.26829101511547
-MEDIA Nivel_Pesticida OUTONO 86.54059781052068
-MAX Nivel_Pesticida OUTONO 89.23421439356044
-
-MIN Nivel_Pesticida INVERNO 8.756710420398761
-MEDIA Nivel_Pesticida INVERNO 11.192677018837143
-MAX Nivel_Pesticida INVERNO 13.729130800567091
-
-Analisando, eu tive a ideia de:
-  Diminuir um pouquino a Primavera pra ficar abaixo do Verão
-  Aumentar um pouquino o Verão, por que tem mais pragas
-  E no Outono diminuir mais um pouco pra mostrar que está indo Ritmo do inverno. O Outono precisa ficar abaixo da Primavera
-"""
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Primavera', 'Nivel_Pesticida'] -= 8;
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Nivel_Pesticida'] += 10;
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Nivel_Pesticida'] -= 18;
-
-"""
-Vou calcular as médias denovo
-"""
-print('\nMEDIAS Nivel_Pesticida POR ESTAÇÂO DEPOIS DE MUDAR:')
-
-# qual a média da Nivel_Pesticida na primavera
-print( 'MIN Nivel_Pesticida PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-# qual a média de Nivel_Pesticida no verao
-print( 'MIN Nivel_Pesticida VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-# qual a média de Nivel_Pesticida no outono
-print( 'MIN Nivel_Pesticida OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-# qual a Nivel_Pesticida de chuvas no inverno
-print( 'MIN Nivel_Pesticida INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Nivel_Pesticida'].min() ) 
-print( 'MEDIA Nivel_Pesticida INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Nivel_Pesticida'].mean() ) 
-print( 'MAX Nivel_Pesticida INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Nivel_Pesticida'].max() ) 
-
-print('')
-
-"""
-Ficou legal
-
-Agora vou tratar a coluna Frequencia_Podas
-"""
-print('\nMEDIAS Frequencia_Podas POR ESTAÇÂO:')
-
-# qual a média da Frequencia_Podas na primavera
-print( 'MIN Frequencia_Podas PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Frequencia_Podas'].min() ) 
-print( 'MEDIA Frequencia_Podas PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Frequencia_Podas'].mean() ) 
-print( 'MAX Frequencia_Podas PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Frequencia_Podas'].max() ) 
-
-print('')
-
-# qual a média de Frequencia_Podas no verao
-print( 'MIN Frequencia_Podas VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Frequencia_Podas'].min() ) 
-print( 'MEDIA Frequencia_Podas VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Frequencia_Podas'].mean() ) 
-print( 'MAX Frequencia_Podas VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Frequencia_Podas'].max() ) 
-
-print('')
-
-# qual a média de Frequencia_Podas no outono
-print( 'MIN Frequencia_Podas OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Frequencia_Podas'].min() ) 
-print( 'MEDIA Frequencia_Podas OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Frequencia_Podas'].mean() ) 
-print( 'MAX Frequencia_Podas OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Frequencia_Podas'].max() ) 
-
-print('')
-
-# qual a Frequencia_Podas de chuvas no inverno
-print( 'MIN Frequencia_Podas INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Frequencia_Podas'].min() ) 
-print( 'MEDIA Frequencia_Podas INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Frequencia_Podas'].mean() ) 
-print( 'MAX Frequencia_Podas INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Frequencia_Podas'].max() ) 
-
-print('')
-
-"""
-Eu não acho que seja necessário tratar nada aqui
-MEDIAS Frequencia_Podas POR ESTAÇÂO DEPOIS DE MUDAR:
-MIN Frequencia_Podas PRIMAVERA 2.0
-MEDIA Frequencia_Podas PRIMAVERA 6.626666666666667
-MAX Frequencia_Podas PRIMAVERA 11.0
-
-MIN Frequencia_Podas VERAO 2.0
-MEDIA Frequencia_Podas VERAO 6.6298076923076925
-MAX Frequencia_Podas VERAO 11.0
-
-MIN Frequencia_Podas OUTONO 1.5
-MEDIA Frequencia_Podas OUTONO 3.129018767528854
-MAX Frequencia_Podas OUTONO 6.5
-
-MIN Frequencia_Podas INVERNO 1.5002815696779608
-MEDIA Frequencia_Podas INVERNO 1.7531050181307093
-MAX Frequencia_Podas INVERNO 1.9949520399371448
-"""
-
-
-"""
-Analisando os graficos, eu ainda quero tratar a Altura_cm, para ela refletir melhor os padrões das estações do ano, e reforçar mais o padrão de cada planta
-"""
-
-"""
-Vou calcular as médidas de Altura por estação
-"""
-print('\nMEDIAS Altura_cm POR ESTAÇÂO:')
-
-# qual a média da NivelAltura_cm_Pesticida na primavera
-print( 'MIN Altura_cm PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Altura_cm'].min() ) 
-print( 'MEDIA Altura_cm PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Altura_cm'].mean() ) 
-print( 'MAX Altura_cm PRIMAVERA', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera' ]['Altura_cm'].max() ) 
-
-print('')
-
-# qual a média de Altura_cm no verao
-print( 'MIN Altura_cm VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Altura_cm'].min() ) 
-print( 'MEDIA Altura_cm VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Altura_cm'].mean() ) 
-print( 'MAX Altura_cm VERAO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão' ]['Altura_cm'].max() ) 
-
-print('')
-
-# qual a média de Altura_cm no outono
-print( 'MIN Altura_cm OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Altura_cm'].min() ) 
-print( 'MEDIA Altura_cm OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Altura_cm'].mean() ) 
-print( 'MAX Altura_cm OUTONO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono' ]['Altura_cm'].max() ) 
-
-print('')
-
-# qual a Altura_cm de chuvas no inverno
-print( 'MIN Altura_cm INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Altura_cm'].min() ) 
-print( 'MEDIA Altura_cm INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Altura_cm'].mean() ) 
-print( 'MAX Altura_cm INVERNO', dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno' ]['Altura_cm'].max() ) 
-
-print('')
-
-"""
-Nas médias
-
-MEDIAS Altura_cm POR ESTAÇÂO:
-MIN Altura_cm PRIMAVERA 570.1529472844369
-MEDIA Altura_cm PRIMAVERA 1097.2191176192623
-MAX Altura_cm PRIMAVERA 1530.456724216624
-
-MIN Altura_cm VERAO 490.99212836782254
-MEDIA Altura_cm VERAO 1169.1226788700808
-MAX Altura_cm VERAO 1655.9892149813713
-
-MIN Altura_cm OUTONO 799.9801296078371
-MEDIA Altura_cm OUTONO 1224.3013677639879
-MAX Altura_cm OUTONO 1713.2223540637722
-
-MIN Altura_cm INVERNO 631.2714618605553
-MEDIA Altura_cm INVERNO 924.5964319324788
-MAX Altura_cm INVERNO 1256.5416605140344
-
-Parece que não faz muito sentido a Altura no Verão ser menor do que no Outono por exemplo
-"""
-
-"""
-Primeiro vou aplicar um reforço no padrão das estações do ano, pra frizar quais estações tendem as plantas a terem maior altura e quais menos
-"""
-# O Verão precisa ter as maiores alturas de planta
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Altura_cm'] += 250;
-#O outono precisa ser um pouco mais baixo que o Verão
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Altura_cm'] -= 115;
-#O inverno precisa ser bem mais baixo a altura
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Altura_cm'] -= 170;
-
-"""
-Agora vou reforçar alguns padrões especificos, para cada planta
-"""
-# na primavera a cenoura cresce um pouco mais
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 210;
-# na primavera, a batata precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Altura_cm'] -= 55;
-# na primavera, o milho precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 210;
-# na primavera, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 10;
-# na primavera, o tomate precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 130;
-
-# no verão, a batata precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Altura_cm'] -= 200;
-# no verão, a cenora precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 210;
-# no verão, o milho 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 0;
-# no verão, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 10;
-# no verão, o tomate precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 18;
-# no verão, o trigo precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Altura_cm'] -= 200;
-
-# no outono, a cenora precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 65;
-# no outono, o milho precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 210;
-# no outono, o tomate precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 260;
-# no outono, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 205;
-# no outono, o trigo precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Altura_cm'] -= 15;
-
-# no inverno, a cenora precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 45;
-# no inverno, a batata precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Altura_cm'] -= 108;
-# no inverno, o milho precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 108;
-# no inverno, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 108;
-# no inverno, o trigo precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Altura_cm'] -= 108;
-# no inverno, não faz sentido o tomate creser mais, precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 140;
-
-
-"""
-Ficou bom
-"""
-
-"""
-Agora vou retocar o Tempo de Crescimento de cada tipo de planta por estação
-"""
-# Na primavera aumentar um pouco mais o tempo de crescimento pra balancear um pouco
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Tempo_Crescimento_horas'] += 60;
-# No inverno aumentar ainda mais o tempo de crescimento pra ficar bem evidente
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Tempo_Crescimento_horas'] += 210;
-# No outono diminuir um pouco mais o tempo de crescimento pra não exagerar
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Tempo_Crescimento_horas'] -= 150;
-
-
-# Tomate: Cresce mais rapido na primavera e verão
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 150;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 100;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] += 150; # No outono demora mais pra crescer, pois parece que diminui
-
-# Cenora: Cresce mais rapido na primavera e outono
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 150;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 190; 
-# Vou aplicar a mesma coisa pro Inverno
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 225; 
-
-# Trigo: Cresce mais rapido na primavera e verão
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] -= 150;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] -= 120; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] += 150; # No outono demora mais pra crescer, pois parece que diminui
-
-# Batata: Cresce mais rapido na primavera e verão
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] -= 190;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] -= 170; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] += 150; # No outono demora mais pra crescer, pois parece que diminui
-
-# Milho: Cresce mais rapido no verão apenas
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Tempo_Crescimento_horas'] -= 50; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Tempo_Crescimento_horas'] += 100; 
-
-# Soja: Cresce mais rapido no verão apenas
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 200; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] += 100; 
-
-"""
-Porém, o Num_Praga na correlação parece aumentar o tempo de vida
-Quero ajustar isso, pro Num_Pragas claramente reduzir o tempo de vida
-
-Preciso analisar as duas coisas:
-"""
-print('\nTEMPO VIDA DIAS:')
-print( dataset_sem_outliers['Tempo_Vida_dias'].describe() );
-
-print('\nNUM PRAGAS:')
-print( dataset_sem_outliers['Num_Praga'].describe() );
-
-"""
-Comparando:
-TEMPO VIDA DIAS:
-count    868.000000
-mean      88.919704
-std       51.298899
-min       12.160784
-25%       28.861459
-50%       95.205898
-75%      127.573951
-max      188.691755
-Name: Tempo_Vida_dias, dtype: float64
-
-NUM PRAGAS:
-count    868.000000
-mean      17.514984
-std       17.326332
-min        0.500000
-25%        2.500000
-50%       12.500000
-75%       30.000000
-max       73.500000
-
-Quero dizer pro dataset que quanto mais pragas a planta tiver, menos ela vive
-
-Eu posso tentar descobrir quantas amostras tem Num_Pragas maior que a média de Num_Pragas menos algum valor pra aumentar a abrangencia
-"""
-print('QTDE AMOSTRAS DATASET:', dataset_sem_outliers.shape)
-print('QTDE AMOSTRAS > MEDIA_NUM_PRAGAS:', dataset_sem_outliers[dataset_sem_outliers['Num_Praga'] >= dataset_sem_outliers['Num_Praga'].mean()-10].shape);
-
-"""
-QTDE AMOSTRAS DATASET: (868, 25)
-QTDE AMOSTRAS > MEDIA_NUM_PRAGAS: (497, 25)
-
-Eu sei que 497 tem uma quantidade de pragas acima da media-10
-"""
-
-"""
-Eu posso tentar descobrir qual é numero de pragas minimo, maximo e médio, por estação
-"""
-print('\nNUM_PRAGAS primavera')
-print( dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Primavera']['Num_Praga'].describe() );
-
-print('\nNUM_PRAGAS verão')
-print( dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Verão']['Num_Praga'].describe() );
-
-print('\nNUM_PRAGAS outono')
-print( dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Outono']['Num_Praga'].describe() );
-
-print('\nNUM_PRAGAS inverno')
-print( dataset_sem_outliers[ dataset_sem_outliers['Estacao_Ano'] == 'Inverno']['Num_Praga'].describe() );
-
-"""
-Essas são os valores
-
-NUM PRAGAS:
-count    868.000000
-mean      17.514984
-std       17.326332
-min        0.500000
-25%        2.500000
-50%       12.500000
-75%       30.000000
-max       73.500000
-Name: Num_Praga, dtype: float64
-QTDE AMOSTRAS DATASET: (868, 25)
-QTDE AMOSTRAS > MEDIA_NUM_PRAGAS: (497, 25)
-
-NUM_PRAGAS primavera
-count    225.000000
-mean      21.062222
-std       13.817631
-min        0.500000
-25%        9.500000
-50%       18.000000
-75%       33.000000
-max       49.000000
-Name: Num_Praga, dtype: float64
-
-NUM_PRAGAS verão
-count    208.000000
-mean      32.141827
-std       19.771224
-min        1.500000
-25%       15.000000
-50%       31.125000
-75%       45.000000
-max       73.500000
-Name: Num_Praga, dtype: float64
-
-NUM_PRAGAS outono
-count    175.000000
-mean      18.625714
-std       12.301232
-min        0.500000
-25%        8.500000
-50%       16.500000
-75%       28.000000
-max       44.500000
-Name: Num_Praga, dtype: float64
-
-NUM_PRAGAS inverno
-count    260.000000
-mean       1.996176
-std        0.611436
-min        1.034715
-25%        1.394253
-50%        1.993234
-75%        2.585063
-max        2.989941
-Name: Num_Praga, dtype: float64
-
-"""
-
+# Removendo features que não vão ser usadas
+dataset_sem_outliers = dataset_sem_outliers.drop('Tempo_Vida_dias', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Frequencia_Podas', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Resistencia_Clima', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Altura_mm', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Altura_cm', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Indice_Crescimento', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Preco_Venda', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Litros_Agua_Semana', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('dif_preco_venda_custo_cultivo', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Nivel_Pesticida', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Saude', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Tipo_Solo', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Humidade_Solo', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Horas_Sol_Dia', axis=1);
+dataset_sem_outliers = dataset_sem_outliers.drop('Temperatura_C', axis=1);
 
 """
 Agora eu posso reduzir o tempo de vida de todas as plantas em função do Num_Pragas
@@ -2768,295 +2298,37 @@ Mais eu acho melhor eu fazer isso para cada estação, pra dar pra controlar mai
 """
 Tratando o Num_Praga na Primavera, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-minimo_pragas_primavera = 0.500000; # que eu descobri pelo describe
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Tempo_Vida_dias'] -= (3 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Primavera']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Primavera']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 """
 Tratando o Num_Praga no Verão, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-minimo_pragas_verao = 1.500000; # que eu descobri pelo describe
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão'), 'Tempo_Vida_dias'] -= (3 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Verão']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Verão']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 """
 Tratando o Num_Praga no Outono, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-minimo_pragas_outono = 0.500000; # que eu descobri pelo describe
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Tempo_Vida_dias'] -= (3 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Outono']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Outono']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 """
 Tratando o Num_Praga no Outono, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-minimo_pragas_inverno = 1.034715; # que eu descobri pelo describe
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Tempo_Vida_dias'] -= (3 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Inverno']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-
-
-"""
-Preciso aumentar tambem o Tempo_Crescimento em função das pragas
-"""
-
-"""
-Tratando o Num_Praga na Primavera, pra afetar bastante o Tempo_Crescimento de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Tempo_Crescimento_horas'] += (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Primavera']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-"""
-Tratando o Num_Praga no Verão, pra afetar bastante o Tempo_Crescimento de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão'), 'Tempo_Crescimento_horas'] += (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Verão']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-"""
-Tratando o Num_Praga no Outono, pra afetar bastante o Tempo_Crescimento de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Tempo_Crescimento_horas'] += (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Outono']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-"""
-Tratando o Num_Praga no Outono, pra afetar bastante o Tempo_Crescimento de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Tempo_Crescimento_horas'] += (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Inverno']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-
-"""
-Preciso tratar para o Num_Pragas diminuir a altura da planta tambem
-"""
-"""
-
-Tratando o Num_Praga na Primavera, pra afetar bastante o Altura_cm de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Altura_cm'] -= (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Primavera']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-"""
-Tratando o Num_Praga no Verão, pra afetar bastante o Altura_cm de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão'), 'Altura_cm'] -= (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Verão']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-"""
-Tratando o Num_Praga no Outono, pra afetar bastante o Altura_cm de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Altura_cm'] -= (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Outono']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-"""
-Tratando o Num_Praga no Outono, pra afetar bastante o Altura_cm de forma negativa
-"""
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Altura_cm'] -= (10 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Inverno']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
-
-"""
-Calculando denovo o Altura_mm
-"""
-dataset_sem_outliers['Altura_mm'] = dataset_sem_outliers['Altura_cm'] / 100
-
-
-"""
-Agora vou verificar se essas colunas que eu alterei se elas tem valores negativos
-
-Tempo_Vida_dias
-Tempo_Crescimento_horas
-Altura_cm
-"""
-
-print( (dataset_sem_outliers['Tempo_Vida_dias'] < 0).sum() )
-print( (dataset_sem_outliers['Tempo_Crescimento_horas'] < 0).sum() )
-print( (dataset_sem_outliers['Altura_cm'] < 0).sum() )
-
-"""
-152
-119
-146
-
-Vi que todos eles tem valores negativos
-
-Vou descobrir onde estão
-"""
-print( 'ESTACOES TEM VALORES NEGATIVOS TEMPO_VIDA_DIAS: ', dataset_sem_outliers[ dataset_sem_outliers['Tempo_Vida_dias'] < 0 ]['Estacao_Ano'].unique() );
-print( 'ESTACOES TEM VALORES NEGATIVOS Tempo_Crescimento_horas: ', dataset_sem_outliers[ dataset_sem_outliers['Tempo_Crescimento_horas'] < 0 ]['Estacao_Ano'].unique() );
-print( 'ESTACOES TEM VALORES NEGATIVOS Altura_cm: ', dataset_sem_outliers[ dataset_sem_outliers['Altura_cm'] < 0 ]['Estacao_Ano'].unique() );
-
-"""
-ESTACOES TEM VALORES NEGATIVOS TEMPO_VIDA_DIAS:  ['Primavera' 'Verão' 'Outono']
-
-ESTACOES TEM VALORES NEGATIVOS Tempo_Crescimento_horas:  ['Primavera' 'Verão' 'Outono']
-
-ESTACOES TEM VALORES NEGATIVOS Altura_cm:  ['Primavera' 'Verão' 'Outono' 'Inverno']
-"""
-
-"""
-Vou tratar primeiro o TEMPO_VIDA_DIAS
-"""
-print( dataset_sem_outliers['Tempo_Vida_dias'].describe() )
-
-dataset_sem_outliers['Tempo_Vida_dias'] += 117.481100 + 17
-
-"""
-Vou tratar o Tempo_Crescimento_horas
-"""
-print( dataset_sem_outliers['Tempo_Crescimento_horas'].describe() )
-
-dataset_sem_outliers['Tempo_Crescimento_horas'] += 923.622671 + 23
-
-"""
-Vou tratar o Altura_cm
-"""
-print( dataset_sem_outliers['Altura_cm'].describe() )
-
-dataset_sem_outliers['Altura_cm'] += 499.982512 + 49
-
-# Ver se deu certo
-print( 'ESTACOES TEM VALORES NEGATIVOS TEMPO_VIDA_DIAS: ', dataset_sem_outliers[ dataset_sem_outliers['Tempo_Vida_dias'] < 0 ]['Estacao_Ano'].unique() );
-print( 'ESTACOES TEM VALORES NEGATIVOS Tempo_Crescimento_horas: ', dataset_sem_outliers[ dataset_sem_outliers['Tempo_Crescimento_horas'] < 0 ]['Estacao_Ano'].unique() );
-print( 'ESTACOES TEM VALORES NEGATIVOS Altura_cm: ', dataset_sem_outliers[ dataset_sem_outliers['Altura_cm'] < 0 ]['Estacao_Ano'].unique() );
-
-"""
-Aplicar uma correação  no tempo de vida nas estações
-"""
-
-"""
-Primeiro vou aplicar um reforço no padrão das estações do ano, pra frizar quais estações tendem as plantas a terem maior altura e quais menos
-"""
-# O Verão precisa ter as maiores alturas de planta
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Altura_cm'] += 250;
-#O outono precisa ser um pouco mais baixo que o Verão
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Altura_cm'] -= 115;
-#O inverno precisa ser bem mais baixo a altura
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Altura_cm'] -= 170;
-
-"""
-Agora vou reforçar alguns padrões especificos, para cada planta
-"""
-# na primavera a cenoura cresce um pouco mais
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 210;
-# na primavera, a batata precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Altura_cm'] -= 55;
-# na primavera, o milho precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 210;
-# na primavera, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 10;
-# na primavera, o tomate precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 130;
-
-# no verão, a batata precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Altura_cm'] -= 200;
-# no verão, a cenora precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 210;
-# no verão, o milho 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 0;
-# no verão, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 10;
-# no verão, o tomate precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 18;
-# no verão, o trigo precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Altura_cm'] -= 200;
-
-# no outono, a cenora precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 65;
-# no outono, o milho precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 210;
-# no outono, o tomate precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 260;
-# no outono, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 205;
-# no outono, o trigo precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Altura_cm'] -= 15;
-
-# no inverno, a cenora precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Altura_cm'] -= 45;
-# no inverno, a batata precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Altura_cm'] -= 108;
-# no inverno, o milho precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Altura_cm'] -= 108;
-# no inverno, a soja precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Altura_cm'] -= 108;
-# no inverno, o trigo precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Altura_cm'] -= 108;
-# no inverno, não faz sentido o tomate creser mais, precisa diminuir um pouquinho a altura
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Altura_cm'] -= 140;
-
-
-"""
-Ficou bom
-"""
-
-"""
-Agora vou retocar o Tempo de Crescimento de cada tipo de planta por estação
-"""
-# Na primavera aumentar um pouco mais o tempo de crescimento pra balancear um pouco
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Tempo_Crescimento_horas'] += 60;
-# No inverno aumentar ainda mais o tempo de crescimento pra ficar bem evidente
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Tempo_Crescimento_horas'] += 210;
-# No outono diminuir um pouco mais o tempo de crescimento pra não exagerar
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Tempo_Crescimento_horas'] -= 150;
-
-
-# Tomate: Cresce mais rapido na primavera e verão
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 150;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] -= 100;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Tomate'), 'Tempo_Crescimento_horas'] += 150; # No outono demora mais pra crescer, pois parece que diminui
-
-# Cenora: Cresce mais rapido na primavera e outono
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 150;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 190; 
-# Vou aplicar a mesma coisa pro Inverno
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno') & (dataset_sem_outliers['Tipo_Planta'] == 'Cenoura'), 'Tempo_Crescimento_horas'] -= 225; 
-
-# Trigo: Cresce mais rapido na primavera e verão
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] -= 150;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] -= 120; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Trigo'), 'Tempo_Crescimento_horas'] += 150; # No outono demora mais pra crescer, pois parece que diminui
-
-# Batata: Cresce mais rapido na primavera e verão
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] -= 190;
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] -= 170; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] += 150; # No outono demora mais pra crescer, pois parece que diminui
-
-# Milho: Cresce mais rapido no verão apenas
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Tempo_Crescimento_horas'] -= 50; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Milho'), 'Tempo_Crescimento_horas'] += 100; 
-
-# Soja: Cresce mais rapido no verão apenas
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] -= 200; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Soja'), 'Tempo_Crescimento_horas'] += 100; 
-
-"""
-Diminuir um pouco o tempo de crescimento na primavera
-"""
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Primavera', 'Tempo_Crescimento_horas'] -= 900; 
-
-"""
-Diminuir um pouco o tempo de crescimento no verão
-"""
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Tempo_Crescimento_horas'] -= 1000; 
-
-"""
-Diminuir um pouco do Outono
-"""
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Tempo_Crescimento_horas'] -= 100; 
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono') & (dataset_sem_outliers['Tipo_Planta'] == 'Batata'), 'Tempo_Crescimento_horas'] -= 200; 
-
-
-"""
-Aumentar o tempo de crescimento no inverno ainda mais
-"""
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Tempo_Crescimento_horas'] += 1100; 
-
-
-
-"""
-Aumentar a altura das plantas no verão
-"""
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Verão', 'Altura_cm'] += 300; 
-#Diminuir no Outono
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Outono', 'Altura_cm'] -= 100; 
-#Diminuir no Inverno
-dataset_sem_outliers.loc[dataset_sem_outliers['Estacao_Ano'] == 'Inverno', 'Altura_cm'] -= 150; 
-
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Inverno']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 # Salvar CSV
 dataset_sem_outliers.to_csv('datasets/dataset-tratado-normalizado-sem-outliers.csv', index=False, sep=';')
 print("Dataset atualizado com sucesso!")
 
 
+print( 'ESTACOES TEM VALORES NEGATIVOS Tempo_Crescimento_horas: ', dataset_sem_outliers[ dataset_sem_outliers['Tempo_Crescimento_horas'] < 0 ]['Estacao_Ano'].unique() );
+
+
 
 tentando_abrir = pd.read_csv('datasets/dataset-tratado-normalizado-sem-outliers.csv', sep=';');
 
+"""
+Agora eu posso visualizar o dataset pra ver como ficou
+"""
 print( tentando_abrir.describe() )
 
 print( tentando_abrir.head(10) )

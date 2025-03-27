@@ -8,8 +8,6 @@ dataset = pd.read_csv('../datasets/dataset-tratado-normalizado-sem-outliers.csv'
 dataset = dataset.drop('Data', axis=1);
 dataset = dataset.drop('Estacao_Ano', axis=1);
 dataset = dataset.drop('Tipo_Planta', axis=1);
-dataset = dataset.drop('Tipo_Solo', axis=1);
-dataset = dataset.drop('Saude', axis=1);
 
 # Calcular a matriz de correlação
 corr = dataset.corr()

@@ -6,13 +6,6 @@ import statsmodels
 
 dataset = pd.read_csv('../datasets/dataset-tratado-normalizado-sem-outliers.csv', sep=';');
 
-# Removendo features que não vão ser usadas
-dataset = dataset.drop('Data', axis=1);
-dataset = dataset.drop('Estacao_Ano', axis=1);
-dataset = dataset.drop('Tipo_Planta', axis=1);
-dataset = dataset.drop('Tipo_Solo', axis=1);
-dataset = dataset.drop('Saude', axis=1);
-
 xColuna = 'Custo_Cultivo';
 yColuna = 'Num_Praga'
 
