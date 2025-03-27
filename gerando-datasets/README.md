@@ -9,7 +9,8 @@ Se quiser ver como eles foram construidos, veja os scripts: `gerar-dataset-agric
 # Versões
 A versão `v5` é a mais completa. 
 
-# Balancemaneto que fiz
-Fiz também um balancemento no arquivo `dataset-agricultura-v5.csv` gerado pelo `gerar-dataset-agricultura-v5.py`, para ele ter classes mais balanceadas de plantas saudaveis/doentes por estação.
+# Balançeamento que fiz
+As vezes, nosso dataset pode ter muito mais amostras de uma determinada categoria do que de outras classes. Por exemplo, no dataset `dataset-agricultura-v4.csv` a quantidade de plantas doentes e muito maior do que a de plantas saudáveis. Então pra resolver isso, tive que remover algumas plantas, para igualar as duas classes. Isso vai ser muito importante quando eu for treinar um modelo.
 
-O arquivo `dataset-agricultura-v5-balanceado` está com esse balanceamento feito.
+**NOTA: Eu melhorei o dataset, e o atual agora é o v5, mais o conceito explicado aqui funciona para qualquer dataset**
+
