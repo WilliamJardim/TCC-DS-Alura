@@ -2298,22 +2298,22 @@ Mais eu acho melhor eu fazer isso para cada estação, pra dar pra controlar mai
 """
 Tratando o Num_Praga na Primavera, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Primavera']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Primavera'), 'Tempo_Crescimento_horas'] += (160 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Primavera']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 """
 Tratando o Num_Praga no Verão, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Verão']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Verão'), 'Tempo_Crescimento_horas'] += (160 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Verão']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 """
 Tratando o Num_Praga no Outono, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Outono']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Outono'), 'Tempo_Crescimento_horas'] += (160 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Outono']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 """
 Tratando o Num_Praga no Outono, pra afetar bastante o Tempo_Vida_Dias de forma negativa
 """
-dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Tempo_Crescimento_horas'] += (64 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Inverno']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
+dataset_sem_outliers.loc[(dataset_sem_outliers['Estacao_Ano'] == 'Inverno'), 'Tempo_Crescimento_horas'] += (160 * dataset_sem_outliers[dataset_sem_outliers['Estacao_Ano'] == 'Inverno']['Num_Praga'] );  # diminuir vezes o numero de praga da planta
 
 # Salvar CSV
 dataset_sem_outliers.to_csv('datasets/dataset-tratado-normalizado-sem-outliers.csv', index=False, sep=';')
