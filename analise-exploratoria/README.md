@@ -61,11 +61,9 @@ Ou seja, na coluna Crescimento não existe nenhum valor negativo. E não deveria
 As vezes, as colunas podem ter valores faltando. E isso precisa ser tratado de alguma forma para não causar problemas na hora de treinar modelos de Machine Learning, ou de fazer análises.
 
 ```python
-
 # Ver se tem valores NaN e contar quantos são, por coluna
 quantidade_nan_por_coluna = dataset.isna().sum()
 print(quantidade_nan_por_coluna)
-
 ```
 
 ```text
