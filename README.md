@@ -2,7 +2,7 @@
 Um trabalho de conclusão de meu curso na Alura que eu fiz usando todos os conhecimentos que aprendi nos meus cursos, imersões, e formações da Alura, que fiz no ano de 2024, como forma de agradecimento aos meus instrutores .
 
 # Temas e seus tópicos, em sequencia:
-[ 1. Análise Explorátoria Básica ](./criando-dataset/)
+[ 1. Meu Dataset ](./criando-dataset/)
  - Meu dataset
 
 [ 2. Análise Explorátoria Básica ](./analise-exploratoria/)
