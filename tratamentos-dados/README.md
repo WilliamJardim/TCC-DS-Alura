@@ -17,4 +17,4 @@ Eu iria documentar todo processo de tratamento e normalização que eu segui, ma
 <img src="./images/PragasEstacao.png" width="100%" height="800px">
 
 ## Num_Pragas vs Custo_Cultivo
-<img src="./images/Num_Pragas_vs_CustoCultivo.png.png" width="100%" height="800px">
+<img src="./images/Num_Pragas_vs_CustoCultivo.png" width="100%" height="800px">
