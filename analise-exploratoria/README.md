@@ -82,9 +82,9 @@ Isso é importante. Outliers são amostras que tem colunas com valores extremos 
 
 ## Como verificar se tem Outliers no Dataset?
 Existem duas formas de verificar a presença de Outliers:
-  - (1) Gráfico de Box Plot: Nesse gráfico de caixa, os Outliers vão aparece sempre fora da zona do gráfico
+  - Gráfico de Box Plot: Nesse gráfico de caixa, os Outliers vão aparece sempre fora da zona do gráfico
 
-  - (2) Testes estatísticos, como o Z-Score.
+  - Testes estatísticos, como o Z-Score.
 
 ## O que fazer? E por que?
 Outliers devem ser removidos, para não causar problemas na hora de treinar modelos de Machine Learning, ou de fazer análises. Pois os Outliers causam instabilidade nos modelos, distorcendo o padrão, e tambem exageram e distorcem gráficos.
