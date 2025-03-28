@@ -87,6 +87,12 @@ Existem duas formas de verificar a presença de Outliers: Podemos usar Gráfico 
 Outliers devem ser removidos, para não causar problemas na hora de treinar modelos de Machine Learning, ou de fazer análises. Pois os Outliers causam instabilidade nos modelos, distorcendo o padrão, e tambem exageram e distorcem gráficos.
 
 # Usando Gráficos para entender melhor o dataset
+Podemos criar diversos tipos de Gráficos para exibir os dados do dataset. Tanto gráficos de barra, quanto gráficos de pizza, histogramas, dispersão, dentre outros. Aqui vou usar Gráfico de barras, Dispersão, Box Plot e Histograma.
+
+## OS Histogramas
+Também podemos usar histogramas para visualizar os dados. Histogramas são gráficos de frequências, ou seja, gráficos que mostram com que frequência os valores aparecem dentro de uma coluna específica do dataset. Isso é semelhante à contagem de vezes que o valor aparece(frequencia), e também ao gráfico de barras, mas a diferença é que, no histograma, ele tem diversos intervalos de frequência, chamados de `bins`. Em vez de contar quantas vezes cada valor numérico apareceu na coluna, o histograma faz algo um pouco melhor: ele conta quantas vezes os valores daquela coluna aparecem dentro de cada intervalo (ou bin). Por exemplo, podemos criar um histograma para contar a frequência das idades: `[28, 20, 22, 25, 28, 22, 23]`, e o histograma vai determinar os `bins` e criar faixas como: de `20 a 22`, `de 23 a 25`, `de 26 a 28`, etc. Ele vai contar quantas vezes os valores caem nesses intervalos e, no final, teremos um gráfico que mostra, por exemplo, que no intervalo de `20 a 22` houve tantas pessoas, no intervalo de `23 a 25` houve tantas, e no intervalo de `26 a 28` houve tantas.
+
+Abaixo eu mostro um exemplo de histograma:
 
 ## Histograma com as Frequencias de Crescimento
 <img src="./imagens/HistogramaCrescimentoGeral.png" width="100%" height="800px">
@@ -163,3 +169,5 @@ Para calcular a correlação, existem duas formas principais:
 
 ## Gráfico de Cores para mostrar as Correlações entre duas colunas
 <img src="./imagens/MapaCorrelacoes.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Nesse gráfico, podemos ver que o Mes e o Ano aumentam o Tempo de Crescimento.**
