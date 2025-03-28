@@ -177,3 +177,16 @@ Para calcular a correlação, existem duas formas principais:
 <img src="./imagens/MapaCorrelacoes.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Nesse gráfico, podemos ver que o Mes e o Ano aumentam o Tempo de Crescimento.**
+
+# Outros tipos de Gráficos
+
+## Dispersão ou Scatter Plot
+O Gráfico de Dispersão, ou tambem conhecido como Scatter Plot, é um gráfico que mostra a dispersão entre duas variáveis, que é desenhado pintando pontos X e Y em um plano cartesiado 2D, e é simples assim, como nas aulas de matemática da escola. Ele pode ser usado para visualizar visualmente a correlação entre duas colunas por exemplo. Quanto mais próximos os pontos X e Y estiverem, mais forte é a correlação entre eles.
+
+Se os pontos estiverem bem próximos significa que existe uma forte correlação. Agora se os pontos estiverem distantes ou aleatórios, isso indica uma correlação fraca ou nenhuma correlação.
+
+Por exemplo, abaixo eu criei um gráfico que mostra a correlação do Crescimento da planta com o Ano, no ano de 2020:
+<img src="./imagens/GraficoDispersaoAnoVsCrescimento2020.png" width="100%" height="800px">
+
+Outro exemplo, abaixo eu criei um gráfico que mostra a correlação do Crescimento da planta com o Ano, dos anos de 2020 e 2025:
+<img src="./imagens/AnoVsCrescimento.png" width="100%" height="800px">
