@@ -194,3 +194,6 @@ Outro exemplo, abaixo eu criei um gráfico que mostra a correlação do Crescime
 <img src="./imagens/AnoVsCrescimento.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Nesses gráficos, existe uma proximidade dos pontos, porém é uma proximidade vertical. Mais é possivel ver a relação que existe entre o Ano e o Crescimento.**
+
+# Próximo tópico:
+[Próximo tópico: Normalização, Escala e Tratamento de dados](../tratamento-dados/)

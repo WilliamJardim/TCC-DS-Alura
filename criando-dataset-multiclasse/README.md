@@ -4,4 +4,5 @@ Um dataset ficticio que eu inventei para esse TCC, para ter 4 tipo de plantas di
 # Colunas
 Existem 5 colunas: `'Planta', 'Altura', 'LarguraFolha', 'Petolas', 'Crescimento'`
 
-
+# Próximo tópico:
+[Próximo tópico: Treinando um modelo de Machine Learning para fazer classificação dos tipos de plantas do meu outro dataset](../treinando-modelo-classificacao/)

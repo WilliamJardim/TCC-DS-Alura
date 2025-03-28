@@ -99,7 +99,8 @@ dataset.loc[ (dataset['Crescimento'].isna()) & (dataset['Nome_Mes'] == 'Abril') 
 
 Pronto! Isso substituiu todos os valores NaN pela média da coluna!
 
-
+# Próximo tópico:
+[Próximo tópico: Treinando um modelo de Machine Learning para fazer regressão do crescimeto das plantas do dataset](../treinando-modelo-regressao-linear/)
 
 
 
