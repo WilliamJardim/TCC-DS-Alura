@@ -44,7 +44,7 @@ Eu expliquei na etapa anterior que podemos usar um Gráfico chamado de Box Plot 
 
 <img src="../analise-exploratoria/imagens/SemOutliers.png" width="100%" height="800px">
 
-**EXPLICAÇÂO DO GRÁFICO: Como voce pode ver, não aparecem mais nenhum Outlier, por que eu removi eles.**
+**EXPLICAÇÂO DO GRÁFICO: Como voce pode ver, não aparecem mais nenhum valor fora da zona do gráfico. Ou seja, não está mais aparecendo nenhum Outlier, por que eu removi eles. Não existem mais Outliers no dataset para serem mostrados.**
  
 
 ## Tratar valores NaN(valores faltando)
