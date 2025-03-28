@@ -19,6 +19,8 @@ Um dataset ficticio que eu inventei para esse TCC, baseado nas estações do ano
  - Tratar os dados nulos
  - Remover Outliers identificados
 
-[ 4. Treinando um modelo de Machine Learning para fazer classificação e regressão das plantas do dataset](./treinando-modelo-MachineLearning/)
- - Classificação de plantas
+[ 4. Treinando um modelo de Machine Learning para fazer regressão do crescimeto das plantas do dataset](./treinando-modelo-regressao-linear/)
  - Regressão do Crescimento das plantas
+
+[ 5. Treinando um modelo de Machine Learning para fazer classificação dos tipos de plantas do meu outro dataset](./treinando-modelo-classificacao/)
+ - Classificação de plantas
