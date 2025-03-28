@@ -16,7 +16,7 @@ Um dataset ficticio que eu inventei para esse TCC, baseado nas estações do ano
  - Encontrar correlações entre as features
  - Procurar outliers(valores extremos)
 
-[ 3. Normalização, Escala e Tratamento de dados](./tratamentos-dados/)
+[ 3. Normalização, Escala e Tratamento de dados](./tratamento-dados/)
  - Como mudar a escala dos dados
  - Tratar os dados nulos
  - Remover Outliers identificados
