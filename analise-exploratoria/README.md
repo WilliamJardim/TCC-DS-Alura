@@ -190,3 +190,5 @@ Por exemplo, abaixo eu criei um gráfico que mostra a correlação do Cresciment
 
 Outro exemplo, abaixo eu criei um gráfico que mostra a correlação do Crescimento da planta com o Ano, dos anos de 2020 e 2025:
 <img src="./imagens/AnoVsCrescimento.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Nesses gráficos, existe uma proximidade dos pontos, porém é uma proximidade vertical. Mais é possivel ver a relação que existe entre o Ano e o Crescimento.**
