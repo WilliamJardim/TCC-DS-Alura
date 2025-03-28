@@ -39,6 +39,14 @@ dataset['Nome_Mes'] = dataset['Mes'].map(meses)
 ## Remover Outliers(valores extremos)
 Na etapa anterior de análise exploratória, eu expliquei formas de identificar Outliers. Com isso, sabendo onde estão esses Outliers, podemos apagar eles do nosso dataset usando funções como o `drop` do pandas. É assim que se trata Outliers.
 
+Eu expliquei na etapa anterior que podemos usar um Gráfico chamado de Box Plot para identificar Outliers. 
+**Abaixo, eu mostrei um exemplo desse mesmo gráfico que usamos para identificar os Outliers, porém depois que os Outliers foram removidos:**
+
+<img src="../analise-exploratoria/imagens/SemOutliers.png" width="100%" height="800px">
+
+**EXPLICAÇÂO DO GRÁFICO: Como voce pode ver, não aparecem mais nenhum Outlier, por que eu removi eles.**
+ 
+
 ## Tratar valores NaN(valores faltando)
 Na etapa anterior de análise exploratória, eu expliquei formas de identificar valores NaN. Com isso, sabendo quais são as colunas que tem valores faltando, podemos tratar elas substituindo esses valores faltantes por alguma coisa. Por exemplo, se em uma determinada coluna temos 200 números, e um deles é NaN(está faltando), podemos tirar a média dessa coluna, e substituir esses valores NaN pela média da própia coluna.
 
