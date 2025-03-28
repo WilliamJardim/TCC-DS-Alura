@@ -1,6 +1,6 @@
 # TCC-DS-Alura
 <p align="center">
-    <img src="./icone.webp" width="300px" height="300px">
+    <img src="../icone.webp" width="300px" height="300px">
 </p>
 
 # Tópicos anteriores:
