@@ -52,7 +52,8 @@ outliers = dataset.loc[ dataset['Crescimento'] > 300 ]
 dataset.drop( outliers.index, inplace=True );
 ```
 
-Pronto! Agora esses 2 Outliers foram removidos. 
+Pronto! Agora esses 2 Outliers foram removidos.
+Lembranco que ao invés de usar o dataset.loc, eu poderia ter usado o Z-Score para encontrar os Outliers no dataset. O que importa é remover essas amostras com valores extremos.
 
 Eu expliquei na etapa anterior que podemos usar um Gráfico chamado de Box Plot para identificar Outliers. 
 **Abaixo, eu mostrei um exemplo desse mesmo gráfico que usamos para identificar os Outliers, porém depois que os Outliers foram removidos com o código acima:**
