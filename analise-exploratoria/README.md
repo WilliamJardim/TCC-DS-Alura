@@ -86,5 +86,80 @@ Existem duas formas de verificar a presença de Outliers: Podemos usar Gráfico 
 ## O que fazer? E por que?
 Outliers devem ser removidos, para não causar problemas na hora de treinar modelos de Machine Learning, ou de fazer análises. Pois os Outliers causam instabilidade nos modelos, distorcendo o padrão, e tambem exageram e distorcem gráficos.
 
+# Usando Gráficos para entender melhor o dataset
 
+## Histograma com as Frequencias de Crescimento
+<img src="./imagens/HistogramaCrescimentoGeral.png" width="100%" height="800px">
 
+## Gráfico do Crescimento em cada Mês de 2020 a 2025
+<img src="./imagens/GraficoBarrasCrescimentoPorMes.png" width="100%" height="800px">
+
+## Gráfico do Crescimento em cada Estação do Ano, de 2020 a 2025
+<img src="./imagens/GraficoBarrasCrescimentoPorEstacao.png" width="100%" height="800px">
+
+## Gráfico do Crescimento ao longo do tempo de 2020 a 2025
+<img src="./imagens/GraficoCrescimentoAnos.png" width="100%" height="800px">
+
+# Conceito de Médias moveis
+As médias móveis são calculadas a partir de uma média, mas não de todo o conjunto de dados. Em vez disso, é uma média de um período específico, e essa média pode "mover-se", ou seja, ela muda conforme as amostras usadas para o cálculo da média. Esse "movimento" acontece por meio de um conceito chamado de "janelas deslizantes". Imagine uma "janela retangular" de tamanho fixo, que tem um `início` e um `fim`. Dentro dessa janela, pegamos todas as amostras dentro desse intervalo de índices: do índice do `início` até o índice do `fim`, e calculamos a média. 
+
+Depois, "movemos" essa janela um passo para a direita, ou seja, o `início` e o `fim` são incrementados em 1. Assim, as amostras escolhidas vão ser as que estão no intervalo entre `início + 1` até `fim + 1`, e calculamos a nova média. Dessa forma, as amostras mais antigas vão ficando para trás e deixam de ser usadas no cálculo da média móvel. Existem diferentes tipos de médias móveis, mas não vou entrar em detalhes sobre isso.
+
+# Padrões sacionais e temporais e uso de Médias moveis
+Padrões sacionais são aqueles que se repetem em épocas especificas, por exemplo, em meses especificos.
+E padrões temporais em geral são padrões que levam em conta o tempo.
+
+Podemos identificar possíveis tendencias sacionais e temporais, analisando o crescimento das plantas ao longo do tempo. Por exemplo, veja o gráfico abaixo:
+
+<img src="./imagens/GraficoCrescimentoAnos.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse primeiro gráfico, observamos um padrão de crescimento das plantas que se repete: um some e desce no crescimento das plantas, por assim dizer**
+
+Para ficar mais fácil de visualizarmos isso, podemos usar médias móveis, e visalizar a tendencia de crescimento dos valores ao longo do tempo. Veja isso no segundo gráfico abaixo:
+
+<img src="./imagens/GraficoCrescimentoAnosMediasMoveis.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Igual no gráfico anterior, nesse segundo gráfico, observamos um padrão de aumento no tempo de crescimento das plastas que se repete: um some e desce no tempo de crescimento das plantas, por assim dizer. Porém, nesse segundo gráfico, usei médias móveis para calcular as tendencias de crescimento.**
+
+Tambem é possivel isolar apenas um ano. Por exemplo, eu tambem criei um gráfico do Crescimento em cada mes, mais olhando apeneas o ano de 2020.
+
+## Gráfico do Crescimento em cada Mês apenas de 2020
+<img src="./imagens/GraficoBarrasCrescimentoPorMes-2020.png" width="100%" height="800px">
+
+## Detectando a presença de Outliers usando Gráficos Box Plot
+<img src="./imagens/Outliers.png" width="100%" height="800px">
+
+**EXPLIAÇÂO: Podemos usar Gráfico de Box Plot: Nesse gráfico de caixa, os Outliers vão aparece sempre fora da zona do gráfico, assim como eu destaquei em vermelho no gráfico acima.**
+
+# ENCONTRANDO CORRELAÇÂO ENTRE AS COLUNAS
+Correlação é o quanto os valores de uma determinada coluna estão relacionados com os valores de uma outra coluna.
+Existem correlações positivas, neutras e negativas, e em diferentes niveis. Isso claro, com respeito a aumento ou diminuição de valores.
+**A correlação é calculada sempre comparando duas colunas.**
+
+## Faixa de valores possiveis da correlação
+ - 0: Nenhuma correlação, nada acontece
+ - 1: Correlação forte positiva, a medida que uma coluna aumenta, a outra tambem aumenta
+ - -1: Correlação negativa forte, a medidaa que uma coluna aumenta, a outra diminui.
+
+**Os valores podem variar entre -1 a 1. O valor da correlação vai ser sempre dentro dessa faixa de valores.**
+
+## Interpretação de correlação
+Por exemplo, se uma determinada coluna tem correlação positiva forte com outra coluna, isso significa que, a medida que essa coluna aumenta, a outra tambem aumenta junto. 
+
+Caso contrário, se uma determinada coluna tem correlação negativa forte com outra coluna, isso significa que, a medida que essa coluna aumenta, a outra tambem diminui, e vice-versa.
+
+**IMPORTANTE: A ordem das colunas não importa, o valor da correlação será o mesmo**
+
+A correlação é muito útil para selecionar quais colunas são mais relevantes, e para poder saber quais colunas usar para treinar um modelo de Machine Learning. Com ela podemos descartar colunas irrelevantes, ou não tão relevantes.
+
+**IDEIA: Voce pode calcular a correlação com o dataset inteiro como eu fiz. Ou então, voce também pode fatiar o dataset em partes menores, ou seja, em grupos menores de amostras, e calcular a correlação de cada grupo. Isso pode dar uma visão melhor.**
+
+## Como calcular
+Para calcular a correlação, existem duas formas principais:
+
+ - (1) Usando Gráficos de Dispersão: Nesse método, nós fazer um Gráfico de Dispersão entre as colunas X e Y, e olhamos se existe uma relação de crescimento vísivel no gráfico, por exemplo, se houver alguma correlação, os eixos X e Y vão estar formando algum tipo de reta linear, para alguma direção, e mesmo com algumas variações, vai existir um padrão claramente visivel. Porém, se não houver nenhuma correlação entre as colunas X e Y escolhidas, os pontos no gráfico vão estar distantes, ou distribuidos de forma bem aleatoria, sem um padrão claro.
+
+ - (2) Usando cálculos: Por exemplo, podemos usar o método da correlação de Pearson, que faz a correlação entre dois vetores X e Y diretamente(ou seja, os valores das colunas X e Y), com isso, retorna um valor entre -1 e 1, que segue a mesma lógica da **Interpretação de correlação** que mostrei acima. 
+
+## Gráfico de Cores para mostrar as Correlações entre duas colunas
+<img src="./imagens/MapaCorrelacoes.png" width="100%" height="800px">
