@@ -48,3 +48,24 @@ outliers = dataset.loc[ dataset['Crescimento'] > 300 ]
 dataset.drop( outliers.index, inplace=True );
 
 print( 'QTDE AMOSTRAS COM CRESCIMENTO ACIMA DO MAXIMO', dataset[ dataset['Crescimento'] > 300 ]['Crescimento'].count() );
+
+
+
+"""
+Agora vou tratar os valores NaN, substituindo eles pela média da coluna
+"""
+
+# Eu já sei que a coluna que tem valores NaN é a Crescimento
+# Agora eu quero descobrir em quais estações do ano, e em quais anos, pra saber onde exatamente estão esses valores, para que eu possa remover
+print( dataset.loc[ dataset['Crescimento'].isna() ] )
+
+# Calculo a média da coluna Crescimento SOMENTE DO ANO DE 2020, NO MES DE ABRIL, NO OUTONO
+media_crescimento_ano2020_outono = dataset.loc[ (dataset['Mes'] == 4) & (dataset['Estacao'] == 'Outono') & (dataset['Ano'] == 2020) ]['Crescimento'].mean()
+
+# Eu substitui os valores NaN por essa média
+dataset.loc[ (dataset['Crescimento'].isna()) & (dataset['Nome_Mes'] == 'Abril') & (dataset['Estacao'] == 'Outono') & (dataset['Ano'] == 2020), 'Crescimento' ] = media_crescimento_ano2020_outono;
+
+"""
+Pronto! Não existem mais valores NaN
+"""
+
