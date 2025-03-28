@@ -1,4 +1,9 @@
-# Treinamento de um modelo de Machine Learning para fazer Regressão Linear
+# Tópico anterior:
+[Tópico anterior: Normalização, Escala e Tratamento de dados](../tratamento-dados/)
+
+# Treinando um modelo de Machine Learning para fazer regressão do crescimeto das plantas do dataset
+
+## Treinamento de um modelo de Machine Learning para fazer Regressão Linear
 Nas etapas anteriores, eu criei um dataset, tratei ele, e agora vou treinar um modelo de regressão linear para estimar o Tempo de Crescimento da planta pelo Ano e Mês.
 
 ### Exemplo de código para treinar um modelo de regressão linaer
@@ -75,3 +80,6 @@ Com esse código python acima, é possivel treinar um modelo de regressão linea
 <img src="./images/EstimativasCrescimentoPlantas.png" width="100%" height="800px">
 
 Note que o gráfico de dispersão acima mostra que os tempos de crescimento estimados pelo modelo de regressão linear construido no código python acima conseguiu acertar muito bem os tempos de crescimento das plantas do dataset, por que os pontos estão muito próximos, e dá pra ver uma reta se formar.
+
+# Próximo tópico:
+[Próximo tópico: Conclusão](../conclusao/)

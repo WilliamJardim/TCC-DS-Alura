@@ -1,4 +1,9 @@
-# Tratamento de dados do dataset
+# Tópico anterior:
+[Tópico anterior: Análise Explorátoria Básica](../analise-exploratoria/)
+
+# Normalização, Escala e Tratamento de dados
+
+## Tratamento de dados do dataset
 Na etapa anterior, eu mostrei como abrir um dataset com o pandas, e como visualizar ele usando gráficos, verificar se tem valores NaN ou Outliers, calcular médias moveis e correlação. **Agora nessa próxima etapa vou mostrar alguns tratamentos de dados que eu vou fazer nesse dataset.**
 
 ## Normalização e Padronização de dados

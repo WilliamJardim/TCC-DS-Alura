@@ -1,4 +1,9 @@
-# Treinamento de modelos de classificação usando a biblioteca Sklearn do python
+# Tópico anterior:
+[Tópico anterior: Meu Dataset de Tipo das plantas](../criando-dataset-multiclasse/)
+
+# Treinando um modelo de Machine Learning para fazer classificação dos tipos de plantas do meu outro dataset
+
+## Treinamento de modelos de classificação usando a biblioteca Sklearn do python
 Nas etapas anteriores, eu criei um outro dataset diferente do primeiro, e agora vou treinar dois modelos de classificação para classificar qual é o tipo da planta pelas suas caracteristicas.
 
 ## RandomForest
@@ -89,3 +94,6 @@ print(classification_report(y_test, y_pred, target_names=label_encoder.classes_)
 O modelo MLP acertou com precisão de 0.9861. Foi muito bom.
 
 Esses são só alguns modelos de Machine Learning que o Sklearn tem. Poderiamos usar muitos outros dele ou de outras bibliotecas.
+
+# Próximo tópico:
+[Próximo tópico: Conclusão](../conclusao/)
