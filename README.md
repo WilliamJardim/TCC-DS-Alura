@@ -1,5 +1,7 @@
 # TCC-DS-Alura
-<img src="./icone.webp" width="256px" height="225px" style="display: flex;align-self: center">
+<p align="center">
+    <img src="./icone.webp" width="300px" height="300px">
+</p>
 
 Um trabalho de conclusão de meu curso na Alura que eu fiz usando todos os conhecimentos que aprendi nos meus cursos, imersões, e formações da Alura, que fiz no ano de 2024, como forma de agradecimento aos meus instrutores .
 
