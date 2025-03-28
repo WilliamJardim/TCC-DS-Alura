@@ -107,7 +107,7 @@ Tambem é possivel isolar apenas um ano. Por exemplo, eu tambem criei um gráfic
 ## Gráfico do Crescimento em cada Mês apenas de 2020
 <img src="./imagens/GraficoBarrasCrescimentoPorMes-2020.png" width="100%" height="800px">
 
-**EXPLICAÇÂO: Esse gráfico de Crescimentode 2020 ele mostra qual foi a média do Tempo de Crescimento das plantas em cada estação do ano de 2020 apenas. Como estamos pegando os dados apenas de 2020 do dataset, então, vamos perceber um resultado um pouco diferente. Mais ainda podemos ver o Outono e o Inverno foram as estações que a Soja mais demorou para crescer, e isso faz sentido devido ao frio, e possiveis condições desfavoráveis para a Soja, que cresce melhor na Primavera e Verão.**
+**EXPLICAÇÂO: Esse gráfico de Crescimento de 2020 ele mostra qual foi a média do Tempo de Crescimento das plantas em cada estação do ano de 2020 apenas. Como estamos pegando os dados apenas de 2020 do dataset, então, vamos perceber um resultado um pouco diferente. Mais ainda podemos ver o Outono e o Inverno foram as estações que a Soja mais demorou para crescer, e isso faz sentido devido ao frio, e possiveis condições desfavoráveis para a Soja, que cresce melhor na Primavera e Verão.**
 
 ## Gráfico do Crescimento em cada Estação do Ano, de 2020 a 2025
 <img src="./imagens/GraficoBarrasCrescimentoPorEstacao.png" width="100%" height="800px">
