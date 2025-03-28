@@ -1,3 +1,8 @@
+# TCC-DS-Alura
+<p align="center">
+    <img src="./icone.webp" width="300px" height="300px">
+</p>
+
 # Tópico anterior:
 [Tópico anterior: Meu Dataset de Tipo das plantas](../criando-dataset-multiclasse/)
 

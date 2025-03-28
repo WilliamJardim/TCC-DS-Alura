@@ -1,3 +1,8 @@
+# TCC-DS-Alura
+<p align="center">
+    <img src="./icone.webp" width="300px" height="300px">
+</p>
+
 # Tópicos anteriores:
  - [Tópico anterior: Treinando um modelo de Machine Learning para fazer regressão do crescimeto das plantas do dataset](../treinando-modelo-regressao-linear/)
 

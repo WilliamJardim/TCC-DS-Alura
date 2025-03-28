@@ -1,3 +1,8 @@
+# TCC-DS-Alura
+<p align="center">
+    <img src="./icone.webp" width="300px" height="300px">
+</p>
+
 # Tópico anterior:
 [Tópico anterior: Normalização, Escala e Tratamento de dados](../tratamento-dados/)
 

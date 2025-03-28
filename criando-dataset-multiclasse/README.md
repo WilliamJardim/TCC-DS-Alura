@@ -1,3 +1,8 @@
+# TCC-DS-Alura
+<p align="center">
+    <img src="./icone.webp" width="300px" height="300px">
+</p>
+
 # Tópico anterior:
 [Tópico anterior: Meus Datasets que criei](../criando-datasets/)
 
