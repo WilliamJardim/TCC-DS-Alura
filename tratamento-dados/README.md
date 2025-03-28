@@ -1,18 +1,23 @@
 # Tratamento de dados do dataset
 Na etapa anterior, eu mostrei como abrir um dataset com o pandas, e como visualizar ele usando gráficos, verificar se tem valores NaN ou Outliers, calcular médias moveis e correlação. **Agora nessa próxima etapa vou mostrar alguns tratamentos de dados que eu vou fazer nesse dataset.**
 
+## Normalização e Padronização de dados
+Existem diversas técnicas para normalizar e padronizar os dados do dataset. Elas servem para manter os valores das colunas dentro de uma escala especifica, ou dentro de um padrão especifico, mais o importante é que isso não afete o padrão do dataset, e mantenha as informações intactas. O importante é deixar os dados em uma escala adequada, e padronizados de uma forma adequada também. Existem muitas bibliotecas que tem funções para fazer normalização e padronização de dados, como o `StandardScaler` e o `MinMaxScaler` do Sklearn.
+
 ## Tratamento de Escala
 Em alguns datasets, os valores das colunas podem ter valores bem grandes ou ter valores muito pequenos, que vão ser obviamente mais dificil de interpretar e ver com os olhos, e também, podem afetar a exibição de gráficos e modelos de Machine Learning. Por isso, se percebermos que o dataset tem valores em escalas muito grande ou muito pequenas, é necessário tratar isso, para deixar a informação mais clara. **Eu não vou tratar a escala do meu dataset por que eu criei ele numa escala que eu queria.** 
 
 ### Como tratar a Escala
 Para tratar a escala podemos usar diferentes técnicas. Por exemplo, podemos dividir o valor da coluna que estamos tratando por um mesmo número fixo(por exemplo 10 ou 100), em cada uma das amostras, para diminuir a escala. Também podemos somar ou subtrair números fixos(como 1000 ou 100) para tentar elimitar números negativos por exemplo. 
 
-Mais além dessas técnicas mais simples, podemos usar funções como as do Sklearn, como por exemplo, o MinMaxScaler da biblioteca Sklearn, que servem para normalizar escalas de valores nas amostras.
+Mais além dessas técnicas mais simples, podemos usar funções como as do Sklearn, como por exemplo, o `MinMaxScaler` da biblioteca Sklearn, que servem para normalizar escalas de valores nas amostras.
 
-## Conversão de Datas e Textos
+## Conversão de Datas e Textos e Codificação
 Também, podemos converter colunas que tenham valores de texto para números, por exemplo na codificação One Hot Enconding, que transforma variáveis categóricas em colunas contendo apenas zeros e uns.
 
 Também podemos converter textos para datas, texto para números, ou números para texto, etc. Por exemplo, podemos converter o número do mês para o nome do mês. 
+
+Existem várias bibliotecas com funções para fazer codificação de textos, como por exemplo o `LabelEncoder` do Sklearn.
 
 ### Exemplo de conversão que eu fiz
 ```python
