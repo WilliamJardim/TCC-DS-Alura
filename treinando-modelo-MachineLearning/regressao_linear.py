@@ -7,15 +7,15 @@ from sklearn.compose import ColumnTransformer
 from sklearn.linear_model import LinearRegression
 
 # Carregar os dados
-df = pd.read_csv('./datasets/dataset-tratado-normalizado-sem-outliers.csv', sep=';');
+df = pd.read_csv('../tratamento-dados/crescimento-soja-tratado.csv', sep=';');
 
 # Separar variáveis explicativas e alvo
-X = df.drop(columns=['Data', 'Custo_Cultivo', 'Tempo_Crescimento_horas'])
-y = df['Custo_Cultivo']
+X = df.drop(columns=['Ano', 'Mes'])
+y = df['Crescimento']
 
 # Transformações para colunas categóricas e numéricas
-categorical_features = ['Estacao_Ano', 'Tipo_Planta']
-numeric_features = ['Chuva_mm', 'Num_Praga']
+categorical_features = ['Estacao']
+numeric_features = ['Crescimento']
 
 preprocessor = ColumnTransformer(
     transformers=[
@@ -40,4 +40,27 @@ model.fit(X_train, y_train)
 score = model.score(X_test, y_test)
 print(f'R² do modelo: {score:.4f}')
 
-print(model.predict(X_test))
+crescimentosEstimados = model.predict(X_test)
+
+print(crescimentosEstimados)
+
+"""
+Mostrando um gráfico de dispersão para ver a qualidade das estimativas do modelo
+"""
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Criando o gráfico de dispersão
+plt.scatter(x=y_test, y=crescimentosEstimados, color='blue', alpha=0.5, label='Dados')
+
+# Adicionando rótulos e título
+plt.xlabel('Crescimentos do dataset')
+plt.ylabel('Crescimentos estimatidos pelo modelo de regressão linear')
+plt.ylim(0, 190)
+plt.title('Gráfico de Dispersão: Crescimentos do dataset VS Crescimentos estimatidos pelo modelo de regressão linear')
+plt.legend()
+
+# Exibindo o gráfico
+plt.show()
+
+

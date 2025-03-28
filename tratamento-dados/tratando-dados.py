@@ -69,3 +69,5 @@ dataset.loc[ (dataset['Crescimento'].isna()) & (dataset['Nome_Mes'] == 'Abril') 
 Pronto! Não existem mais valores NaN
 """
 
+# Salva o dataset tratado
+dataset.to_csv('crescimento-soja-tratado.csv', sep=';', index=False)
