@@ -100,8 +100,19 @@ Abaixo eu mostro um exemplo de histograma:
 ## Gráfico do Crescimento em cada Mês de 2020 a 2025
 <img src="./imagens/GraficoBarrasCrescimentoPorMes.png" width="100%" height="800px">
 
+**EXPLICAÇÂO: Esse gráfico de Crescimento em cada Mês de 2020 a 2025 ele mostra qual foi a média do Tempo de Crescimento das plantas em cada mes, do ano de 2020 a 2025. Podemos ver que os meses de Julho e Agosto foram os meses que a Soja mais demorou para crescer.**
+
 ## Gráfico do Crescimento em cada Estação do Ano, de 2020 a 2025
 <img src="./imagens/GraficoBarrasCrescimentoPorEstacao.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico de Crescimento em cada Estação do Ano, de 2020 a 2025 ele mostra qual foi a média do Tempo de Crescimento das plantas em cada estação do ano, do ano de 2020 a 2025. Podemos ver o Outono e o Inverno foram as estações que a Soja mais demorou para crescer, e isso faz sentido devido ao frio, e possiveis condições desfavoráveis para a Soja, que cresce melhor na Primavera e Verão.**
+
+Tambem é possivel isolar apenas um ano. Por exemplo, eu tambem criei um gráfico do Crescimento em cada mes, mais olhando apeneas o ano de 2020.
+
+## Gráfico do Crescimento em cada Mês apenas de 2020
+<img src="./imagens/GraficoBarrasCrescimentoPorMes-2020.png" width="100%" height="800px">
+
+**EXPLICAÇÂO: Esse gráfico de Crescimentode 2020 ele mostra qual foi a média do Tempo de Crescimento das plantas em cada estação do ano de 2020 apenas. Como estamos pegando os dados apenas de 2020 do dataset, então, vamos perceber um resultado um pouco diferente. Mais ainda podemos ver o Outono e o Inverno foram as estações que a Soja mais demorou para crescer, e isso faz sentido devido ao frio, e possiveis condições desfavoráveis para a Soja, que cresce melhor na Primavera e Verão.**
 
 ## Gráfico do Crescimento ao longo do tempo de 2020 a 2025
 <img src="./imagens/GraficoCrescimentoAnos.png" width="100%" height="800px">
@@ -126,11 +137,6 @@ Para ficar mais fácil de visualizarmos isso, podemos usar médias móveis, e vi
 <img src="./imagens/GraficoCrescimentoAnosMediasMoveis.png" width="100%" height="800px">
 
 **EXPLICAÇÂO: Igual no gráfico anterior, nesse segundo gráfico, observamos um padrão de aumento no tempo de crescimento das plastas que se repete: um some e desce no tempo de crescimento das plantas, por assim dizer. Porém, nesse segundo gráfico, usei médias móveis para calcular as tendencias de crescimento.**
-
-Tambem é possivel isolar apenas um ano. Por exemplo, eu tambem criei um gráfico do Crescimento em cada mes, mais olhando apeneas o ano de 2020.
-
-## Gráfico do Crescimento em cada Mês apenas de 2020
-<img src="./imagens/GraficoBarrasCrescimentoPorMes-2020.png" width="100%" height="800px">
 
 ## Detectando a presença de Outliers usando Gráficos Box Plot
 <img src="./imagens/Outliers.png" width="100%" height="800px">
