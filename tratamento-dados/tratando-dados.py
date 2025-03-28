@@ -31,3 +31,20 @@ Com isso, eu criei duas novas colunas ao meu dataset: Estacao_Numero e Nome_Mes
 
 print( dataset.describe() )
 print( dataset.head() );
+
+
+"""
+Agora vou remover os dois Outliers que eu coloquei propositalmente na etapa de criação do dataset
+
+Pra simplificar a explicação, como eu já sei que os Outliers tem valores maiores que 300, eu posso remover isso já!
+"""
+
+print( 'QTDE AMOSTRAS COM CRESCIMENTO ACIMA DO MAXIMO', dataset[ dataset['Crescimento'] > 300 ]['Crescimento'].count() );
+
+# Agora basta eu remover
+outliers = dataset.loc[ dataset['Crescimento'] > 300 ]
+
+# Remover essas linhas do dataset
+dataset.drop( outliers.index, inplace=True );
+
+print( 'QTDE AMOSTRAS COM CRESCIMENTO ACIMA DO MAXIMO', dataset[ dataset['Crescimento'] > 300 ]['Crescimento'].count() );
