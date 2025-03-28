@@ -9,7 +9,6 @@ import pandas as pd
 
 dataset = pd.read_csv('../criando-dataset/datasets/crescimento-soja.csv', sep=';')
 ```
-<code>
 
 ## Descrevendo o dataset
 ```python
