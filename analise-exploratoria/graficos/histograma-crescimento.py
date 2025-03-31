@@ -3,7 +3,7 @@ import numpy as np;
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-dataset_completo = pd.read_csv('../../criando-dataset/datasets/crescimento-soja.csv', sep=';');
+dataset_completo = pd.read_csv('../../criando-dataset-crescimento/datasets/crescimento-soja.csv', sep=';');
 
 # Histograma usando Seaborn
 sns.histplot(dataset_completo['Crescimento'], bins=400, kde=True, color='green', alpha=0.7, edgecolor='black')

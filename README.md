@@ -3,6 +3,8 @@
     <img src="./icone.webp" width="300px" height="300px">
 </p>
 
+**Autor: William Alves Jardim**
+
 Um trabalho de conclusão de meu curso na Alura que eu fiz usando todos os conhecimentos que aprendi nos meus cursos, imersões, e formações da Alura, que fiz no ano de 2024, como forma de agradecimento aos meus instrutores .
 
 # Tema do dataset

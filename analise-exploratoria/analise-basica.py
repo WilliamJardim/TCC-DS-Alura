@@ -2,7 +2,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-dataset = pd.read_csv('../criando-dataset/datasets/crescimento-soja.csv', sep=';')
+dataset = pd.read_csv('../criando-dataset-crescimento/datasets/crescimento-soja.csv', sep=';')
 
 print( dataset.describe() )
 print( dataset.shape )

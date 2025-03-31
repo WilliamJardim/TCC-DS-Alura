@@ -3,7 +3,7 @@ import numpy as np;
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-dataset_completo = pd.read_csv('../../criando-dataset/datasets/crescimento-soja.csv', sep=';');
+dataset_completo = pd.read_csv('../../criando-dataset-crescimento/datasets/crescimento-soja.csv', sep=';');
 dataset_completo = dataset_completo[ dataset_completo['Ano'] == 2020 ]
 
 xColuna = 'Ano';
